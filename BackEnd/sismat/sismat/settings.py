@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'webApps.matriculas',
     'rest_framework',
-    'rest_framework_jwt'
 ]
 
 MIDDLEWARE = [

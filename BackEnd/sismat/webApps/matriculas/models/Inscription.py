@@ -8,8 +8,9 @@ import uuid
 
 class Inscription(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    workload = models.ForeignKey(Workload, on_delete=models.CASCADE)
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
+    workload_id = models.ForeignKey(Workload, on_delete=models.CASCADE)
+    status = models.BooleanField(default=True)
     
     created_by = models.ForeignKey(User, related_name='created_%(class)s_set' , on_delete=models.SET_NULL, null=True)
     modified_by = models.ForeignKey(User, related_name='modified_%(class)s_set', on_delete=models.SET_NULL, null=True)
@@ -21,8 +22,9 @@ class Inscription(models.Model):
     
 class InscriptionLab(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    workload = models.ForeignKey(WorkloadLab, on_delete=models.CASCADE)
+    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
+    workload_id = models.ForeignKey(WorkloadLab, on_delete=models.CASCADE)
+    status = models.BooleanField(default=True)
     
     created_by = models.ForeignKey(User, related_name='created_%(class)s_set' , on_delete=models.SET_NULL, null=True)
     modified_by = models.ForeignKey(User, related_name='modified_%(class)s_set', on_delete=models.SET_NULL, null=True)

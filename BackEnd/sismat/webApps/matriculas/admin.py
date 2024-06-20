@@ -1,9 +1,9 @@
 from django.contrib import admin
 from .models.Student import Student
 from .models.Teacher import Teacher
-from.models.Course import Course, Laboratory
-from.models.Workload import Workload, WorkloadLab
-from.models.Inscription import Inscription, InscriptionLab
+from .models.Course import Course, Laboratory
+from .models.Workload import Workload, WorkloadLab
+from .models.Inscription import Inscription, InscriptionLab
 
 # Register your models here.
 
@@ -24,19 +24,19 @@ class CourseAdmin(BaseModelAdmin):
     fields = ['code', 'name', 'theory_hours', 'credits', 'hasLaboratory', 'status', 'year', 'semester']
     
 class LaboratoryAdmin(BaseModelAdmin):
-    fields = ['courseId', 'name', 'status', 'year', 'semester']
+    fields = ['course_id', 'name', 'status', 'year', 'semester']
     
 class WorkloadAdmin(BaseModelAdmin):
-    fields = ['group', 'capacity', 'teacher', 'course']
+    fields = ['group', 'capacity', 'teacher_id', 'course_id']
     
 class WorkloadLabAdmin(BaseModelAdmin):
-    fields = ['group', 'capacity', 'teacher', 'laboratory']
+    fields = ['group', 'capacity', 'teacher_id', 'laboratory_id']
     
 class InscriptionAdmin(BaseModelAdmin):
-    fields = ['student', 'workload']
+    fields = ['student_id', 'workload_id', 'status']
 
 class InscriptionLabAdmin(BaseModelAdmin):
-    fields = ['student', 'workload']
+    fields = ['student_id', 'workload_id', 'status']
     
 
 # Registrando modelos

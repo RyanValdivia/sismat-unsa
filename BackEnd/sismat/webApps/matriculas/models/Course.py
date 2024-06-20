@@ -44,7 +44,7 @@ class Course(models.Model):
     
 class Laboratory(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    courseId = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     status = models.BooleanField(default=True)
     year = models.IntegerField(choices=YEARS, default=1)

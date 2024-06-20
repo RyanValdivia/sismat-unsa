@@ -17,8 +17,8 @@ class Workload(models.Model):
     year = models.IntegerField()
     semester = models.IntegerField()
     
-    teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    teacher_id = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True)
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
     
     created_by = models.ForeignKey(User, related_name='created_%(class)s_set' , on_delete=models.SET_NULL, null=True)
     modified_by = models.ForeignKey(User, related_name='modified_%(class)s_set', on_delete=models.SET_NULL, null=True)
@@ -41,8 +41,8 @@ class WorkloadLab(models.Model):
     year = models.IntegerField()
     semester = models.IntegerField()
     
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE)
+    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    laboratory_id = models.ForeignKey(Laboratory, on_delete=models.CASCADE)
     
     created_by = models.ForeignKey(User, related_name='created_%(class)s_set' , on_delete=models.SET_NULL, null=True)
     modified_by = models.ForeignKey(User, related_name='modified_%(class)s_set', on_delete=models.SET_NULL, null=True)
