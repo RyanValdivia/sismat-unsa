@@ -12,7 +12,7 @@ GROUPS = [
 
 class Workload(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    group = models.CharField(choices=[(group, group) for group in GROUPS], default="A")
+    group = models.CharField(choices=[(group, group) for group in GROUPS], default="A", max_length=1)
     capacity = models.PositiveIntegerField()
     year = models.IntegerField()
     semester = models.IntegerField()
@@ -36,7 +36,7 @@ class Workload(models.Model):
 
 class WorkloadLab(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    group = models.CharField(choices=[(group, group) for group in GROUPS], default="A")
+    group = models.CharField(choices=[(group, group) for group in GROUPS], default="A", max_length=1)
     capacity = models.PositiveIntegerField()
     year = models.IntegerField()
     semester = models.IntegerField()
