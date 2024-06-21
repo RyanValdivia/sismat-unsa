@@ -21,7 +21,7 @@ class TeacherAdmin(BaseModelAdmin):
     fields = ['email', 'names', 'lastnames', 'status']
     
 class CourseAdmin(BaseModelAdmin):
-    fields = ['code', 'name', 'theory_hours', 'credits', 'hasLaboratory', 'status', 'year', 'semester']
+    fields = ['code', 'name', 'theory_hours', 'credits', 'hasLaboratory', 'status', 'year', 'semester', 'prerequisites']
     
 class LaboratoryAdmin(BaseModelAdmin):
     fields = ['course_id', 'name', 'status', 'year', 'semester']
@@ -33,10 +33,12 @@ class WorkloadLabAdmin(BaseModelAdmin):
     fields = ['group', 'capacity', 'teacher_id', 'laboratory_id']
     
 class InscriptionAdmin(BaseModelAdmin):
-    fields = ['student_id', 'workload_id', 'status']
+    fields = ['student_id', 'workload_id', 'status', 'course_status', 'nro_matricula']
+    readonly_fields = ['course_status', 'nro_matricula']
 
 class InscriptionLabAdmin(BaseModelAdmin):
     fields = ['student_id', 'workload_id', 'status']
+    readonly_fields = ['course_status', 'nro_matricula']
     
 
 # Registrando modelos

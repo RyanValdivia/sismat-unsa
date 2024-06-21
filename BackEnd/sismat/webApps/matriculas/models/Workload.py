@@ -26,13 +26,13 @@ class Workload(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        if self.course:
-            self.year = self.course.year
-            self.semester = self.course.semester
+        if self.course_id:
+            self.year = self.course_id.year
+            self.semester = self.course_id.semester
         super().save(*args, **kwargs)
         
     def __str__(self):
-        return f"{self.course.name} {self.group} - Profesor: {self.teacher.lastnames} {self.teacher.names}"
+        return f"{self.course_id.name} {self.group} - Profesor: {self.teacher_id.lastnames} {self.teacher_id.names}"
 
 class WorkloadLab(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -50,10 +50,10 @@ class WorkloadLab(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        if self.laboratory:
-            self.year = self.laboratory.year
-            self.semester = self.laboratory.semester
+        if self.laboratory_id:
+            self.year = self.laboratory_id.year
+            self.semester = self.laboratory_id.semester
         super().save(*args, **kwargs)
         
     def __str__(self):
-        return f"{self.laboratory.name} {self.group} - Profesor: {self.teacher.lastnames} {self.teacher.names}"
+        return f"{self.laboratory_id.name} {self.group} - Profesor: {self.teacher_id.lastnames} {self.teacher_id.names}"

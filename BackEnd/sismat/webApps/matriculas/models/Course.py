@@ -30,6 +30,8 @@ class Course(models.Model):
     year = models.IntegerField(choices=YEARS, default=1)
     semester = models.IntegerField(choices=SEMESTERS, default=1)
     
+    prerequisites = models.ManyToManyField('self', symmetrical=False, blank=True, related_name='prerequisites_%(class)s_set')
+    
     created_by = models.ForeignKey(User, related_name='created_%(class)s_set' , on_delete=models.SET_NULL, null=True)
     modified_by = models.ForeignKey(User, related_name='modified_%(class)s_set', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
