@@ -4,12 +4,11 @@ import uuid
 
 # Create your models here.
 
-class Student(models.Model):
+class Teacher(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    cui = models.CharField(max_length=8, unique=True)
+    email = models.EmailField()
     names = models.CharField(max_length=100)
     lastnames = models.CharField(max_length=100)
-    email = models.EmailField()
     status = models.BooleanField(default=True)
     
     created_by = models.ForeignKey(User, related_name='created_%(class)s_set' , on_delete=models.SET_NULL, null=True)
@@ -17,10 +16,13 @@ class Student(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        app_label = 'matriculas'
+    
     def save(self, *args, **kwargs):
         self.names = self.names.upper()
         self.lastnames = self.lastnames.upper()
-        super(Student, self).save(*args, **kwargs)
+        super(Teacher, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.lastnames} {self.names}"
+        return f"{self.names} {self.lastnames}"

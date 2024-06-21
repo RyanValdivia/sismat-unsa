@@ -26,6 +26,9 @@ class Inscription(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        app_label = 'matriculas'
+    
     def save(self, *args, **kwargs):
         
         course = self.workload_id.course_id
@@ -70,6 +73,9 @@ class InscriptionLab(models.Model):
     modified_by = models.ForeignKey(User, related_name='modified_%(class)s_set', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        app_label = 'matriculas'
     
     def save(self, *args, **kwargs):        
         if self.workload_id:

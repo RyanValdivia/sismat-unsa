@@ -37,6 +37,9 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        app_label = 'matriculas'
+    
     def save(self, *args, **kwargs):
         self.name = self.name.upper()
         super(Course, self).save(*args, **kwargs)
