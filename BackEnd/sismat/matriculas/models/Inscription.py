@@ -82,6 +82,8 @@ class InscriptionLab(models.Model):
             if self.workload_id.capacity > 0:
                 self.workload_id.capacity -= 1
                 self.workload_id.save()
+        
+        
                 
         super().save(*args, **kwargs)
 
