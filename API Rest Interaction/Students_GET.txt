@@ -1,0 +1,18 @@
+Headers:
+Authorization : ? (claveApi)
+
+GET
+
+http://127.0.0.1:8000/api/students/
+
+[
+    {
+        "id": "",
+        "cui": "",
+        "names": "",
+        "lastnames": "",
+        "email": "",
+        "status": true
+    },
+    ...
+]
