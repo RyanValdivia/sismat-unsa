@@ -1,0 +1,17 @@
+Headers:
+Authorization : ? (claveApi)
+
+GET
+
+http://127.0.0.1:8000/api/teachers/
+
+[
+    {
+        "id": "",
+        "email": "",
+        "names": "",
+        "lastnames": "",
+        "status": true
+    },
+    ...
+]

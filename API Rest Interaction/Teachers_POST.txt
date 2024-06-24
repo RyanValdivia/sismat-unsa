@@ -1,0 +1,30 @@
+POST
+
+http://127.0.0.1:8000/api/teachers/
+
+[
+    {
+        "email": "apazv@unsa.edu.pe",
+        "names": "Alfredo",
+        "lastnames": "Paz Valderrama",
+        "status": true
+    },
+    {
+        "email": "kguevarap@unsa.edu.pe",
+        "names": "Karim",
+        "lastnames": "Guevara Puente de la Vega",
+        "status": true
+    },
+    {
+        "email": "ccorrales@unsa.edu.pe",
+        "names": "Carlo Jose Luis",
+        "lastnames": "Corrales Delgado",
+        "status": true
+    },
+    {
+        "email": "nbedregal@unsa.edu.pe",
+        "names": "Norka Norali",
+        "lastnames": "Bedregal Alpaca",
+        "status": true
+    },
+]

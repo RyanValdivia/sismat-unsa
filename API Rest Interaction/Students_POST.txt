@@ -1,0 +1,27 @@
+POST
+
+http://127.0.0.1:8000/api/students/
+
+[
+    {
+        "cui": "20232188",
+        "names": "Jhonatan Benjamin",
+        "lastnames": "Mamani Cespedes",
+        "email": "jmamanices@unsa.edu.pe",
+        "status": true
+    },
+    {
+        "cui": "20232193",
+        "names": "Ryan Fabian",
+        "lastnames": "Valdivia Segovia",
+        "email": "rvaldiviase@unsa.edu.pe",
+        "status": true
+    },
+    {
+        "cui": "20231498",
+        "names": "Johann Andre",
+        "lastnames": "Caceres Ruiz",
+        "email": "jcaceresruiz@unsa.edu.pe",
+        "status": true
+    },
+]

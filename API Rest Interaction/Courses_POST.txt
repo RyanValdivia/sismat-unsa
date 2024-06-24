@@ -1,0 +1,30 @@
+POST
+
+http://127.0.0.1:8000/api/courses/
+
+// Para agregar prerrequisitos se necesita el id del curso (Caso del segundo objeto)
+
+[
+    {
+        "code": "1701106",
+        "name": "Fundamentos de la Programacion",
+        "hasLaboratory": true,
+        "theory_hours": "4.00",
+        "credits": 5,
+        "status": true,
+        "year": 1,
+        "semester": 1,
+        "prerequisites": []
+    },
+    {
+        "code": "1701212",
+        "name": "Programacion Web 1",
+        "hasLaboratory": true,
+        "theory_hours": "2.00",
+        "credits": 4,
+        "status": true,
+        "year": 1,
+        "semester": 2,
+        "prerequisites": ["<id_course>"]
+    },
+]
