@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "../styles/LoginForm.css";
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
@@ -9,12 +8,15 @@ const LoginForm = () => {
         event.preventDefault();
         console.log("username", username);
         console.log("password", password);
+        setUsername("");
+        setPassword("");
+        event.target.reset();
     };
 
     return (
-        <div className="login-container">
+        <div className="shadow-md flex flex-col justify-center items-center">
             <form
-                className="login-form"
+                className="flex flex-col justify-center items-center"
                 onSubmit={(event) => handleSubmit(event)}
             >
                 <h2>Inicio de sesión</h2>

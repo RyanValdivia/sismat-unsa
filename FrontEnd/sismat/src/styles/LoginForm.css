@@ -7,12 +7,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 30%;
-    height: 50%;
 }
 
 .login-form {
-    border: solid black 2px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     background-color: #fff;
     border-radius: 8px;
     text-align: center;
@@ -23,23 +21,24 @@
     align-items: center;
     flex-direction: column;
     padding: 10%;
+    text-wrap: nowrap;
 }
 
 .login-form h2 {
     color: #7D0705;
     font-size: 225%;
-    margin: 2%;
+    margin: 2% 300px;
 }
 
 .login-form p {
     color: #7C7A7D;
     font-size: 120%;
-    margin: 2%;
+    margin: 2% 300px;
 }
 
 .input-container {
     width: 100%;
-    margin: 2%;
+    margin: 2% 300px;
     text-align: left;
 }
 

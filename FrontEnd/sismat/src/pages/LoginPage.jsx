@@ -1,9 +1,8 @@
 import LoginForm from "../components/LoginForm";
-import "../styles/LoginPage.css"
 
 const LoginPage = () => {
     return (
-        <div className="main-container">
+        <div className="flex justify-center items-center h-screen">
             <LoginForm />
         </div>
     );
