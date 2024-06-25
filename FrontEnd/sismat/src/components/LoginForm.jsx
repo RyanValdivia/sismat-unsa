@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "./Input";
+import InputSubmit from "./InputSubmit";
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
@@ -43,13 +44,7 @@ const LoginForm = () => {
                     onChange={(event) => setPassword(event.target.value)}
                 />
 
-                <div className="flex flex-col justify-center items-center m-2 w-full">
-                    <input
-                        className="m-2 w-full bg-red-800 text-white p-2 rounded-md cursor-pointer hover:bg-red-900"
-                        type="submit"
-                        value="Iniciar Sesión"
-                    />
-                </div>
+                <InputSubmit/>
             </form>
         </div>
     );
