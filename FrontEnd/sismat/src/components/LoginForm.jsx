@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "./Input";
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
@@ -14,38 +15,37 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="shadow-md flex flex-col justify-center items-center">
+        <div className="border shadow rounded-md min-w-96 p-10">
             <form
-                className="flex flex-col justify-center items-center"
+                className="flex flex-col justify-center items-center p-1"
                 onSubmit={(event) => handleSubmit(event)}
             >
-                <h2>Inicio de sesión</h2>
-                <p>Ingresa tus credenciales para acceder</p>
-                <div className="input-container">
-                    <label htmlFor="username">Nombre de usuario: </label>
+                <h2 className="m-2 text-4xl antialiased text-red-800 font-bold">
+                    Inicio de sesión
+                </h2>
+                <p className="text-xl m-2">
+                    Ingresa tus credenciales para acceder
+                </p>
+
+                <Input
+                    type="text"
+                    label="Nombre de usuario: "
+                    placeholder="Ingresa tu nombre de usuario"
+                    value="username"
+                    onChange={(event) => setUsername(event.target.value)}
+                />
+
+                <Input
+                    type="password"
+                    label="Contraseña: "
+                    placeholder="Ingresa tu contraseña"
+                    value="password"
+                    onChange={(event) => setPassword(event.target.value)}
+                />
+
+                <div className="flex flex-col justify-center items-center m-2 w-full">
                     <input
-                        type="text"
-                        id="username"
-                        placeholder="Ingresa tu nombre de usuario"
-                        onChange={(event) => {
-                            setUsername(event.target.value);
-                        }}
-                    />
-                </div>
-                <div className="input-container">
-                    <label htmlFor="password"> Contraseña: </label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Ingresa tu contraseña"
-                        onChange={(event) => {
-                            setPassword(event.target.value);
-                        }}
-                    />
-                </div>
-                <div className="input-container">
-                    <input
-                        className="button"
+                        className="m-2 w-full bg-red-800 text-white p-2 rounded-md cursor-pointer hover:bg-red-900"
                         type="submit"
                         value="Iniciar Sesión"
                     />
