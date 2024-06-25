@@ -44,7 +44,7 @@ const LoginForm = () => {
                     onChange={(event) => setPassword(event.target.value)}
                 />
 
-                <InputSubmit/>
+                <InputSubmit />
             </form>
         </div>
     );

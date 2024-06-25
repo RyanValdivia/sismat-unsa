@@ -1,4 +1,4 @@
-const InputSubmit = ({ value }) => {
+const InputSubmit = ({ value = "Enviar" }) => {
     return (
         <div className="flex flex-col justify-center items-center m-2 w-full">
             <input
