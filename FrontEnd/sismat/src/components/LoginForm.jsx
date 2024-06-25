@@ -1,18 +1,29 @@
 import { useState } from "react";
 import Input from "./Input";
 import InputSubmit from "./InputSubmit";
+import { login } from "../api/login";
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("username", username);
-        console.log("password", password);
-        setUsername("");
-        setPassword("");
-        event.target.reset();
+        const user = {
+            username: username,
+            password: password,
+        };
+        try {
+            const res = await login(user);
+            console.log(res.data);
+            setUsername("");
+            setPassword("");
+            event.target.reset();
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.data.detail);
+            }
+        }
     };
 
     return (
