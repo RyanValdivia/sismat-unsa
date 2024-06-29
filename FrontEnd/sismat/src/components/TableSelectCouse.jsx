@@ -1,6 +1,5 @@
 import React from "react";
 import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
 
 const TableSelectCourse = () => {
   const courses = [
@@ -18,25 +17,37 @@ const TableSelectCourse = () => {
           <p>Creditos actuales:</p>
           <p>Creditos maximos:</p>
         </div>
-        
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="mb-6 text-center">
             <h1 className="text-3xl font-bold text-[#8B0000]">Selección de Cursos</h1>
           </div>
           <div className="flex items-center justify-center gap-4 mb-6">
-            
+            {[1, 2, 3, 4, 5].map((num) => (
+              <button key={num}
+              className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md"
+              style={{ minWidth: '40px' }}
+              >
+              {num}
+              </button>
+            ))}
           </div>
           {/* tabla de Selección de cursos */}
           <div className="overflow-x-auto">
-            <table className="w-full table-auto">              
+            <table className="w-full table-auto">
               <thead>
-            
+                <tr className="bg-[#8B0000] text-white">
+                  <th className="px-4 py-2 rounded-tl-lg">Nro</th>
+                  <th className="px-4 py-2">Código</th>
+                  <th className="px-4 py-2">Nombre</th>
+                  <th className="px-4 py-2">Estatus</th>
+                  <th className="px-4 py-2">Créditos</th>
+                  <th className="px-4 py-2 rounded-tr-lg">Verificar</th>
+                </tr>
               </thead>
-              
               <tbody>
                 {courses.map((course) => (
                   <tr key={course.id} className="border-b border-[#800020]">
-                    <td className={`px-4 py-2 ${course.id === 5 ? 'bg-[#8B0000] text-white rounded-l-lg rounded-b-lg' : 'bg-[#8B0000] text-white rounded-l-lg'}`}>{course.id}</td>
+                    <td className={`px-4 py-2 ${course.id === 5 ? 'bg-[#8B0000] text-white ' : 'bg-[#8B0000] text-white '}`}>{course.id}</td>
                     <td className="px-4 py-2">{course.code}</td>
                     <td className="px-4 py-2">{course.name}</td>
                     <td className="px-4 py-2">{course.status}</td>
@@ -45,11 +56,25 @@ const TableSelectCourse = () => {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>          
+            </table>            
+          </div>
+          <div className="flex justify-end mt-5">
+                <p>Total de creditos: 00</p>
+          </div>
+          
         </div>
+        <div className="flex items-center justify-between">
+          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md ">
+              Atras
+          </button>
+          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md">
+              Continuar
+          </button>
+                
+        </div>
+        
       </main>
   );
-
 };
+
 export default TableSelectCourse;
