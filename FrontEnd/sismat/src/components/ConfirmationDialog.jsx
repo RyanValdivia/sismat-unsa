@@ -7,9 +7,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DownloadIcon from '@mui/icons-material/Download';
 import RedButton from './RedButton';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
+import PDFDocument from "./PDFDocument";
 
-const ConfirmationDialog = ({ open, onClose, onDownload }) => (
+const ConfirmationDialog = ({ open, onClose, student, courses, totalCredits }) => (
     <Dialog
         open={open}
         onClose={onClose}
@@ -27,9 +29,16 @@ const ConfirmationDialog = ({ open, onClose, onDownload }) => (
                 Puedes descargar tu constancia de matrícula a continuación.
             </DialogContentText>
             <DialogActions className="flex justify-center pb-4 mt-6">
-            <RedButton onClick={onDownload} endIcon={<DownloadIcon />}>
-                Descargar Constancia
-            </RedButton>
+            <PDFDownloadLink
+                    document={<PDFDocument student={student} courses={courses} totalCredits={totalCredits} payment={{ amount: 16.5, receipt: '123546' }} />}
+                    fileName={`constancia_${student.cui}.pdf`}
+                >
+                    {({ loading }) => (
+                        <RedButton endIcon={<DownloadIcon />}>
+                            {loading ? 'Cargando...' : 'Descargar Constancia'}
+                        </RedButton>
+                    )}
+            </PDFDownloadLink>
         </DialogActions>
         </DialogContent>
         
