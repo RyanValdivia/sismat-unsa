@@ -5,17 +5,13 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import jsPDF from 'jspdf';
 
 import CourseTable from './CourseTable';
-import DownloadButton from './DownloadButton';
-import ConfirmationSnackbar from './ConfirmationSnackbar';
 import ScheduleModal from "./ScheduleModal";
 import RedButton from "./RedButton";
+import ConfirmationDialog from './ConfirmationDialog';
 
 const ConfirmationTable = () => {
-    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // Será false antes de la confirmación, por ahora queda asi para probar el botón de la descarga pdf
-    const [isConfirmed, setIsConfirmed] = useState(true);
 
     const courses = [
         { id: 1, code: "CS101", name: "Introducción a la Programación", group: "A", enrollment: "1", credits: 3, teacher: "Paz Valderrama Alfredo" },
@@ -28,14 +24,11 @@ const ConfirmationTable = () => {
     const totalCredits = courses.reduce((sum, course) => sum += course.credits, 0);
 
     const handleConfirmClick = () => {
-        setOpenSnackbar(true);
+        setOpenDialog(true);
     };
 
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpenSnackbar(false);
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
     };
 
     const handleOpenModal = () => {
@@ -93,12 +86,14 @@ const ConfirmationTable = () => {
                     </div>
                 </div>
             </div>
-
-            {isConfirmed && <DownloadButton handleDownloadPDF={handleDownloadPDF} />}
             
             <ScheduleModal isOpen={isModalOpen} onClose={handleCloseModal} />
 
-            <ConfirmationSnackbar openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} />
+            <ConfirmationDialog 
+                open={openDialog} 
+                onClose={handleCloseDialog} 
+                onDownload={handleDownloadPDF} 
+            />
         </main>
     );
 };
