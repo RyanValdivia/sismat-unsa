@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import { PDFViewer } from '@react-pdf/renderer';
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 
 
 import CourseTable from './CourseTable';
@@ -113,7 +113,16 @@ const ConfirmationTable = () => {
                     payment={{ amount: 16.5, receipt: '123546' }} 
                 />
             </PDFViewer>
-        </main>
+
+            <PDFDownloadLink document={<PDFDocument student={student} courses={courses} totalCredits={totalCredits} payment={{ amount: 16.5, receipt: '123546' }} />} fileName={`constancia__${student.cui}.pdf`}>
+                {({ loading }) => (loading ? <RedButton>
+                        Cargando documento...
+                    </RedButton> : <RedButton>
+                        ¡Descargar ahora!
+                    </RedButton>)
+                }
+            </PDFDownloadLink>
+        </main> 
     );
 };
 
