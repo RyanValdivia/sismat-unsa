@@ -1,62 +1,14 @@
 import React, { useState } from "react";
-import Button from '@mui/material/Button';
-import { styled } from '@mui/system';
-import DownloadIcon from '@mui/icons-material/Download';
 import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import jsPDF from 'jspdf';
-import Modal from '@mui/material/Modal';
 
-const ScheduleModal = ({ isOpen, onClose }) => {
-    return (
-        <Modal
-            open={isOpen}
-            onClose={onClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-        >
-            <Box sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                bgcolor: 'background.paper',
-                boxShadow: 24,
-                p: 4,
-                maxWidth: '80vw',
-            }}>
-                <h1 id="simple-modal-title">MI HORARIO</h1>
-                <h2 id="simple-modal-title">Hola Mundo</h2>
-                <Button 
-                    onClick={onClose} 
-                    variant="contained" 
-                    color="primary" 
-                    sx={{ mt: 2 }}
-                >
-                    Cerrar
-                </Button>
-            </Box>
-        </Modal>
-    );
-};
-
-const RedButton = styled(Button)({
-    backgroundColor: '#8B0000',
-    color: 'white',
-    '&:hover': {
-        backgroundColor: '#5F0000',
-    },
-});
-
-const WhiteButton = styled(Button)({
-    backgroundColor: 'white',
-    color: '#8B0000',
-    '&:hover': {
-        backgroundColor: '#dcdcdc',
-    },
-});
+import CourseTable from './CourseTable';
+import DownloadButton from './DownloadButton';
+import ConfirmationSnackbar from './ConfirmationSnackbar';
+import ScheduleModal from "./ScheduleModal";
+import RedButton from "./RedButton";
 
 const ConfirmationTable = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -119,34 +71,8 @@ const ConfirmationTable = () => {
                     
                 </div>
                 {/* tabla de Selección de cursos */}
-                <div className="overflow-x-auto" id="confirmation-table">
-                    <table className="w-full table-auto">              
-                        <thead>
-                            <tr className="bg-[#8B0000] text-white">
-                                <th className="px-4 py-2 text-left rounded-tl-lg">Nro.</th>
-                                <th className="px-4 py-2 text-left">Código del curso</th>
-                                <th className="px-4 py-2 text-left">Asignatura</th>
-                                <th className="px-4 py-2 text-center">Grupo</th>
-                                <th className="px-4 py-2 text-center">Matrícula</th>
-                                <th className="px-4 py-2 text-center">Créditos</th>
-                                <th className="px-4 py-2 text-left rounded-tr-lg">Docente</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            {courses.map((course) => (
-                            <tr key={course.id} className="border-b border-[#800020]">
-                                <td className="px-4 py-2 bg-[#8B0000] text-white text-center w-12">{course.id}</td>
-                                    <td className="px-4 py-2">{course.code}</td>
-                                    <td className="px-4 py-2">{course.name}</td>
-                                    <td className="px-4 py-2 text-center">{course.group}</td>
-                                    <td className="px-4 py-2 text-center">{course.enrollment}</td>
-                                    <td className="px-4 py-2 text-center">{course.credits}</td>
-                                    <td className="px-4 py-2">{course.teacher}</td>
-                            </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                <div className="overflow-x-auto">
+                    <CourseTable courses={courses} />
                     <div className="flex justify-end gap-4 mt-2">
                         <a onClick={handleOpenModal} className="underline text-red-800 hover:text-red-200 cursor-pointer">
                             <ScheduleIcon className="mr-1" />
@@ -168,26 +94,11 @@ const ConfirmationTable = () => {
                 </div>
             </div>
 
-            {isConfirmed && (
-                <div className="flex justify-end mt-3">
-                    <WhiteButton 
-                        variant="contained" 
-                        endIcon={<DownloadIcon />}
-                        onClick={handleDownloadPDF}
-                    >
-                        Descargar constancia
-                    </WhiteButton>
-                </div>
-            )}
+            {isConfirmed && <DownloadButton handleDownloadPDF={handleDownloadPDF} />}
             
-            {/* Modal de horarios */}
             <ScheduleModal isOpen={isModalOpen} onClose={handleCloseModal} />
 
-            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
-                    ¡Se ha matriculado correctamente!
-                </Alert>
-            </Snackbar>
+            <ConfirmationSnackbar openSnackbar={openSnackbar} handleCloseSnackbar={handleCloseSnackbar} />
         </main>
     );
 };
