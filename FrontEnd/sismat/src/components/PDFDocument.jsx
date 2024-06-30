@@ -4,19 +4,18 @@ import registerFonts from '../config/fonts';
 
 registerFonts();
 
-// Define styles
 const styles = StyleSheet.create({
     page: {
-        padding: 20,
+        padding: 25,
         fontSize: 8.5,
         flexDirection: "column",
     },
     header: {
-        fontSize: 15,
+        fontSize: 16,
         fontFamily: 'Open Sans',
-        fontWeight: 800,
+        fontWeight: '700',
         textAlign: "center",
-        marginTop: 20,
+        marginTop: 15,
         marginBottom: 20,
     },
     section: {
@@ -30,9 +29,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: 4,
-    },
-    label: {
-        fontWeight: "bold",
     },
     table: {
         width: "100%",
@@ -48,12 +44,13 @@ const styles = StyleSheet.create({
     tableHeader: {
         borderBottomWidth: 1,
         backgroundColor: "#f2f2f2",
-        fontStyle: "bold",
-        padding: 4,
+        fontFamily: 'Open Sans',
+        fontWeight: '800',
+        padding: 3,
         textAlign: "center",
     },
     tableCell: {
-        padding: 3,
+        padding: 1,
         borderLeftColor: "#000",
     },
     // AQUI MANEJO LOS TAMAÑOS DE LOS ANCHOS DE LAS COLUMNAS
@@ -70,7 +67,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     tableCellName: {
-        width: "55%",
+        width: "50%",
     },
     tableCellCiclo: {
         width: "6%",
@@ -89,19 +86,27 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     tableCellObservations: {
-        width: "13%",
+        width: "15%",
     },
 
     totalCredits: {
-        marginTop: 10,
-        fontWeight: "bold",
+        marginTop: 2,
+        marginRight: 85,
+        fontFamily: 'Open Sans',
+        fontWeight: '700',
         textAlign: "right",
     },
+    payment: {
+        marginTop: 0,
+        fontFamily: 'Open Sans',
+        fontWeight: '700',
+        textAlign: "left",
+    },
+    signature: {
+        marginTop: 70,
+    },
     footer: {
-        marginTop: 20,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        paddingHorizontal: 50,
+        marginTop: 390,
     },
     tableContainer: {
         flexDirection: "row",
@@ -124,7 +129,7 @@ const styles = StyleSheet.create({
 const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
     <Document title={fileName}>
         <Page size="A4" style={styles.page}>
-            <Text style={[styles.header, styles.boldText]}>CONSTANCIA DE MATRÍCULA</Text>
+            <Text style={[styles.header]}>CONSTANCIA DE MATRICULA</Text>
 
             <View style={styles.section}>
                 <View style={styles.title}>
@@ -190,15 +195,14 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
             </View>
 
             <Text style={styles.totalCredits}>Total de créditos: {totalCredits}</Text>
-            <Text style={styles.totalCredits}>Pagos realizados: S/. {payment.amount} [recibo: {payment.receipt}]</Text>
-
+            <Text style={styles.payment}>Pagos realizados:</Text>
+            <Text>S/. {payment.amount} [recibo: {payment.receipt}]</Text>
+            <View style={styles.signature}>
+                <Text>Operador                                              Alumno</Text>
+                <Text>____________________                              ____________________</Text>
+            </View>
             <View style={styles.footer}>
-                
-                <Text>Operador</Text>
-                <Text>Alumno</Text>
-                <Text></Text>
-                <Text>____________________</Text>
-                <Text>____________________</Text>
+                <Text> Este documento carece de validez en caso no contenga las firmas, sellos y huella dactilar - a33a82b5542402860821b41e6c6db08f6d9579e3</Text>
             </View>
         </Page>
     </Document>
