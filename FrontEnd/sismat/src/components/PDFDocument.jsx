@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
     }
 });
 
-const PDFDocument = ({ student, courses, totalCredits, payment }) => (
-    <Document>
+const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
+    <Document title={fileName}>
         <Page size="A4" style={styles.page}>
             <Text style={styles.header}>CONSTANCIA DE MATRÍCULA</Text>
 
