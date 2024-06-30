@@ -28,11 +28,11 @@ const ConfirmationTable = () => {
     };
 
     const courses = [
-        { id: 1, code: "CS101", name: "Introducción a la Programación", group: "A", enrollment: "1", credits: 3, teacher: "Paz Valderrama Alfredo" },
-        { id: 2, code: "WD201", name: "Diseño Web Avanzado", group: "B", enrollment: "1", credits: 4, teacher: "Prof. Martínez Martínez" },
-        { id: 3, code: "DB301", name: "Bases de Datos Relacionales", group: "C", enrollment: "1", credits: 5, teacher: "Ing. López Obrador" },
-        { id: 4, code: "MA401", name: "Desarrollo de Aplicaciones Móviles", group: "C", enrollment: "1", credits: 4, teacher: "Sánchez Carlos José" },
-        { id: 5, code: "AI501", name: "Inteligencia Artificial y Machine Learning", group: "A", enrollment: "1", credits: 5, teacher: "Contrato Pendiente" },
+        { id: 1, code: "CS101", name: "INTRODUCCIÓN A LA PROGRAMACIÓN", group: "A", enrollment: "1", credits: 3, teacher: "Paz Valderrama Alfredo" },
+        { id: 2, code: "WD201", name: "DISEÑO WEB AVANZADO", group: "B", enrollment: "1", credits: 4, teacher: "Prof. Martínez Martínez" },
+        { id: 3, code: "DB301", name: "BASES DE DATOS RELACIONALES", group: "C", enrollment: "1", credits: 5, teacher: "Ing. López Obrador" },
+        { id: 4, code: "MA401", name: "DESARROLLO DE APLICACIONES MÓVILES", group: "C", enrollment: "1", credits: 4, teacher: "Sánchez Carlos José" },
+        { id: 5, code: "AI501", name: "INTELIGENCIA ARTIFICIAL Y MACHINE LEARNING", group: "A", enrollment: "1", credits: 5, teacher: "Contrato Pendiente" },
     ];
 
     const totalCredits = courses.reduce((sum, course) => sum += course.credits, 0);

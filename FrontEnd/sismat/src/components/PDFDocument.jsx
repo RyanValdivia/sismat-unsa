@@ -1,18 +1,22 @@
 import React from "react";
 import { Page, Text, View, StyleSheet, Document } from "@react-pdf/renderer";
+import registerFonts from '../config/fonts';
+
+registerFonts();
 
 // Define styles
 const styles = StyleSheet.create({
     page: {
         padding: 20,
-        fontSize: 10,
+        fontSize: 8.5,
         flexDirection: "column",
-        fontFamily: "Helvetica",
     },
     header: {
-        fontSize: 14,
-        fontWeight: "bold",
+        fontSize: 15,
+        fontFamily: 'Open Sans',
+        fontWeight: 800,
         textAlign: "center",
+        marginTop: 20,
         marginBottom: 20,
     },
     section: {
@@ -38,23 +42,56 @@ const styles = StyleSheet.create({
     },
     tableRow: {
         flexDirection: "row",
-        borderBottomWidth: 1,
         borderBottomColor: "#000",
         alignItems: "center",
     },
     tableHeader: {
+        borderBottomWidth: 1,
         backgroundColor: "#f2f2f2",
-        fontWeight: "bold",
-        padding: 5,
+        fontStyle: "bold",
+        padding: 4,
         textAlign: "center",
     },
     tableCell: {
-        padding: 5,
-        textAlign: "center",
-        flex: 1,
-        borderLeftWidth: 1,
+        padding: 3,
         borderLeftColor: "#000",
     },
+    // AQUI MANEJO LOS TAMAÑOS DE LOS ANCHOS DE LAS COLUMNAS
+    tableCellNro: {
+        width: "4%",
+        textAlign: "center",
+    },
+    tableCellCode: {
+        width: "8%",
+        textAlign: "center",
+    },
+    tableCellYearSem: {
+        width: "9%",
+        textAlign: "center",
+    },
+    tableCellName: {
+        width: "55%",
+    },
+    tableCellCiclo: {
+        width: "6%",
+        textAlign: "center",
+    },
+    tableCellGroup: {
+        width: "6%",
+        textAlign: "center",
+    },
+    tableCellMat: {
+        width: "4%",
+        textAlign: "center",
+    },
+    tableCellCredits: {
+        width: "6%",
+        textAlign: "center",
+    },
+    tableCellObservations: {
+        width: "13%",
+    },
+
     totalCredits: {
         marginTop: 10,
         fontWeight: "bold",
@@ -87,7 +124,7 @@ const styles = StyleSheet.create({
 const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
     <Document title={fileName}>
         <Page size="A4" style={styles.page}>
-            <Text style={styles.header}>CONSTANCIA DE MATRÍCULA</Text>
+            <Text style={[styles.header, styles.boldText]}>CONSTANCIA DE MATRÍCULA</Text>
 
             <View style={styles.section}>
                 <View style={styles.title}>
@@ -127,27 +164,27 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
 
             <View style={styles.table}>
                 <View style={styles.tableRow}>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Nro</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Código</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Año-Sem</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Nombre</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Ciclo</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Grupo</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Mat.</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Cred.</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader]}>Observaciones</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellNro]}>Nro</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCode]}>Código</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellYearSem]}>Año-Sem</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellName]}>Nombre</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCiclo]}>Ciclo</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellGroup]}>Grupo</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellMat]}>Mat.</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCredits]}>Cred.</Text>
+                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellObservations]}>Observaciones</Text>
                 </View>
                 {courses.map((course, index) => (
                     <View key={index} style={styles.tableRow}>
-                        <Text style={styles.tableCell}>{index + 1}</Text>
-                        <Text style={styles.tableCell}>{course.code}</Text>
-                        <Text style={styles.tableCell}>{"1  2"}</Text>
-                        <Text style={styles.tableCell}>{course.name}</Text>
-                        <Text style={styles.tableCell}>{"B"}</Text>
-                        <Text style={styles.tableCell}>{course.group}</Text>
-                        <Text style={styles.tableCell}>{course.enrollment}</Text>
-                        <Text style={styles.tableCell}>{course.credits}</Text>
-                        <Text style={styles.tableCell}></Text>
+                        <Text style={[styles.tableCell, styles.tableCellNro]}>{index + 1}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellCode]}>{course.code}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1  2"}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellName]}>{course.name}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellCiclo]}>{"B"}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellGroup]}>{course.group}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellMat]}>{course.enrollment}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellCredits]}>{course.credits}</Text>
+                        <Text style={[styles.tableCell, styles.tableCellObservations]}></Text>
                     </View>
                 ))}
             </View>
