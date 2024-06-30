@@ -3,6 +3,8 @@ import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 
 import CourseTable from './CourseTable';
 import ScheduleModal from "./ScheduleModal";
@@ -41,8 +43,21 @@ const ConfirmationTable = () => {
 
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
-        doc.text('Hola Mundo', 10, 10);
-        doc.save('constancia.pdf');
+    
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor('#BLACK');
+        doc.text('CONSTANCIA DE MATRÍCULA', 105, 20, { align: 'center' });
+    
+        doc.autoTable({
+            startY: 30,
+            head: [['Nro', 'Código', 'Nombre', 'Grupo', 'Mat.', 'Créd.']],
+            body: courses.map(course => [course.id, course.code, course.name, course.group, course.enrollment, course.credits]),
+        });
+    
+        doc.text(`Total de créditos: ${totalCredits}`, 14, doc.autoTable.previous.finalY + 10);
+    
+        doc.save('constancia_matricula.pdf');
     };
 
     //useEffect(() => {
