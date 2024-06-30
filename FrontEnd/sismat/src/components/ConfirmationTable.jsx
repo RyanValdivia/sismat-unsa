@@ -2,18 +2,30 @@ import React, { useState } from "react";
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import { Document, PDFViewer } from '@react-pdf/renderer';
 
 
 import CourseTable from './CourseTable';
 import ScheduleModal from "./ScheduleModal";
 import RedButton from "./RedButton";
 import ConfirmationDialog from './ConfirmationDialog';
+import PDFDocument from "./PDFDocument";
 
 const ConfirmationTable = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const student = {
+        cui: '20232188',
+        name: 'Juan Perez',
+        ingreso: '232001',
+        fecNac: '05-10-30',
+        docCivil: 'DNI 12345678',
+        docMilitar: '12345',
+        nivel: 'PRE-GRADO',
+        escuela: 'INGENIERIA DE SISTEMAS',
+        fuente: 'INTERNET',
+    };
 
     const courses = [
         { id: 1, code: "CS101", name: "Introducción a la Programación", group: "A", enrollment: "1", credits: 3, teacher: "Paz Valderrama Alfredo" },
@@ -39,25 +51,6 @@ const ConfirmationTable = () => {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-    };
-
-    const handleDownloadPDF = () => {
-        const doc = new jsPDF();
-    
-        doc.setFontSize(16);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor('#BLACK');
-        doc.text('CONSTANCIA DE MATRÍCULA', 105, 20, { align: 'center' });
-    
-        doc.autoTable({
-            startY: 30,
-            head: [['Nro', 'Código', 'Nombre', 'Grupo', 'Mat.', 'Créd.']],
-            body: courses.map(course => [course.id, course.code, course.name, course.group, course.enrollment, course.credits]),
-        });
-    
-        doc.text(`Total de créditos: ${totalCredits}`, 14, doc.autoTable.previous.finalY + 10);
-    
-        doc.save('constancia_matricula.pdf');
     };
 
     //useEffect(() => {
@@ -107,8 +100,19 @@ const ConfirmationTable = () => {
             <ConfirmationDialog 
                 open={openDialog} 
                 onClose={handleCloseDialog} 
-                onDownload={handleDownloadPDF} 
+                onDownload={() => { /* Aquí se tendría que hacer la función de descarga */ }}
             />
+
+            {/* Componente PDFViewer para mostrar el PDF */}
+            <PDFViewer style={{ width: '100%', height: '500px' }}>
+                <PDFDocument 
+                    fileName={`constancia__${student.cui}.pdf`}
+                    student={student} 
+                    courses={courses} 
+                    totalCredits={totalCredits} 
+                    payment={{ amount: 16.5, receipt: '123546' }} 
+                />
+            </PDFViewer>
         </main>
     );
 };
