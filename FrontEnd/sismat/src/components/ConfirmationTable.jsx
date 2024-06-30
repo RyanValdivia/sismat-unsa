@@ -7,6 +7,40 @@ import Snackbar from '@mui/material/Snackbar';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import jsPDF from 'jspdf';
+import Modal from '@mui/material/Modal';
+
+const ScheduleModal = ({ isOpen, onClose }) => {
+    return (
+        <Modal
+            open={isOpen}
+            onClose={onClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+        >
+            <Box sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                bgcolor: 'background.paper',
+                boxShadow: 24,
+                p: 4,
+                maxWidth: '80vw',
+            }}>
+                <h1 id="simple-modal-title">MI HORARIO</h1>
+                <h2 id="simple-modal-title">Hola Mundo</h2>
+                <Button 
+                    onClick={onClose} 
+                    variant="contained" 
+                    color="primary" 
+                    sx={{ mt: 2 }}
+                >
+                    Cerrar
+                </Button>
+            </Box>
+        </Modal>
+    );
+};
 
 const RedButton = styled(Button)({
     backgroundColor: '#8B0000',
@@ -26,6 +60,7 @@ const WhiteButton = styled(Button)({
 
 const ConfirmationTable = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Será false antes de la confirmación, por ahora queda asi para probar el botón de la descarga pdf
     const [isConfirmed, setIsConfirmed] = useState(true);
@@ -49,6 +84,14 @@ const ConfirmationTable = () => {
             return;
         }
         setOpenSnackbar(false);
+    };
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
     };
 
     const handleDownloadPDF = () => {
@@ -105,7 +148,7 @@ const ConfirmationTable = () => {
                         </tbody>
                     </table>
                     <div className="flex justify-end gap-4 mt-2">
-                        <a className="underline text-red-800 hover:text-red-200 cursor-pointer">
+                        <a onClick={handleOpenModal} className="underline text-red-800 hover:text-red-200 cursor-pointer">
                             <ScheduleIcon className="mr-1" />
                             Ver horarios
                         </a>
@@ -136,6 +179,9 @@ const ConfirmationTable = () => {
                     </WhiteButton>
                 </div>
             )}
+            
+            {/* Modal de horarios */}
+            <ScheduleModal isOpen={isModalOpen} onClose={handleCloseModal} />
 
             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                 <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
