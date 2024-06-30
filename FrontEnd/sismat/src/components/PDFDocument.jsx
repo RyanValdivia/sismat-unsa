@@ -7,16 +7,29 @@ registerFonts();
 const styles = StyleSheet.create({
     page: {
         padding: 25,
-        fontSize: 8.5,
+        fontSize: 8,
         flexDirection: "column",
     },
     header: {
-        fontSize: 16,
+        fontSize: 12,
         fontFamily: 'Open Sans',
         fontWeight: '700',
         textAlign: "center",
         marginTop: 15,
         marginBottom: 20,
+    },
+    title: {
+        fontFamily: 'Open Sans',
+        fontWeight: '700',
+    },
+    tag: {
+        fontFamily: 'Open Sans',
+        fontWeight: '700',
+        backgroundColor: "#CCCCCC",
+        width: 65,
+        borderColor: "#000",
+        borderWidth: 1,
+        marginBottom: -1,
     },
     section: {
         borderWidth: 1,
@@ -24,17 +37,21 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         padding: 5,
     },
+    subsection: {
+        borderWidth: 1,
+        borderColor: "#000",
+        marginBottom: 10,
+        padding: 5,
+    },
     row: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
+        justifyContent: "left",
         marginBottom: 4,
     },
     table: {
         width: "100%",
         borderWidth: 1,
         borderColor: "#000",
-        marginTop: 10,
     },
     tableRow: {
         flexDirection: "row",
@@ -97,16 +114,17 @@ const styles = StyleSheet.create({
         textAlign: "right",
     },
     payment: {
-        marginTop: 0,
         fontFamily: 'Open Sans',
         fontWeight: '700',
-        textAlign: "left",
     },
     signature: {
         marginTop: 70,
+        alignItems: "center",
     },
     footer: {
-        marginTop: 390,
+        position: 'absolute',
+        bottom: 40,
+        left: 30,
     },
     tableContainer: {
         flexDirection: "row",
@@ -117,48 +135,42 @@ const styles = StyleSheet.create({
         borderLeftWidth: 1,
         borderLeftColor: "#000",
     },
-    rightAlign: {
-        textAlign: "right",
-    },
-    title: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-    }
 });
 
 const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
     <Document title={fileName}>
         <Page size="A4" style={styles.page}>
             <Text style={[styles.header]}>CONSTANCIA DE MATRICULA</Text>
-
+            <Text style={styles.tag}>  Datos Alumno</Text>
             <View style={styles.section}>
                 <View style={styles.title}>
-                    <Text style={styles.label}>Datos Alumno</Text>
-                    <Text style={styles.rightAlign}>FECHA: 2023-08-28</Text>
+                    <Text style={styles}>FECHA: 2023-08-28</Text>
+                    <Text style={styles}>PÁGINA: 1/1</Text>
                 </View>
                 <View style={styles.row}>
-                    <Text style={styles.label}>C.U.I. :</Text>
+                    <Text style={styles.title}>C.U.I. :</Text>
                     <Text>{student.cui}</Text>
-                    <Text style={styles.label}>NOMBRE:</Text>
+                    <Text style={styles.title}>NOMBRE:</Text>
                     <Text>{student.name}</Text>
                 </View>
                 <View style={styles.row}>
-                    <Text style={styles.label}>INGRESO :</Text>
+                    <Text style={styles.title}>INGRESO :</Text>
                     <Text>{student.ingreso}</Text>
-                    <Text style={styles.label}>FEC. NAC.:</Text>
+                    <Text style={styles.title}>FEC. NAC.:</Text>
                     <Text>{student.fecNac}</Text>
-                    <Text style={styles.label}>DOC. CIVIL:</Text>
+                    <Text style={styles.title}>DOC. CIVIL:</Text>
                     <Text>{student.docCivil}</Text>
-                    <Text style={styles.label}>DOC. MILITAR:</Text>
+                    <Text style={styles.title}>DOC. MILITAR:</Text>
                     <Text>{student.docMilitar}</Text>
                 </View>
             </View>
 
+            <Text style={styles.tag}>  Datos Escuela</Text>
             <View style={styles.section}>
                 <View style={styles.row}>
-                    <Text style={styles.label}>NIVEL :</Text>
+                    <Text style={styles.title}>NIVEL :</Text>
                     <Text>PRE-GRADO</Text>
-                    <Text style={styles.label}>ESCUELA :</Text>
+                    <Text style={styles.title}>ESCUELA :</Text>
                     <Text>INGENIERIA DE SISTEMAS</Text>
                 </View>
                 <View style={styles.row}>
@@ -167,6 +179,7 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
                 </View>
             </View>
 
+            <Text style={[styles.tag, { width: 115 }]}>  Asignaturas Matriculadas</Text>
             <View style={styles.table}>
                 <View style={styles.tableRow}>
                     <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellNro]}>Nro</Text>
@@ -195,14 +208,17 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
             </View>
 
             <Text style={styles.totalCredits}>Total de créditos: {totalCredits}</Text>
-            <Text style={styles.payment}>Pagos realizados:</Text>
-            <Text>S/. {payment.amount} [recibo: {payment.receipt}]</Text>
+            <View style={styles.row}>
+                <Text style={styles.payment}>Pagos realizados:</Text>
+                <Text>   S/. {payment.amount} [recibo: {payment.receipt}]</Text>
+            </View>
             <View style={styles.signature}>
-                <Text>Operador                                              Alumno</Text>
-                <Text>____________________                              ____________________</Text>
+                <Text>___________________                                                                                            ___________________</Text>
+                <Text style={{marginTop: 3}}>Operador                                                                                                                       Alumno</Text>
             </View>
             <View style={styles.footer}>
-                <Text> Este documento carece de validez en caso no contenga las firmas, sellos y huella dactilar - a33a82b5542402860821b41e6c6db08f6d9579e3</Text>
+                <Text style={{marginBottom: 3}}>________________________________________</Text>
+                <Text>Este documento carece de validez en caso no contenga las firmas, sellos y huella dactilar - a33a82b5542402860821b41e6c6db08f6d9579e3</Text>
             </View>
         </Page>
     </Document>
