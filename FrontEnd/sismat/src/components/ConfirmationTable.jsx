@@ -6,6 +6,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import jsPDF from 'jspdf';
 
 const RedButton = styled(Button)({
     backgroundColor: '#8B0000',
@@ -48,6 +49,12 @@ const ConfirmationTable = () => {
             return;
         }
         setOpenSnackbar(false);
+    };
+
+    const handleDownloadPDF = () => {
+        const doc = new jsPDF();
+        doc.text('Hola Mundo', 10, 10);
+        doc.save('constancia.pdf');
     };
 
     //useEffect(() => {
@@ -122,7 +129,8 @@ const ConfirmationTable = () => {
                 <div className="flex justify-end mt-3">
                     <WhiteButton 
                         variant="contained" 
-                        endIcon={<DownloadIcon />} 
+                        endIcon={<DownloadIcon />}
+                        onClick={handleDownloadPDF}
                     >
                         Descargar constancia
                     </WhiteButton>
