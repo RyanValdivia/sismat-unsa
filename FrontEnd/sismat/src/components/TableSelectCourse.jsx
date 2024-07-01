@@ -1,5 +1,6 @@
 import React from "react";
 import Checkbox from '@mui/material/Checkbox';
+import { Link } from "react-router-dom";
 
 const TableSelectCourse = () => {
   const courses = [
@@ -36,7 +37,7 @@ const TableSelectCourse = () => {
             <table className="w-full table-auto">
               <thead>
                 <tr className="bg-[#8B0000] text-white">
-                  <th className="px-4 py-2 rounded-tl-lg">Nro</th>
+                  <th className="px-1 py-2 rounded-tl-lg ">Nro</th>
                   <th className="px-4 py-2">Código</th>
                   <th className="px-4 py-2">Nombre</th>
                   <th className="px-4 py-2">Estatus</th>
@@ -64,12 +65,18 @@ const TableSelectCourse = () => {
           
         </div>
         <div className="flex items-center justify-between">
-          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md ">
-              Atras
-          </button>
-          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md">
-              Continuar
-          </button>
+         <Link to="/pageLogin">
+         <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2 ">
+                Atras
+              </button>
+         </Link>
+              
+          <Link to="/pageGroup">
+            <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">
+                Continuar
+            </button>
+          </Link>
+          
                 
         </div>
         

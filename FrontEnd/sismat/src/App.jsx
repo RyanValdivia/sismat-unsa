@@ -10,6 +10,9 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<SelectGroupPage />} />
                 <Route path="/confirmation" element={<ConfirmationPage />} />
+                <Route path="/pageLogin" Component={LoginPage}></Route>
+                <Route path="/pageCourse" Component={SelectCoursePage}></Route>
+                <Route path="/pageGroup" Component={SelectGroupPage}></Route>
             </Routes>
         </BrowserRouter>
     );
