@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import { PDFViewer } from '@react-pdf/renderer';
 
 import CourseTable from './CourseTable';
 import ScheduleModal from "./ScheduleModal";
 import RedButton from "./RedButton";
 import ConfirmationDialog from './ConfirmationDialog';
-import PDFDocument from "./PDFDocument";
+import ErrorDialog from "./ErrorDialog";
 
 const ConfirmationTable = () => {
-    const [openDialog, setOpenDialog] = useState(false);
+    const [openConfirm, setOpenConfirm] = useState(false);
+    const [openError, setOpenError] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const student = {
@@ -37,11 +37,19 @@ const ConfirmationTable = () => {
     const totalCredits = courses.reduce((sum, course) => sum += course.credits, 0);
 
     const handleConfirmClick = () => {
-        setOpenDialog(true);
+        setOpenConfirm(true);
     };
 
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
+    const handleCloseConfirm = () => {
+        setOpenConfirm(false);
+    };
+
+    const handleErrorClose = () => {
+        setOpenError(false);
+    };
+
+    const handleEnrollmentError = () => {
+        setOpenError(true);
     };
 
     const handleOpenModal = () => {
@@ -91,14 +99,30 @@ const ConfirmationTable = () => {
                 </div>
             </div>
             
+            <div className="flex justify-center gap-4 mt-4">
+                <RedButton 
+                    variant="contained" 
+                    onClick={handleEnrollmentError}
+                >
+                    PROBAR ERROR DE MATRÍCULA XD
+                </RedButton>
+            </div>
+
             <ScheduleModal isOpen={isModalOpen} onClose={handleCloseModal} />
 
             <ConfirmationDialog 
-                open={openDialog}
-                onClose={handleCloseDialog}
+                open={openConfirm}
+                onClose={handleCloseConfirm}
                 student={student} 
                 courses={courses} 
                 totalCredits={totalCredits} 
+            />
+            <ErrorDialog
+                open={openError}
+                onClose={handleErrorClose}
+                student={student} 
+                courses={courses} 
+                totalCredits={totalCredits}
             />
         </main> 
     );
