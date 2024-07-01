@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 const TableGroup = () => {
     return(
     <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
@@ -47,12 +49,21 @@ const TableGroup = () => {
           
         </div>
         <div className="flex items-center justify-between">
-          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md">
-              Atras
-          </button>
-          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md">
-              Continuar
-          </button>
+          <Link to="/pageCourse">
+            <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2 ">
+                Atras
+            </button>
+          </Link>
+          
+          <Link to="#">
+            <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">
+                Continuar
+            </button>
+          </Link>
+          
+            
+          
+          
                 
         </div>
         
