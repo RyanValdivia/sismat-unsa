@@ -81,7 +81,7 @@ const LoginForm = () => {
             </AnimatePresence>
 
             <Card className="mt-10">
-                <div className="min-w-96 p-10">
+                <div className="min-w-96 p-6">
                     <form
                         className="flex flex-col justify-center items-center p-1"
                         onSubmit={handleSubmit}
