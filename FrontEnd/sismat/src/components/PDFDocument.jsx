@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
     },
     header: {
-        fontSize: 12,
+        fontSize: 16,
         fontFamily: 'Open Sans',
         fontWeight: '700',
         textAlign: "center",
@@ -21,46 +21,56 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Open Sans',
         fontWeight: '700',
+        fontSize: 8,
+        marginRight: 3,
+    },
+    text: {
+        marginTop: 0.3,
     },
     tag: {
         fontFamily: 'Open Sans',
         fontWeight: '700',
         backgroundColor: "#CCCCCC",
-        width: 65,
+        width: 60,
         borderColor: "#000",
         borderWidth: 1,
         marginBottom: -1,
     },
     section: {
-        borderWidth: 1,
-        borderColor: "#000",
-        marginBottom: 10,
-        padding: 5,
+        flexDirection: "row",
+        fontFamily: 'Open Sans',
     },
     subsection: {
         borderWidth: 1,
         borderColor: "#000",
+        width: 465,
         marginBottom: 10,
-        padding: 5,
+        padding: 4,
+        paddingBottom: -1,
+        alignContent: "baseline",
     },
     row: {
         flexDirection: "row",
         justifyContent: "left",
-        marginBottom: 4,
+        marginBottom: 3,
     },
     table: {
         width: "100%",
-        borderWidth: 1,
-        borderColor: "#000",
+        borderColor: "#white",
     },
     tableRow: {
         flexDirection: "row",
         borderBottomColor: "#000",
         alignItems: "center",
     },
+    tableRowHeaders: {
+        flexDirection: "row",
+        borderWidth: 1,
+        borderBottomColor: "#000",
+        alignItems: "center",
+    },
     tableHeader: {
-        borderBottomWidth: 1,
-        backgroundColor: "#f2f2f2",
+        backgroundColor: "#EEEEEE",
         fontFamily: 'Open Sans',
         fontWeight: '800',
         padding: 3,
@@ -68,7 +78,7 @@ const styles = StyleSheet.create({
     },
     tableCell: {
         padding: 1,
-        borderLeftColor: "#000",
+        borderLeftColor: "#white",
     },
     // AQUI MANEJO LOS TAMAÑOS DE LOS ANCHOS DE LAS COLUMNAS
     tableCellNro: {
@@ -137,91 +147,119 @@ const styles = StyleSheet.create({
     },
 });
 
-const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => (
-    <Document title={fileName}>
-        <Page size="A4" style={styles.page}>
-            <Text style={[styles.header]}>CONSTANCIA DE MATRICULA</Text>
-            <Text style={styles.tag}>  Datos Alumno</Text>
-            <View style={styles.section}>
-                <View style={styles.title}>
-                    <Text style={styles}>FECHA: 2023-08-28</Text>
-                    <Text style={styles}>PÁGINA: 1/1</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.title}>C.U.I. :</Text>
-                    <Text>{student.cui}</Text>
-                    <Text style={styles.title}>NOMBRE:</Text>
-                    <Text>{student.name}</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.title}>INGRESO :</Text>
-                    <Text>{student.ingreso}</Text>
-                    <Text style={styles.title}>FEC. NAC.:</Text>
-                    <Text>{student.fecNac}</Text>
-                    <Text style={styles.title}>DOC. CIVIL:</Text>
-                    <Text>{student.docCivil}</Text>
-                    <Text style={styles.title}>DOC. MILITAR:</Text>
-                    <Text>{student.docMilitar}</Text>
-                </View>
-            </View>
+const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
+    const now = new Date();
+    const timeZoneOffset = -5 * 60;
+    const peruTime = new Date(now.getTime() + timeZoneOffset * 60 * 1000);
+    const date = peruTime.toISOString().slice(0, 10);
 
-            <Text style={styles.tag}>  Datos Escuela</Text>
-            <View style={styles.section}>
-                <View style={styles.row}>
-                    <Text style={styles.title}>NIVEL :</Text>
-                    <Text>PRE-GRADO</Text>
-                    <Text style={styles.title}>ESCUELA :</Text>
-                    <Text>INGENIERIA DE SISTEMAS</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>FUENTE:</Text>
-                    <Text>{student.fuente}</Text>
-                </View>
-            </View>
-
-            <Text style={[styles.tag, { width: 115 }]}>  Asignaturas Matriculadas</Text>
-            <View style={styles.table}>
-                <View style={styles.tableRow}>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellNro]}>Nro</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCode]}>Código</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellYearSem]}>Año-Sem</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellName]}>Nombre</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCiclo]}>Ciclo</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellGroup]}>Grupo</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellMat]}>Mat.</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCredits]}>Cred.</Text>
-                    <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellObservations]}>Observaciones</Text>
-                </View>
-                {courses.map((course, index) => (
-                    <View key={index} style={styles.tableRow}>
-                        <Text style={[styles.tableCell, styles.tableCellNro]}>{index + 1}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellCode]}>{course.code}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1  2"}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellName]}>{course.name}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellCiclo]}>{"B"}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellGroup]}>{course.group}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellMat]}>{course.enrollment}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellCredits]}>{course.credits}</Text>
-                        <Text style={[styles.tableCell, styles.tableCellObservations]}></Text>
+    const page = "1/1";
+    return (
+        <Document title={fileName}>
+            <Page size="A4" style={styles.page}>
+                <Text style={styles.header}>CONSTANCIA DE MATRICULA</Text>
+                <Text style={styles.tag}> Datos Alumno</Text>
+                <View style={styles.section}>
+                    <View style={styles.subsection}>
+                        <View style={styles.row}>
+                            <Text style={styles.title}>C.U.I. :  </Text>
+                            <Text>{student.cui}</Text>
+                            <Text>      </Text>
+                            <Text style={styles.title}>NOMBRE: </Text>
+                            <Text>{student.name}</Text>
+                        </View>
+                        <View style={[styles.row, { fontSize: 7.6 }]}>
+                            <Text style={styles.title}>INGRESO :</Text>
+                            <Text style={styles.text}>{student.ingreso}</Text>
+                            <Text>      </Text>
+                            <Text style={styles.title}>FEC. NAC.:</Text>
+                            <Text style={styles.text}>{student.fecNac}</Text>
+                            <Text>          </Text>
+                            <Text style={styles.title}>DOC. CIVIL:</Text>
+                            <Text style={styles.text}>D{student.docCivil}</Text>
+                            <Text>              </Text>
+                            <Text style={styles.title}>DOC. MILITAR:</Text>
+                            <Text style={styles.text}>{student.docMilitar}</Text>
+                        </View>
                     </View>
-                ))}
-            </View>
+                    <View style={[styles.subsection, { marginLeft: 4, width: 80, backgroundColor: "#EEEEEE", }]}>
+                        <View style={[styles.row, { fontSize: 7.6 }]}>
+                            <Text style={styles.title}>FECHA:</Text>
+                            <Text style={styles.text}>{date}</Text>
+                        </View>
+                        <View style={[styles.row, { fontSize: 7.6 }]}>
+                            <Text style={styles.title}>PÁGINA:</Text>
+                            <Text style={styles.text}>{page}</Text>
+                        </View>
+                    </View>
+                </View>
+                    
+                <Text style={styles.tag}> Datos Escuela</Text>
+                <View style={styles.section}>
+                    <View style={styles.subsection}>
+                        <View style={styles.row}>
+                            <Text style={styles.title}>NIVEL :</Text>
+                            <Text>PRE-GRADO</Text>
+                            <Text>                      </Text>
+                            <Text style={styles.title}>ESCUELA :</Text>
+                            <Text>INGENIERIA DE SISTEMAS</Text>
+                        </View>                
+                    </View>
+                    
+                    <View style={[styles.subsection, { marginLeft: 4, width: 80, backgroundColor: "#EEEEEE",}]}>
+                        <View style={styles.row}>
+                            <Text style={styles.title}>FUENTE:</Text>
+                            <Text>{student.fuente}</Text>
+                        </View>
+                    </View>
+                </View>
 
-            <Text style={styles.totalCredits}>Total de créditos: {totalCredits}</Text>
-            <View style={styles.row}>
-                <Text style={styles.payment}>Pagos realizados:</Text>
-                <Text>   S/. {payment.amount} [recibo: {payment.receipt}]</Text>
-            </View>
-            <View style={styles.signature}>
-                <Text>___________________                                                                                            ___________________</Text>
-                <Text style={{marginTop: 3}}>Operador                                                                                                                       Alumno</Text>
-            </View>
-            <View style={styles.footer}>
-                <Text style={{marginBottom: 3}}>________________________________________</Text>
-                <Text>Este documento carece de validez en caso no contenga las firmas, sellos y huella dactilar - a33a82b5542402860821b41e6c6db08f6d9579e3</Text>
-            </View>
-        </Page>
-    </Document>
-);
+                <Text style={[styles.tag, { width: 108 }]}> Asignaturas Matriculadas</Text>
+                <View style={styles.table}>
+                    <View style={styles.tableRowHeaders}>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellNro]}>Nro</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCode]}>Código</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellYearSem]}>Año-Sem</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellName]}>Nombre</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCiclo]}>Ciclo</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellGroup]}>Grupo</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellMat]}>Mat.</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCredits]}>Cred.</Text>
+                        <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellObservations]}>Observaciones</Text>
+                    </View>
+                    {courses.map((course, index) => (
+                        <View key={index} style={styles.tableRow}>
+                            <Text style={[styles.tableCell, styles.tableCellNro]}>{index + 1}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCode]}>{course.code}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1  2"}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellName]}>{course.name}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCiclo]}>{"B"}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellGroup]}>{course.group}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellMat]}>{course.enrollment}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCredits]}>{course.credits}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellObservations]}></Text>
+                        </View>
+                    ))}
+                    <Text style={{borderTopColor: "#000", borderTopWidth: 1}}></Text>
+
+                </View>
+
+                <Text style={styles.totalCredits}>Total de créditos: {totalCredits}</Text>
+                <View style={styles.row}>
+                    <Text style={styles.payment}>Pagos realizados:</Text>
+                    <Text style={{marginTop: 2 }}>   S/. {payment.amount} [recibo: {payment.receipt}]</Text>
+                </View>
+                <View style={styles.signature}>
+                    <Text>___________________                                                                                            ___________________</Text>
+                    <Text style={{marginTop: 3}}>Operador                                                                                                                       Alumno</Text>
+                </View>
+                <View style={styles.footer}>
+                    <Text style={{marginBottom: 3}}>________________________________________</Text>
+                    <Text>Este documento carece de validez en caso no contenga las firmas, sellos y huella dactilar - a33a82b5542402860821b41e6c6db08f6d9579e3</Text>
+                </View>
+            </Page>
+        </Document>
+    );
+};
 
 export default PDFDocument;

@@ -16,10 +16,10 @@ const ConfirmationTable = () => {
 
     const student = {
         cui: '20232188',
-        name: 'Juan Perez',
+        name: 'MAMANI CESPEDES, JHONATAN BENJAMIN',
         ingreso: '232001',
         fecNac: '05-10-30',
-        docCivil: 'DNI 12345678',
+        docCivil: '12345678',
         docMilitar: '12345',
         nivel: 'PRE-GRADO',
         escuela: 'INGENIERIA DE SISTEMAS',
