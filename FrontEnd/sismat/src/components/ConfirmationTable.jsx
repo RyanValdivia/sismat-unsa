@@ -23,7 +23,8 @@ const ConfirmationTable = () => {
         docMilitar: '12345',
         nivel: 'PRE-GRADO',
         escuela: 'INGENIERIA DE SISTEMAS',
-        fuente: 'INTERNET',
+        monto: '16',
+        recibo: '123456'
     };
 
     const courses = [
@@ -115,7 +116,8 @@ const ConfirmationTable = () => {
                 onClose={handleCloseConfirm}
                 student={student} 
                 courses={courses} 
-                totalCredits={totalCredits} 
+                totalCredits={totalCredits}
+                payment={{ amount: student.monto, receipt: student.recibo }} 
             />
             <ErrorDialog
                 open={openError}
@@ -123,6 +125,7 @@ const ConfirmationTable = () => {
                 student={student} 
                 courses={courses} 
                 totalCredits={totalCredits}
+                payment={{ amount: student.monto, receipt: student.recibo }} 
             />
         </main> 
     );

@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         padding: 4,
         paddingBottom: -1,
-        alignContent: "baseline",
     },
     row: {
         flexDirection: "row",
@@ -61,14 +60,12 @@ const styles = StyleSheet.create({
     },
     tableRow: {
         flexDirection: "row",
-        borderBottomColor: "#000",
+        marginTop: 1,
         alignItems: "center",
     },
     tableRowHeaders: {
         flexDirection: "row",
         borderWidth: 1,
-        borderBottomColor: "#000",
-        alignItems: "center",
     },
     tableHeader: {
         backgroundColor: "#EEEEEE",
@@ -79,8 +76,8 @@ const styles = StyleSheet.create({
     },
     tableCell: {
         padding: 1,
-        borderLeftColor: "#white",
     },
+
     // AQUI MANEJO LOS TAMAÑOS DE LOS ANCHOS DE LAS COLUMNAS
     tableCellNro: {
         width: "3.5%",
@@ -124,10 +121,6 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: "right",
     },
-    payment: {
-        fontFamily: 'Open Sans',
-        fontWeight: '700',
-    },
     signature: {
         marginTop: 80,
         alignItems: "center",
@@ -137,15 +130,6 @@ const styles = StyleSheet.create({
         bottom: 40,
         left: 30,
     },
-    tableContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    tableCellContainer: {
-        flex: 1,
-        borderLeftWidth: 1,
-        borderLeftColor: "#000",
-    },
 });
 
 const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
@@ -154,7 +138,6 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
     const peruTime = new Date(now.getTime() + timeZoneOffset * 60 * 1000);
     const date = peruTime.toISOString().slice(0, 10);
 
-    const page = "1/1";
     return (
         <Document title={fileName}>
             <Page size="A4" style={styles.page}>
@@ -183,7 +166,7 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
                             <Text style={styles.text}>{student.docMilitar}</Text>
                         </View>
                     </View>
-                    <View style={[styles.subsection, { marginLeft: 4, width: 80, backgroundColor: "#EEEEEE", }]}>
+                    <View style={[styles.subsection, { marginLeft: 4, width: 80, backgroundColor: "#EEEEEE" }]}>
                         <View style={[styles.row, { fontSize: 7.6 }]}>
                             <Text style={styles.title}>FECHA:</Text>
                             <Text style={styles.text}>{date}</Text>
@@ -206,11 +189,10 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
                             <Text>INGENIERIA DE SISTEMAS</Text>
                         </View>                
                     </View>
-                    
-                    <View style={[styles.subsection, { marginLeft: 4, width: 80, backgroundColor: "#EEEEEE",}]}>
+                    <View style={[styles.subsection, { marginLeft: 4, width: 80, backgroundColor: "#EEEEEE" }]}>
                         <View style={styles.row}>
                             <Text style={styles.title}>FUENTE:</Text>
-                            <Text>{student.fuente}</Text>
+                            <Text>INTERNET</Text>
                         </View>
                     </View>
                 </View>
@@ -242,12 +224,11 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
                         </View>
                     ))}
                     <Text style={{borderTopColor: "#000", borderTopWidth: 1}}></Text>
-
                 </View>
-
+                
                 <Text style={styles.totalCredits}>Total de créditos: {totalCredits.toFixed(2)}</Text>
                 <View style={styles.row}>
-                    <Text style={styles.payment}>Pagos realizados:</Text>
+                    <Text style={styles.title}>Pagos realizados:</Text>
                     <Text style={{marginTop: 2 }}>   S/. {payment.amount} [recibo: {payment.receipt}]</Text>
                 </View>
                 <View style={styles.signature}>

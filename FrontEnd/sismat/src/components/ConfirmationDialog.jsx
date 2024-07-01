@@ -12,7 +12,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import PDFDocument from "./PDFDocument";
 
-const ConfirmationDialog = ({ open, onClose, student, courses, totalCredits }) => (
+const ConfirmationDialog = ({ open, onClose, student, courses, totalCredits, payment }) => (
     <Dialog
         open={open}
         onClose={onClose}
@@ -31,7 +31,7 @@ const ConfirmationDialog = ({ open, onClose, student, courses, totalCredits }) =
             </DialogContentText>
             <DialogActions className="flex flex-col justify-center pb-4 mt-6 space-y-4">
                 <PDFDownloadLink
-                        document={<PDFDocument student={student} courses={courses} totalCredits={totalCredits} payment={{ amount: 16.5, receipt: '123546' }} />}
+                        document={<PDFDocument student={student} courses={courses} totalCredits={totalCredits} payment={payment} />}
                         fileName={`constancia_${student.cui}.pdf`}
                     >
                         {({ loading }) => (
