@@ -6,12 +6,11 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import CourseTable from './CourseTable';
 import ScheduleModal from "./ScheduleModal";
 import RedButton from "./RedButton";
-import ConfirmationDialog from './ConfirmationDialog';
-import ErrorDialog from "./ErrorDialog";
+import CustomDialog from './CustomDialog';
 
 const ConfirmationTable = () => {
-    const [openConfirm, setOpenConfirm] = useState(false);
-    const [openError, setOpenError] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [dialogType, setDialogType] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const student = {
@@ -38,19 +37,17 @@ const ConfirmationTable = () => {
     const totalCredits = courses.reduce((sum, course) => sum += course.credits, 0);
 
     const handleConfirmClick = () => {
-        setOpenConfirm(true);
+        setOpenDialog(true);
+        setDialogType('confirmation');
     };
 
-    const handleCloseConfirm = () => {
-        setOpenConfirm(false);
-    };
-
-    const handleErrorClose = () => {
-        setOpenError(false);
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
     };
 
     const handleEnrollmentError = () => {
-        setOpenError(true);
+        setOpenDialog(true);
+        setDialogType('error'); 
     };
 
     const handleOpenModal = () => {
@@ -111,17 +108,10 @@ const ConfirmationTable = () => {
 
             <ScheduleModal isOpen={isModalOpen} onClose={handleCloseModal} />
 
-            <ConfirmationDialog 
-                open={openConfirm}
-                onClose={handleCloseConfirm}
-                student={student} 
-                courses={courses} 
-                totalCredits={totalCredits}
-                payment={{ amount: student.monto, receipt: student.recibo }} 
-            />
-            <ErrorDialog
-                open={openError}
-                onClose={handleErrorClose}
+            <CustomDialog 
+                open={openDialog}
+                onClose={handleCloseDialog}
+                type={dialogType}
                 student={student} 
                 courses={courses} 
                 totalCredits={totalCredits}
