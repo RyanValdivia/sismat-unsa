@@ -31,10 +31,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Open Sans',
         fontWeight: '700',
         backgroundColor: "#CCCCCC",
-        width: 60,
+        width: 62,
         borderColor: "#000",
         borderWidth: 1,
         marginBottom: -1,
+        padding: 1,
     },
     section: {
         flexDirection: "row",
@@ -82,26 +83,26 @@ const styles = StyleSheet.create({
     },
     // AQUI MANEJO LOS TAMAÑOS DE LOS ANCHOS DE LAS COLUMNAS
     tableCellNro: {
-        width: "4%",
+        width: "3.5%",
         textAlign: "center",
     },
     tableCellCode: {
-        width: "8%",
+        width: "7%",
         textAlign: "center",
     },
     tableCellYearSem: {
-        width: "9%",
+        width: "8%",
         textAlign: "center",
     },
     tableCellName: {
-        width: "50%",
+        width: "57%",
     },
     tableCellCiclo: {
-        width: "6%",
+        width: "5.3%",
         textAlign: "center",
     },
     tableCellGroup: {
-        width: "6%",
+        width: "5.7%",
         textAlign: "center",
     },
     tableCellMat: {
@@ -109,16 +110,16 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     tableCellCredits: {
-        width: "6%",
+        width: "5%",
         textAlign: "center",
     },
     tableCellObservations: {
-        width: "15%",
+        width: "13%",
     },
 
     totalCredits: {
         marginTop: 2,
-        marginRight: 85,
+        marginRight: 70,
         fontFamily: 'Open Sans',
         fontWeight: '700',
         textAlign: "right",
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     signature: {
-        marginTop: 70,
+        marginTop: 80,
         alignItems: "center",
     },
     footer: {
@@ -189,7 +190,7 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
                         </View>
                         <View style={[styles.row, { fontSize: 7.6 }]}>
                             <Text style={styles.title}>PÁGINA:</Text>
-                            <Text style={styles.text}>{page}</Text>
+                            <Text style={styles.text} render={({pageNumber, totalPages}) => `${pageNumber}/${totalPages}`}></Text>
                         </View>
                     </View>
                 </View>
@@ -231,12 +232,12 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
                         <View key={index} style={styles.tableRow}>
                             <Text style={[styles.tableCell, styles.tableCellNro]}>{index + 1}</Text>
                             <Text style={[styles.tableCell, styles.tableCellCode]}>{course.code}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1  2"}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1   2"}</Text>
                             <Text style={[styles.tableCell, styles.tableCellName]}>{course.name}</Text>
                             <Text style={[styles.tableCell, styles.tableCellCiclo]}>{"B"}</Text>
                             <Text style={[styles.tableCell, styles.tableCellGroup]}>{course.group}</Text>
                             <Text style={[styles.tableCell, styles.tableCellMat]}>{course.enrollment}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellCredits]}>{course.credits}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCredits]}>{course.credits.toFixed(2)}</Text>
                             <Text style={[styles.tableCell, styles.tableCellObservations]}></Text>
                         </View>
                     ))}
@@ -244,7 +245,7 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
 
                 </View>
 
-                <Text style={styles.totalCredits}>Total de créditos: {totalCredits}</Text>
+                <Text style={styles.totalCredits}>Total de créditos: {totalCredits.toFixed(2)}</Text>
                 <View style={styles.row}>
                     <Text style={styles.payment}>Pagos realizados:</Text>
                     <Text style={{marginTop: 2 }}>   S/. {payment.amount} [recibo: {payment.receipt}]</Text>
