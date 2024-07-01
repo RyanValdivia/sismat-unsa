@@ -56,7 +56,7 @@ const ConfirmationTable = () => {
     //}, []);
 
     return (
-        <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
+        <main className="flex flex-col gap-6 mx-6">
             <Box display="flex" justifyContent="center">
                 <Alert severity="info" style={{ fontSize: '1.1rem', textAlign: 'center' }}>
                     Revisa los detalles de tu matrícula
@@ -65,13 +65,10 @@ const ConfirmationTable = () => {
             
             <div className="bg-white rounded-lg shadow-lg p-6">
                 <div className="mb-6 text-center">
-                    <h1 className="text-3xl font-bold text-[#8B0000]">Confirmación de Matrícula</h1>
-                </div>
-                <div className="flex items-center justify-center gap-4 mb-6">
-                    
+                    <h1 className="text-3xl font-bold text-[#8B0000] p-2 mt-2">Confirmación de Matrícula</h1>                    
                 </div>
                 {/* tabla de Selección de cursos */}
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto p-2">
                     <CourseTable courses={courses} />
                     <div className="flex justify-end gap-4 mt-2">
                         <a onClick={handleOpenModal} className="underline text-red-800 hover:text-red-200 cursor-pointer">
@@ -82,7 +79,7 @@ const ConfirmationTable = () => {
                     <div className="flex items-center justify-between gap-4 mt-5 ml-5">
                         <RedButton variant="outlined">Volver</RedButton>
                         <div className="flex items-center">
-                            <p className="mr-7">Total de créditos: {totalCredits}</p>
+                            <p className="mr-7">Total de créditos: {totalCredits.toFixed(2)}</p>
                             <RedButton 
                                 variant="contained" 
                                 onClick={handleConfirmClick}
@@ -103,17 +100,6 @@ const ConfirmationTable = () => {
                 courses={courses} 
                 totalCredits={totalCredits} 
             />
-
-            {/* Componente PDFViewer para mostrar el PDF */}
-            <PDFViewer style={{ width: '100%', height: '500px' }}>
-                <PDFDocument 
-                    fileName={`constancia_${student.cui}.pdf`}
-                    student={student} 
-                    courses={courses} 
-                    totalCredits={totalCredits} 
-                    payment={{ amount: 16.5, receipt: '123546' }} 
-                />
-            </PDFViewer>
         </main> 
     );
 };

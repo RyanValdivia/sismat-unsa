@@ -6,6 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DownloadIcon from '@mui/icons-material/Download';
+import CircularProgress from '@mui/material/CircularProgress';
 import RedButton from './RedButton';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
@@ -26,22 +27,21 @@ const ConfirmationDialog = ({ open, onClose, student, courses, totalCredits }) =
                 ¡Tu matrícula ha sido confirmada!
             </DialogTitle>
             <DialogContentText id="alert-dialog-description" className="text-center mt-2">
-                Puedes descargar tu constancia de matrícula a continuación.
+                Puedes ver o descargar tu constancia de matrícula a continuación.
             </DialogContentText>
-            <DialogActions className="flex justify-center pb-4 mt-6">
-            <PDFDownloadLink
-                    document={<PDFDocument student={student} courses={courses} totalCredits={totalCredits} payment={{ amount: 16.5, receipt: '123546' }} />}
-                    fileName={`constancia_${student.cui}.pdf`}
-                >
-                    {({ loading }) => (
-                        <RedButton endIcon={<DownloadIcon />}>
-                            {loading ? 'Cargando...' : 'Descargar Constancia'}
-                        </RedButton>
-                    )}
-            </PDFDownloadLink>
-        </DialogActions>
+            <DialogActions className="flex flex-col justify-center pb-4 mt-6 space-y-4">
+                <PDFDownloadLink
+                        document={<PDFDocument student={student} courses={courses} totalCredits={totalCredits} payment={{ amount: 16.5, receipt: '123546' }} />}
+                        fileName={`constancia_${student.cui}.pdf`}
+                    >
+                        {({ loading }) => (
+                            <RedButton endIcon={loading ? <CircularProgress size={20} color="inherit" /> : <DownloadIcon />}>
+                                {loading ? '' : 'Descargar Constancia'}
+                            </RedButton>
+                        )}
+                </PDFDownloadLink>
+            </DialogActions>
         </DialogContent>
-        
     </Dialog>
 );
 

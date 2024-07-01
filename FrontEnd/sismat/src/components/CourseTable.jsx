@@ -6,7 +6,7 @@ const CourseTable = ({ courses }) => (
             <thead>
                 <tr className="bg-[#8B0000] text-white">
                     <th className="px-4 py-2 text-left rounded-tl-lg">Nro.</th>
-                    <th className="px-4 py-2 text-left">Código del curso</th>
+                    <th className="px-4 py-2 text-left">Código</th>
                     <th className="px-4 py-2 text-left">Asignatura</th>
                     <th className="px-4 py-2 text-center">Grupo</th>
                     <th className="px-4 py-2 text-center">Matrícula</th>
@@ -22,7 +22,7 @@ const CourseTable = ({ courses }) => (
                         <td className="px-4 py-2">{course.name}</td>
                         <td className="px-4 py-2 text-center">{course.group}</td>
                         <td className="px-4 py-2 text-center">{course.enrollment}</td>
-                        <td className="px-4 py-2 text-center">{course.credits}</td>
+                        <td className="px-4 py-2 text-center">{course.credits.toFixed(2)}</td>
                         <td className="px-4 py-2">{course.teacher}</td>
                     </tr>
                 ))}
