@@ -7,7 +7,7 @@ import {
     Alert,
 } from "@material-tailwind/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MdError } from "react-icons/md";
+import { MdError, MdOutlineCheckCircle } from "react-icons/md";
 import { login } from "../api/login";
 
 const LoginForm = () => {
@@ -15,6 +15,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [showError, setShowError] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -28,15 +29,14 @@ const LoginForm = () => {
             sessionStorage.setItem("access", res.data.access);
             sessionStorage.setItem("refresh", res.data.refresh);
             console.log(sessionStorage);
-            setErrorMessage("");
-            setShowError(false);
+            setShowSuccess(true);
             setUsername("");
             setPassword("");
             event.target.reset();
         } catch (error) {
-            setErrorMessage("Hubo un error :v");
+            setErrorMessage(error.response.data.detail);
             setShowError(true);
-            setTimeout(() => setShowError(false), 3000); // Hide the error after 3 seconds
+            setTimeout(() => setShowError(false), 3000);
         }
     };
 
@@ -49,67 +49,83 @@ const LoginForm = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="w-full flex justify-center"
+                        className="absolute bottom-96 left-0 right-0 flex justify-center mt-2"
                     >
-                        <Alert color="red" icon={<MdError />}>
+                        <Alert
+                            color="red"
+                            icon={<MdError className="h-full" />}
+                            className="text-center"
+                        >
                             {errorMessage}
                         </Alert>
                     </motion.div>
                 )}
-            </AnimatePresence>
-            <motion.div
-                initial={{ y: 0 }}
-                animate={{ y: showError ? 20 : 0 }}
-                transition={{ duration: 0.3 }}
-                className="w-full flex justify-center"
-            >
-                <Card>
-                    <div className="min-w-96 p-10">
-                        <form
-                            className="flex flex-col justify-center items-center p-1"
-                            onSubmit={handleSubmit}
+
+                {showSuccess && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute bottom-96 left-0 right-0 flex justify-center mt-2"
+                    >
+                        <Alert
+                            color="green"
+                            icon={<MdOutlineCheckCircle className="h-full" />}
+                            className="text-center"
                         >
-                            <Typography variant="h2" className="text-primary">
-                                Inicio de sesión
-                            </Typography>
+                            {"Inicio de sesión exitoso"}
+                        </Alert>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
-                            <Typography variant="h5" className="m-3">
-                                Ingresa tus credenciales para acceder
-                            </Typography>
+            <Card className="mt-10">
+                <div className="min-w-96 p-10">
+                    <form
+                        className="flex flex-col justify-center items-center p-1"
+                        onSubmit={handleSubmit}
+                    >
+                        <Typography variant="h2" className="text-primary">
+                            Inicio de sesión
+                        </Typography>
 
-                            <Input
-                                variant="outlined"
-                                label="Nombre de usuario: "
-                                placeholder="Ingresa tu nombre de usuario"
-                                containerProps={{ className: "w-full m-3" }}
-                                onChange={(event) =>
-                                    setUsername(event.target.value)
-                                }
-                            />
+                        <Typography variant="h5" className="m-3">
+                            Ingresa tus credenciales para acceder
+                        </Typography>
 
-                            <Input
-                                variant="outlined"
-                                label="Contraseña: "
-                                placeholder="Ingresa tu contraseña"
-                                containerProps={{
-                                    className: "w-full",
-                                }}
-                                onChange={(event) =>
-                                    setPassword(event.target.value)
-                                }
-                            />
+                        <Input
+                            variant="outlined"
+                            label="Nombre de usuario: "
+                            placeholder="Ingresa tu nombre de usuario"
+                            containerProps={{ className: "w-full m-3" }}
+                            onChange={(event) =>
+                                setUsername(event.target.value)
+                            }
+                        />
 
-                            <Button
-                                fullWidth
-                                className="bg-primary my-3"
-                                type="submit"
-                            >
-                                Iniciar Sesión
-                            </Button>
-                        </form>
-                    </div>
-                </Card>
-            </motion.div>
+                        <Input
+                            variant="outlined"
+                            label="Contraseña: "
+                            placeholder="Ingresa tu contraseña"
+                            containerProps={{
+                                className: "w-full",
+                            }}
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
+                        />
+
+                        <Button
+                            fullWidth
+                            className="bg-primary my-3"
+                            type="submit"
+                        >
+                            Iniciar Sesión
+                        </Button>
+                    </form>
+                </div>
+            </Card>
         </div>
     );
 };
