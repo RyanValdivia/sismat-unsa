@@ -161,7 +161,7 @@ const ConfirmationTable = () => {
                 onClose={handleCloseDialog}
                 type={dialogType}
                 student={student} 
-                workoads={workloadData} 
+                workloads={workloadData} 
                 totalCredits={totalCredits}
                 payment={{ amount: student.monto, receipt: student.recibo }} 
             />
