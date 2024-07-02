@@ -118,7 +118,7 @@ const LoginForm = () => {
                             variant="outlined"
                             label="Nombre de usuario: "
                             placeholder="Ingresa tu nombre de usuario"
-                            containerProps={{ className: "w-full mt-1" }}
+                            containerProps={{ className: "w-full m-3" }}
                             {...register("username")}
                             error={!!errors.username}
                         />
@@ -134,7 +134,7 @@ const LoginForm = () => {
                             label="Contraseña: "
                             placeholder="Ingresa tu contraseña"
                             containerProps={{
-                                className: "w-full mt-1",
+                                className: "w-full m-3",
                             }}
                             {...register("password")}
                             error={!!errors.password}

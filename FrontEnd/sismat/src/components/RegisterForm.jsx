@@ -113,13 +113,27 @@ const LoginForm = () => {
                             Ingresa tus credenciales para registrarte
                         </Typography>
 
+                        {errors.names && (
+                            <Typography color="red">
+                                {errors.names.message}
+                            </Typography>
+                        )}
+
                         <Input
                             variant="outlined"
                             label="Nombres: "
                             placeholder="Ingresa tus nombres"
                             containerProps={{ className: "w-full m-3" }}
                             onChange={(event) => setNames(event.target.value)}
+                            {...register("names")}
+                            error={!!errors.names}
                         />
+
+                        {errors.lastnames && (
+                            <Typography color="red">
+                                {errors.lastnames.message}
+                            </Typography>
+                        )}
 
                         <Input
                             variant="outlined"
@@ -129,7 +143,15 @@ const LoginForm = () => {
                             onChange={(event) =>
                                 setLastNames(event.target.value)
                             }
+                            {...register("lastnames")}
+                            error={!!errors.lastnames}
                         />
+
+                        {errors.email && (
+                            <Typography color="red">
+                                {errors.email.message}
+                            </Typography>
+                        )}
 
                         <Input
                             variant="outlined"
@@ -137,7 +159,15 @@ const LoginForm = () => {
                             placeholder="Ingresa tu correo"
                             containerProps={{ className: "w-full m-3" }}
                             onChange={(event) => setEmail(event.target.value)}
+                            {...register("email")}
+                            error={!!errors.email}
                         />
+
+                        {errors.cui && (
+                            <Typography color="red">
+                                {errors.cui.message}
+                            </Typography>
+                        )}
 
                         <Input
                             variant="outlined"
@@ -145,6 +175,8 @@ const LoginForm = () => {
                             placeholder="Ingresa tu CUI"
                             containerProps={{ className: "w-full m-3" }}
                             onChange={(event) => setCui(event.target.value)}
+                            {...register("cui")}
+                            error={!!errors.cui}
                         />
 
                         <Button
