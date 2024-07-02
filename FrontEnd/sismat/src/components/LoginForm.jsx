@@ -34,12 +34,11 @@ const LoginForm = () => {
     } = useForm({
         resolver: zodResolver(loginSchema),
     });
-    const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
     const [showError, setShowError] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
 
     const onSubmit = async (data) => {
+        console.log(data);
         try {
             const res = await login(data);
             sessionStorage.setItem("access", res.data.access);

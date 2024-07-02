@@ -71,12 +71,13 @@ class InscriptionLabDetail(generics.RetrieveUpdateAPIView):
 class StudentListCreate(generics.ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    permission_classes = []
 
 
 class StudentDetail(generics.RetrieveUpdateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 
 class TeacherListCreate(generics.ListCreateAPIView):

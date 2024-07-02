@@ -8,16 +8,12 @@ import {
 } from "@material-tailwind/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdError, MdOutlineCheckCircle } from "react-icons/md";
-import { register } from "../api/login";
+import { register as reg } from "../api/login";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const LoginForm = () => {
-    const [names, setNames] = useState("");
-    const [lastnames, setLastNames] = useState("");
-    const [email, setEmail] = useState("");
-    const [cui, setCui] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
@@ -39,23 +35,14 @@ const LoginForm = () => {
         resolver: zodResolver(registerSchema),
     });
 
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        const student = {
-            names: names,
-            lastnames: lastnames,
-            email: email,
-            cui: cui,
-        };
+    const onSubmit = async (data) => {
+
+        console.log(data);
         try {
-            const res = await register(student);
-            // setSuccessMessage(res.data.detail);
-            console.log(res);
-            event.target.reset;
+            const res = await reg(data);
+            
         } catch (error) {
-            // setErrorMessage(error.data.detail);
-            console.log(error.response.data);
-            setErrorMessage(error.response.data[0]);
+            console.log(error);
         }
     };
 
@@ -103,7 +90,7 @@ const LoginForm = () => {
                 <div className="min-w-96 p-6">
                     <form
                         className="flex flex-col justify-center items-center p-1"
-                        onSubmit={handleSubmit(onSubmit)}
+                        onSubmit={(handleSubmit(onSubmit))}
                     >
                         <Typography variant="h2" className="text-primary">
                             Regístrate
@@ -124,7 +111,6 @@ const LoginForm = () => {
                             label="Nombres: "
                             placeholder="Ingresa tus nombres"
                             containerProps={{ className: "w-full m-3" }}
-                            onChange={(event) => setNames(event.target.value)}
                             {...register("names")}
                             error={!!errors.names}
                         />
@@ -140,9 +126,6 @@ const LoginForm = () => {
                             label="Apellidos: "
                             placeholder="Ingresa tus apellidos"
                             containerProps={{ className: "w-full m-3" }}
-                            onChange={(event) =>
-                                setLastNames(event.target.value)
-                            }
                             {...register("lastnames")}
                             error={!!errors.lastnames}
                         />
@@ -158,7 +141,6 @@ const LoginForm = () => {
                             label="Correo electrónico: "
                             placeholder="Ingresa tu correo"
                             containerProps={{ className: "w-full m-3" }}
-                            onChange={(event) => setEmail(event.target.value)}
                             {...register("email")}
                             error={!!errors.email}
                         />
@@ -174,7 +156,6 @@ const LoginForm = () => {
                             label="CUI: "
                             placeholder="Ingresa tu CUI"
                             containerProps={{ className: "w-full m-3" }}
-                            onChange={(event) => setCui(event.target.value)}
                             {...register("cui")}
                             error={!!errors.cui}
                         />
