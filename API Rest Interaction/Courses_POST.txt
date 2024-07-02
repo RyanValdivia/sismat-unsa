@@ -7,7 +7,7 @@ http://127.0.0.1:8000/api/courses/
 [
     {
         "code": "1701106",
-        "name": "Fundamentos de la Programacion",
+        "name": "Fundamentos de la Programacion 1",
         "hasLaboratory": true,
         "theory_hours": "4.00",
         "credits": 5,

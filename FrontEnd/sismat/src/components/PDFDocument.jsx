@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
+const PDFDocument = ({ fileName, student, workloads, totalCredits, payment }) => {
     const now = new Date();
     const timeZoneOffset = -5 * 60;
     const peruTime = new Date(now.getTime() + timeZoneOffset * 60 * 1000);
@@ -210,16 +210,16 @@ const PDFDocument = ({ fileName, student, courses, totalCredits, payment }) => {
                         <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellCredits]}>Cred.</Text>
                         <Text style={[styles.tableCell, styles.tableHeader, styles.tableCellObservations]}>Observaciones</Text>
                     </View>
-                    {courses.map((course, index) => (
+                    {workloads.map((workload, index) => (
                         <View key={index} style={styles.tableRow}>
                             <Text style={[styles.tableCell, styles.tableCellNro]}>{index + 1}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellCode]}>{course.code}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCode]}>{workload.code}</Text>
                             <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1   2"}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellName]}>{course.name}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellName]}>{workload.name}</Text>
                             <Text style={[styles.tableCell, styles.tableCellCiclo]}>{"B"}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellGroup]}>{course.group}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellMat]}>{course.enrollment}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellCredits]}>{course.credits.toFixed(2)}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellGroup]}>{workload.group}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellMat]}>{workload.enrollment}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCredits]}>{workload.credits.toFixed(2)}</Text>
                             <Text style={[styles.tableCell, styles.tableCellObservations]}></Text>
                         </View>
                     ))}

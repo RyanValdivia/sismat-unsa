@@ -13,7 +13,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFDocument from "./PDFDocument";
 import DownloadIcon from '@mui/icons-material/Download';
 
-const CustomDialog = ({ open, onClose, type, student, courses, totalCredits, payment }) => (
+const CustomDialog = ({ open, onClose, type, student, workloads, totalCredits, payment }) => (
     <Dialog
         open={open}
         onClose={onClose}
@@ -34,7 +34,7 @@ const CustomDialog = ({ open, onClose, type, student, courses, totalCredits, pay
                     </DialogContentText>
                     <DialogActions className="flex flex-col justify-center pb-4 mt-6 space-y-4">
                         <PDFDownloadLink
-                            document={<PDFDocument student={student} courses={courses} totalCredits={totalCredits} payment={payment} />}
+                            document={<PDFDocument student={student} workloads={workloads} totalCredits={totalCredits} payment={payment} />}
                             fileName={`constancia_${student.cui}.pdf`}
                         >
                             {({ loading }) => (
