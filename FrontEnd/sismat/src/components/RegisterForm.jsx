@@ -40,9 +40,10 @@ const LoginForm = () => {
         console.log(data);
         try {
             const res = await reg(data);
-            
+            setSuccessMessage("You've registered successfully")
         } catch (error) {
             console.log(error);
+            setErrorMessage("Hubo un error al registrar el usuario")
         }
     };
 
