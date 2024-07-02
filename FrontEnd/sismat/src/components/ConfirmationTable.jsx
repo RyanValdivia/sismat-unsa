@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import { Link } from "react-router-dom";
 
 import WorkloadTable from './WorkloadTable';
 import ScheduleModal from "./ScheduleModal";
@@ -131,7 +132,10 @@ const ConfirmationTable = () => {
                         </a>
                     </div>
                     <div className="flex items-center justify-between gap-4 mt-5 ml-5">
-                        <RedButton variant="outlined">Volver</RedButton>
+                        <Link to="/pageGroup">
+                            <RedButton variant="outlined">Atrás</RedButton>
+                        </Link>
+                        
                         <div className="flex items-center">
                             <p className="mr-7">Total de créditos: {totalCredits.toFixed(2)}</p>
                             <RedButton 
