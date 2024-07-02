@@ -9,33 +9,101 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { MdError, MdOutlineCheckCircle } from "react-icons/md";
 import { register } from "../api/login";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const LoginForm = () => {
     const [names, setNames] = useState("");
-    const [lastNames, setLastNames] = useState("");
+    const [lastnames, setLastNames] = useState("");
     const [email, setEmail] = useState("");
     const [cui, setCui] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
-    const handleSubmit = async (event) => {
+    const registerSchema = z.object({
+        names: z.string().min(1, "This field is required").max(50),
+        lastnames: z.string().min(1, "This field is required").max(50),
+        email: z.string().email(),
+        cui: z
+            .string()
+            .min(8, "This field is required")
+            .max(8, "CUI must be 8 characters long"),
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(registerSchema),
+    });
+
+    const onSubmit = async (event) => {
         event.preventDefault();
         const student = {
             names: names,
-            lastnames: lastNames,
+            lastnames: lastnames,
             email: email,
             cui: cui,
         };
-        const res = await register(student);
-        console.log(res);
-        event.target.reset;
+        try {
+            const res = await register(student);
+            // setSuccessMessage(res.data.detail);
+            console.log(res);
+            event.target.reset;
+        } catch (error) {
+            // setErrorMessage(error.data.detail);
+            console.log(error.response.data);
+            setErrorMessage(error.response.data[0]);
+        }
     };
 
     return (
-        <div className="flex flex-col justify-center items-center relative">
+        <div className="flex flex-col justify-center items-center">
+            <AnimatePresence>
+                {errorMessage && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute left-0 right-0 flex justify-center mt-2 z-10 top-10"
+                    >
+                        <Alert
+                            color="red"
+                            icon={<MdError className="h-full" />}
+                            className="text-center w-5/6 md:w-1/3"
+                        >
+                            {errorMessage}
+                        </Alert>
+                    </motion.div>
+                )}
+
+                {successMessage && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute bottom-96 left-0 right-0 flex justify-center mt-2"
+                    >
+                        <Alert
+                            color="green"
+                            icon={<MdOutlineCheckCircle className="h-full" />}
+                            className="text-center"
+                        >
+                            {"Usuario registrado correctamente"}
+                        </Alert>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <Card className="mt-10">
                 <div className="min-w-96 p-6">
                     <form
                         className="flex flex-col justify-center items-center p-1"
-                        onSubmit={(event) => handleSubmit(event)}
+                        onSubmit={handleSubmit(onSubmit)}
                     >
                         <Typography variant="h2" className="text-primary">
                             Regístrate

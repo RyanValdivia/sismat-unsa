@@ -9,30 +9,44 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { MdError, MdOutlineCheckCircle } from "react-icons/md";
 import { login } from "../api/login";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const loginSchema = z.object({
+    username: z
+        .string()
+        .min(1, "Username is required")
+        .max(8, "Username must be at most 8 characters long")
+        .regex(/^[A-Za-z]+$/, "Username must only contain letters"),
+    password: z
+        .string()
+        .min(1, "Password is required")
+        .max(8, "Password must be at most 8 characters long")
+        .regex(/^[0-9]+$/, "Password must only contain numbers"),
+});
 
 const LoginForm = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(loginSchema),
+    });
     const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [showError, setShowError] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const user = {
-            username: username,
-            password: password,
-        };
+    const onSubmit = async (data) => {
         try {
-            const res = await login(user);
-            console.log(res);
+            const res = await login(data);
             sessionStorage.setItem("access", res.data.access);
             sessionStorage.setItem("refresh", res.data.refresh);
-            console.log(sessionStorage);
+            setSuccessMessage("Inicio de sesión exitoso");
             setShowSuccess(true);
-            setUsername("");
-            setPassword("");
-            event.target.reset();
+            setTimeout(() => setShowSuccess(false), 3000);
         } catch (error) {
             setErrorMessage(error.response.data.detail);
             setShowError(true);
@@ -74,7 +88,7 @@ const LoginForm = () => {
                             icon={<MdOutlineCheckCircle className="h-full" />}
                             className="text-center"
                         >
-                            {"Inicio de sesión exitoso"}
+                            {successMessage}
                         </Alert>
                     </motion.div>
                 )}
@@ -84,7 +98,7 @@ const LoginForm = () => {
                 <div className="min-w-96 p-6">
                     <form
                         className="flex flex-col justify-center items-center p-1"
-                        onSubmit={handleSubmit}
+                        onSubmit={handleSubmit(onSubmit)}
                     >
                         <Typography variant="h2" className="text-primary">
                             Inicio de sesión
@@ -94,27 +108,38 @@ const LoginForm = () => {
                             Ingresa tus credenciales para acceder
                         </Typography>
 
+                        {errors.username && (
+                            <Typography color="red">
+                                {errors.username.message}
+                            </Typography>
+                        )}
+
                         <Input
                             variant="outlined"
                             label="Nombre de usuario: "
                             placeholder="Ingresa tu nombre de usuario"
-                            containerProps={{ className: "w-full m-3" }}
-                            onChange={(event) =>
-                                setUsername(event.target.value)
-                            }
+                            containerProps={{ className: "w-full mt-1" }}
+                            {...register("username")}
+                            error={!!errors.username}
                         />
+                        
+                        {errors.password && (
+                            <Typography color="red">
+                                {errors.password.message}
+                            </Typography>
+                        )}
 
                         <Input
                             variant="outlined"
                             label="Contraseña: "
                             placeholder="Ingresa tu contraseña"
                             containerProps={{
-                                className: "w-full",
+                                className: "w-full mt-1",
                             }}
-                            onChange={(event) =>
-                                setPassword(event.target.value)
-                            }
+                            {...register("password")}
+                            error={!!errors.password}
                         />
+                        
 
                         <Button
                             fullWidth
