@@ -4,7 +4,6 @@ import RegisterPage from "./pages/RegisterPage";
 import SelectCoursePage from "./pages/SelectCoursePage";
 import SelectGroupPage from "./pages/SelectGroupPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
-import ShowCapacity from "./components/ShowCapacity";
 
 const App = () => {
     return (
@@ -15,7 +14,6 @@ const App = () => {
                 <Route path="/pageCourse" Component={SelectCoursePage}></Route>
                 <Route path="/pageGroup" Component={SelectGroupPage}></Route>
                 <Route path="/confirmation" Component={ConfirmationPage}></Route>
-                <Route path="/prueba" Component={ShowCapacity}></Route>
             </Routes>
         </BrowserRouter>
     );
