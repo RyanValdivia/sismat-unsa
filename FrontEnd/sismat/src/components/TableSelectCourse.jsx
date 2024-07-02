@@ -65,7 +65,7 @@ const TableSelectCourse = () => {
           
         </div>
         <div className="flex items-center justify-between">
-         <Link to="/pageLogin">
+         <Link to="/">
          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2 ">
                 Atras
               </button>

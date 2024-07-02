@@ -7,7 +7,7 @@ const SelectGroupPage = () => {
           <header className="flex items-center justify-between bg-[#9B0000] text-white py-4 px-6">
             <div className="font-bold">User Name</div>
             <div className="">
-              <Link to="/pageLogin">
+              <Link to="/">
               Sign Out
               </Link>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CourseTable = ({ courses }) => (
+const CourseTable = ({ workloads }) => (
     <div className="overflow-x-auto" id="confirmation-table">
         <table className="w-full table-auto">
             <thead>
@@ -14,14 +14,16 @@ const CourseTable = ({ courses }) => (
                 </tr>
             </thead>
             <tbody>
-                {courses.map((course) => (
-                    <tr key={course.id} className="border-b border-[#800020]">
-                        <td className="px-4 py-2 bg-[#8B0000] text-white text-center w-12">{course.id}</td>
-                        <td className="px-4 py-2">{course.code}</td>
-                        <td className="px-4 py-2">{course.name}</td>
-                        <td className="px-4 py-2 text-center">{course.group}</td>
-                        <td className="px-4 py-2 text-center">{course.credits.toFixed(2)}</td>
-                        <td className="px-4 py-2">{course.teacher}</td>
+                {workloads.map((workload, index) => (
+                    <tr key={workload.id} className="border-b border-[#800020]">
+                        <td className="px-4 py-2 bg-[#8B0000] text-white text-center w-12">{index + 1}</td>
+                        <td className="px-4 py-2">{workload.code}</td>
+                        <td className="px-4 py-2">{workload.name}</td>
+                        <td className="px-4 py-2 text-center">{workload.group}</td>
+                        <td className="px-4 py-2 text-center">
+                            {workload.credits !== undefined ? workload.credits.toFixed(2) : 'N/A'}
+                        </td>
+                        <td className="px-4 py-2">{workload.teacher}</td>
                     </tr>
                 ))}
             </tbody>
