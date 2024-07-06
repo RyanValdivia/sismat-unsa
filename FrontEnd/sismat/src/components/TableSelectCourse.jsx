@@ -105,9 +105,9 @@ const TableSelectCourse = () => {
         </div>
         <div className="flex items-center justify-between">
          <Link to="/pageLogin">
-           <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2 ">
-              Atras
-           </button>
+         <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2 ">
+                Atras
+              </button>
          </Link>
           <Link to="/pageGroup">
             <button onClick={handleClick} className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">

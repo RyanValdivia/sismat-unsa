@@ -12,6 +12,8 @@ class Student(models.Model):
     email = models.EmailField()
     status = models.BooleanField(default=True)
     
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    
     created_by = models.ForeignKey(User, related_name='created_%(class)s_set' , on_delete=models.SET_NULL, null=True)
     modified_by = models.ForeignKey(User, related_name='modified_%(class)s_set', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

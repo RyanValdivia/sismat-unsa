@@ -63,7 +63,7 @@ const TableGroup = () => {
             </button>
           </Link>
           
-          <Link to="#">
+          <Link to="/confirmation">
             <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">
                 Continuar
             </button>
