@@ -12,11 +12,12 @@ import CustomDialog from './CustomDialog';
 import { login, fetchWorkload } from "../api/workload";
 
 const ConfirmationTable = () => {
-    const workloadId = "39a41f79-5a2b-4df4-b95f-e948c2cc12d9";
+    const workloadId = "c70f6a25-10c0-4b80-be95-ebd2dbefeec8";
     const [workloadData, setWorkloadData] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const capacity = 10;
 
     useEffect(() => {
         const authenticateAndFetchData = async () => {
@@ -41,22 +42,6 @@ const ConfirmationTable = () => {
                     teacher: `${data.teacher.names} ${data.teacher.lastnames}`
                 },{
                     id: 3,
-                    code: data.course.code,
-                    name: data.course.name,
-                    group: data.group,
-                    enrollment: "1",
-                    credits: data.course.credits,
-                    teacher: `${data.teacher.names} ${data.teacher.lastnames}`
-                },{
-                    id: 4,
-                    code: data.course.code,
-                    name: data.course.name,
-                    group: data.group,
-                    enrollment: "1",
-                    credits: data.course.credits,
-                    teacher: `${data.teacher.names} ${data.teacher.lastnames}`
-                },{
-                    id: 5,
                     code: data.course.code,
                     name: data.course.name,
                     group: data.group,
@@ -89,17 +74,17 @@ const ConfirmationTable = () => {
     const totalCredits = workloadData.reduce((sum, workload) => sum + workload.credits, 0); 
 
     const handleConfirmClick = () => {
-        setOpenDialog(true);
-        setDialogType('confirmation');
+        if (capacity > 0) {
+            setOpenDialog(true);
+            setDialogType('confirmation');
+        } else {
+            setOpenDialog(true);
+            setDialogType('error');
+        }
     };
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
-    };
-
-    const handleEnrollmentError = () => {
-        setOpenDialog(true);
-        setDialogType('error'); 
     };
 
     const handleOpenModal = () => {
@@ -149,15 +134,6 @@ const ConfirmationTable = () => {
                 </div>
             </div>
             
-            <div className="flex justify-center gap-4 mt-4">
-                <RedButton 
-                    variant="contained" 
-                    onClick={handleEnrollmentError}
-                >
-                    PROBAR ERROR DE MATRÍCULA XD
-                </RedButton>
-            </div>
-
             <ScheduleModal isOpen={isModalOpen} onClose={handleCloseModal} />
 
             <CustomDialog 

@@ -122,8 +122,9 @@ const styles = StyleSheet.create({
         textAlign: "right",
     },
     signature: {
-        marginTop: 80,
-        alignItems: "center",
+        flexDirection: "row",
+        marginTop: 90,
+        justifyContent: "space-between",
     },
     footer: {
         position: 'absolute',
@@ -232,8 +233,12 @@ const PDFDocument = ({ fileName, student, workloads, totalCredits, payment }) =>
                     <Text style={{marginTop: 2 }}>   S/. {payment.amount} [recibo: {payment.receipt}]</Text>
                 </View>
                 <View style={styles.signature}>
-                    <Text>___________________                                                                                            ___________________</Text>
-                    <Text style={{marginTop: 3}}>Operador                                                                                                                       Alumno</Text>
+                    <Text style={{marginLeft: 80}}>___________________</Text>
+                    <Text style={{marginRight: 90}}>___________________</Text>
+                </View>
+                <View style={[styles.signature, { marginTop: 5 }]}>
+                    <Text style={{marginLeft: 105}}>Operador</Text>
+                    <Text style={{marginRight: 118}}>Alumno</Text>
                 </View>
                 <View style={styles.footer}>
                     <Text style={{marginBottom: 3}}>________________________________________</Text>
