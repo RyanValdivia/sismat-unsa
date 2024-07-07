@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework import generics
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
@@ -47,6 +48,15 @@ class CustomTokenView(APIView):
             })
         else:
             return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+class CustomTokenRefresh(TokenRefreshView):
+    permission_classes = []
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code != status.HTTP_200_OK:
+            return Response({'detail': 'Invalid refresh token'}, status=status.HTTP_400_BAD_REQUEST)
+        return response
 
 class CourseListCreate(generics.ListCreateAPIView):
     queryset = Course.objects.all()

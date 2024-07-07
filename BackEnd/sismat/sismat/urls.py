@@ -20,7 +20,6 @@ from django.urls import path, include
 from matriculas.views import CustomTokenView
 
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
 
