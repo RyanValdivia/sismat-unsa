@@ -151,7 +151,7 @@ const PDFDocument = ({ fileName, student, workloads, totalCredits, payment }) =>
                             <Text>{student.cui}</Text>
                             <Text>      </Text>
                             <Text style={styles.title}>NOMBRE: </Text>
-                            <Text>{student.name}</Text>
+                            <Text>{student.lastnames + ", " + student.names}</Text>
                         </View>
                         <View style={[styles.row, { fontSize: 7.6 }]}>
                             <Text style={styles.title}>INGRESO :</Text>

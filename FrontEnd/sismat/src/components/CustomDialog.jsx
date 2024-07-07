@@ -30,7 +30,7 @@ const CustomDialog = ({ open, onClose, type, student, workloads, totalCredits, p
                         ¡Tu matrícula ha sido confirmada!
                     </DialogTitle>
                     <DialogContentText id="alert-dialog-description" className="text-center mt-2">
-                        Puedes ver o descargar tu constancia de matrícula a continuación.
+                        Puedes descargar tu constancia de matrícula a continuación.
                     </DialogContentText>
                     <DialogActions className="flex flex-col justify-center pb-4 mt-6 space-y-4">
                         <PDFDownloadLink
