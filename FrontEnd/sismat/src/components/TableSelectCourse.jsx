@@ -1,34 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const TableSelectCourse = () => {
-  const student = {
+  const [student, setStudent] = useState({
     id: 1, name: "Juan Pablo", lastname: "González", dni: "703456789", email: "juan.gonzalez@gmail.com", credits: 20,
-  };
+  });
 
-  const courses = [
+  const [courses, setCourses] = useState([
     { id: 1, code: "CS101", name: "Introducción a la Programación", status: "Disponible", credits: 3 },
     { id: 2, code: "WD201", name: "Diseño Web Avanzado", status: "Disponible", credits: 4 },
     { id: 3, code: "DB301", name: "Bases de Datos Relacionales", status: "Disponible", credits: 5 },
     { id: 4, code: "MA401", name: "Desarrollo de Aplicaciones Móviles", status: "Disponible", credits: 4 },
     { id: 5, code: "AI501", name: "Inteligencia Artificial y Machine Learning", status: "Disponible", credits: 5 },
-  ];
+  ]);
 
   const [selectedCourses, setSelectedCourses] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const username = sessionStorage.getItem("username");
+    const password = sessionStorage.getItem("password");
+    if (username && password) {
+      console.log(sessionStorage);
+    }
+  }, []);
+
   const handleClick = () => {
-    navigate('/pageGroup', { state: { courses: coursesSelec } });
+    navigate('/pageGroup', { state: { courses: selectedCourses } });
   };
 
-  
   const handleCheckboxChange = (courseId, courseCredits) => {
     setSelectedCourses((prevSelected) => {
       const creditosMax = student.credits;
       if (creditosMax - getTotalCredits() < courseCredits) {
-        alert("No puede seleccionar más créditos. Ha superado el límite de creditos.");
+        alert("No puede seleccionar más créditos. Ha superado el límite de créditos.");
         return prevSelected;
       }
       if (prevSelected.includes(courseId)) {
@@ -49,8 +56,8 @@ const TableSelectCourse = () => {
   return (
     <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
         <div className="bg-white rounded-lg shadow-lg p-4 flex items-center justify-between">
-          <p>Creditos actuales: {student.credits}</p>
-          <p>Creditos seleccionados: {getTotalCredits()}</p>
+          <p>Créditos actuales: {student.credits}</p>
+          <p>Créditos seleccionados: {getTotalCredits()}</p>
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="mb-6 text-center">

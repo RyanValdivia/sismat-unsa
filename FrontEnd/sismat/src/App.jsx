@@ -4,7 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import SelectCoursePage from "./pages/SelectCoursePage";
 import SelectGroupPage from "./pages/SelectGroupPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
-import RegisterPage from "./pages/RegisterPage";
+
 
 const App = () => {
     return (
