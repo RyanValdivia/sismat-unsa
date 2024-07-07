@@ -11,7 +11,7 @@ import CustomDialog from './CustomDialog';
 
 const ConfirmationTable = () => {
     const [student, setStudent] = useState({});
-    const [workloadData, setWorkloadData] = useState([]);
+    const [workloads, setWorkloads] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +24,7 @@ const ConfirmationTable = () => {
         }
     }, []);
 
-    const totalCredits = workloadData.reduce((sum, workload) => sum + workload.credits, 0); 
+    const totalCredits = workloads.reduce((sum, workload) => sum + workload.credits, 0); 
 
     const handleConfirmClick = () => {
         if (capacity > 0) {
@@ -60,14 +60,11 @@ const ConfirmationTable = () => {
                 <div className="mb-6 text-center">
                     <h1 className="text-3xl font-bold text-[#8B0000] p-2 mt-2">Confirmación de Matrícula</h1>
                     <div className="flex items-center justify-between mb-4">
-                    <p>Nombres: {student.names}</p>
-                    <p>Apellidos: {student.lastnames}</p>
-                    <p>CUI: {student.cui}</p>
                 </div>               
                 </div>
                 {/* tabla de Selección de cursos */}
                 <div className="overflow-x-auto p-2">
-                    <WorkloadTable workloads={workloadData} />
+                    <WorkloadTable workloads={workloads} />
                     <div className="flex justify-end gap-4 mt-2">
                         <a onClick={handleOpenModal} className="underline text-red-800 hover:text-red-200 cursor-pointer">
                             <ScheduleIcon className="mr-1" />
@@ -99,9 +96,9 @@ const ConfirmationTable = () => {
                 onClose={handleCloseDialog}
                 type={dialogType}
                 student={student} 
-                workloads={workloadData} 
+                workloads={workloads} 
                 totalCredits={totalCredits}
-                payment={{ amount: student.monto, receipt: student.recibo }} 
+                payment={{ amount: 0, receipt: 0 }} 
             />
         </main> 
     );
