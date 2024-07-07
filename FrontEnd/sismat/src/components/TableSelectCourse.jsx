@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const TableSelectCourse = () => {
+  const student = {
+    id: 1, name: "Juan Pablo", lastname: "González", dni: "703456789", email: "juan.gonzalez@gmail.com", credits: 20,
+  };
+
   const courses = [
     { id: 1, code: "CS101", name: "Introducción a la Programación", status: "Disponible", credits: 3 },
     { id: 2, code: "WD201", name: "Diseño Web Avanzado", status: "Disponible", credits: 4 },
@@ -11,12 +16,41 @@ const TableSelectCourse = () => {
     { id: 5, code: "AI501", name: "Inteligencia Artificial y Machine Learning", status: "Disponible", credits: 5 },
   ];
 
+  const [selectedCourses, setSelectedCourses] = useState([]);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/pageGroup', { state: { courses: coursesSelec } });
+  };
+
+  
+  const handleCheckboxChange = (courseId, courseCredits) => {
+    setSelectedCourses((prevSelected) => {
+      const creditosMax = student.credits;
+      if (creditosMax - getTotalCredits() < courseCredits) {
+        alert("No puede seleccionar más créditos. Ha superado el límite de creditos.");
+        return prevSelected;
+      }
+      if (prevSelected.includes(courseId)) {
+        return prevSelected.filter(id => id !== courseId);
+      } else {
+        return [...prevSelected, courseId];
+      }
+    });
+  };
+
+  const getTotalCredits = () => {
+    return selectedCourses.reduce((total, courseId) => {
+      const course = courses.find(course => course.id === courseId);
+      return total + (course ? course.credits : 0);
+    }, 0);
+  };
+
   return (
     <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
-        
         <div className="bg-white rounded-lg shadow-lg p-4 flex items-center justify-between">
-          <p>Creditos actuales:</p>
-          <p>Creditos maximos:</p>
+          <p>Creditos actuales: {student.credits}</p>
+          <p>Creditos seleccionados: {getTotalCredits()}</p>
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="mb-6 text-center">
@@ -53,34 +87,35 @@ const TableSelectCourse = () => {
                     <td className="px-4 py-2">{course.name}</td>
                     <td className="px-4 py-2">{course.status}</td>
                     <td className="px-4 py-2 text-center">{course.credits}</td>
-                    <td className="px-4 py-2 text-center"><Checkbox id={`course${course.id}`} /></td>
+                    <td className="px-4 py-2 text-center">
+                      <Checkbox
+                        id={`course${course.id}`}
+                        checked={selectedCourses.includes(course.id)}
+                        onChange={() => handleCheckboxChange(course.id, course.credits)}
+                      />
+                    </td>
                   </tr>
                 ))}
               </tbody>
-            </table>            
+            </table>
           </div>
           <div className="flex justify-end mt-5">
-                <p>Total de creditos: 00</p>
+                <p>Total de créditos seleccionados: {getTotalCredits()}</p>
           </div>
-          
         </div>
         <div className="flex items-center justify-between">
-         <Link to="/">
+         <Link to="/pageLogin">
          <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2 ">
                 Atras
               </button>
          </Link>
-              
           <Link to="/pageGroup">
-            <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">
+            <button onClick={handleClick} className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">
                 Continuar
             </button>
           </Link>
-          
-                
         </div>
-        
-      </main>
+    </main>
   );
 };
 

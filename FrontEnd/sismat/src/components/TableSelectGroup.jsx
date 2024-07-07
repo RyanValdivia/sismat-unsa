@@ -1,7 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const TableGroup = () => {
+  const courses = [
+    { id: 1, code: "CS101", name: "Introducción a la Programación", status: "Disponible", credits: 3 },
+    { id: 2, code: "WD201", name: "Diseño Web Avanzado", status: "Disponible", credits: 4 },
+    { id: 3, code: "DB301", name: "Bases de Datos Relacionales", status: "Disponible", credits: 5 },
+    { id: 4, code: "MA401", name: "Desarrollo de Aplicaciones Móviles", status: "Disponible", credits: 4 },
+    { id: 5, code: "AI501", name: "Inteligencia Artificial y Machine Learning", status: "Disponible", credits: 5 },
+  ]
+  const maxCredits = courses.reduce((sum, course) => sum += course.credits, 0);
+  const location = useLocation();
+
+  console.log(location.pathname);
     return(
     <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
         
@@ -23,11 +35,7 @@ const TableGroup = () => {
                 </tr>
               </thead>
               <tbody>
-                {[{ id: 1, code: "CS101", name: "Introducción a la Programación", status: "Disponible", credits: 3 },
-                { id: 2, code: "WD201", name: "Diseño Web Avanzado", status: "Disponible", credits: 4 },
-                { id: 3, code: "DB301", name: "Bases de Datos Relacionales", status: "Disponible", credits: 5 },
-                { id: 4, code: "MA401", name: "Desarrollo de Aplicaciones Móviles", status: "Disponible", credits: 4 },
-                { id: 5, code: "AI501", name: "Inteligencia Artificial y Machine Learning", status: "Disponible", credits: 5 },].map((course) => (
+                {courses.map((course) => (
                   <tr key={course.id} className="border-b border-[#800020]">
                     <td className={`px-4 py-2 ${course.id === 5 ? 'bg-[#8B0000] text-white ' : 'bg-[#8B0000] text-white '}`}>{course.id}</td>
                     <td className="px-4 py-2">{course.code}</td>
@@ -44,7 +52,7 @@ const TableGroup = () => {
             </table>            
           </div>
           <div className="flex justify-end mt-5">
-                <p>Total de creditos: 00</p>
+                <p>Total de creditos: {maxCredits.toFixed(0)}</p>
           </div>
           
         </div>
