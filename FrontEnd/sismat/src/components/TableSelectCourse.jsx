@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import getStudent from "../api/student"
+import axios from 'axios'; // Asegúrate de instalar axios: npm install axios
 
 const TableSelectCourse = () => {
-  const [student, setStudent] = useState({
-    id: 1, name: "Juan Pablo", lastname: "González", dni: "703456789", email: "juan.gonzalez@gmail.com", credits: 20,
-  });
-
+  const [student, setStudent] = useState({});
   const [courses, setCourses] = useState([
     { id: 1, code: "CS101", name: "Introducción a la Programación", status: "Disponible", credits: 3 },
     { id: 2, code: "WD201", name: "Diseño Web Avanzado", status: "Disponible", credits: 4 },
@@ -15,17 +14,27 @@ const TableSelectCourse = () => {
     { id: 4, code: "MA401", name: "Desarrollo de Aplicaciones Móviles", status: "Disponible", credits: 4 },
     { id: 5, code: "AI501", name: "Inteligencia Artificial y Machine Learning", status: "Disponible", credits: 5 },
   ]);
-
   const [selectedCourses, setSelectedCourses] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const username = sessionStorage.getItem("username");
-    const password = sessionStorage.getItem("password");
-    if (username && password) {
-      console.log(sessionStorage);
-    }
-  }, []);
+    const accessToken = sessionStorage.getItem("access");
+    const studentId = sessionStorage.getItem("student_id");
+    console.log(accessToken);
+    
+      const fetchStudentData = async () => {
+        try {
+          const student = await getStudent(studentId,accessToken);
+          setStudent(response.data.student);
+          console.log('tamal', student);
+        } catch (error) {
+          console.error('tamal', error);
+        }
+      };
+
+      fetchStudentData();
+    
+  }, [navigate]);
 
   const handleClick = () => {
     navigate('/pageGroup', { state: { courses: selectedCourses } });
@@ -52,7 +61,6 @@ const TableSelectCourse = () => {
       return total + (course ? course.credits : 0);
     }, 0);
   };
-
   return (
     <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
         <div className="bg-white rounded-lg shadow-lg p-4 flex items-center justify-between">
