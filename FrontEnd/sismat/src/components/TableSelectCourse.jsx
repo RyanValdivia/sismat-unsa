@@ -56,6 +56,7 @@ const TableSelectCourse = () => {
             try {
                 const response = await getStudent(studentId, accessToken);
                 setStudent(response.data);
+                sessionStorage.setItem("student", JSON.stringify(response.data));
                 console.log(response);
             } catch (error) {
                 let { code } = error.response.data;
@@ -66,6 +67,10 @@ const TableSelectCourse = () => {
                         const refresh = sessionStorage.getItem("refresh");
                         const res = await refreshToken(refresh);
                         sessionStorage.setItem("access", res.data.access);
+                        // Fetch cuando el token expire o algo asi xd
+                        const response = await getStudent(studentId, res.data.access);
+                        setStudent(response.data);
+                        sessionStorage.setItem("student", JSON.stringify(response.data));
                     } catch (error) {
                         // TODO: Redirect to log in page
                     }
