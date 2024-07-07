@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.views import APIView
+from django.contrib.auth import authenticate
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response
 from matriculas.models.Course import Course, Laboratory
 from matriculas.models.Inscription import Inscription, InscriptionLab
 from matriculas.models.Student import Student
@@ -19,6 +24,29 @@ from .serializers import (
 
 # Create your views here.
 
+class CustomTokenView(APIView):
+    permission_classes = []
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            try:
+                student = Student.objects.get(user=user)
+                student_id = student.id
+            except Student.DoesNotExist:
+                student_id = None
+                
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'user_id': user.id,
+                'student_id': student_id,
+            })
+        else:
+            return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class CourseListCreate(generics.ListCreateAPIView):
     queryset = Course.objects.all()

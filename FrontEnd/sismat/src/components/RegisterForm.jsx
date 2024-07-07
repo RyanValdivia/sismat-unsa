@@ -37,7 +37,6 @@ const LoginForm = () => {
 
     const onSubmit = async (data) => {
 
-        console.log(data);
         try {
             const res = await reg(data);
             setSuccessMessage("You've registered successfully")

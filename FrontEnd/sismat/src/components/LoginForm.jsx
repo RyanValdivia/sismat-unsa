@@ -34,29 +34,29 @@ const LoginForm = () => {
     } = useForm({
         resolver: zodResolver(loginSchema),
     });
-    const [showError, setShowError] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     const onSubmit = async (data) => {
-        console.log(data);
         try {
             const res = await login(data);
             sessionStorage.setItem("access", res.data.access);
             sessionStorage.setItem("refresh", res.data.refresh);
+            sessionStorage.setItem("student_id", res.data.student_id);
+            console.log(sessionStorage)
             setSuccessMessage("Inicio de sesión exitoso");
-            setShowSuccess(true);
-            setTimeout(() => setShowSuccess(false), 3000);
+            setTimeout(() => setSuccessMessage(""), 3000);
         } catch (error) {
+            console.log(error);
             setErrorMessage(error.response.data.detail);
-            setShowError(true);
-            setTimeout(() => setShowError(false), 3000);
+            setTimeout(() => setErrorMessage(""), 3000);
         }
     };
 
     return (
         <div className="flex flex-col justify-center items-center relative">
             <AnimatePresence>
-                {showError && (
+                {errorMessage && (
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ const LoginForm = () => {
                     </motion.div>
                 )}
 
-                {showSuccess && (
+                {successMessage && (
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}

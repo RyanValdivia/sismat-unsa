@@ -14,6 +14,7 @@ from .views import (
     InscriptionListCreate,
     InscriptionLabDetail,
     InscriptionLabListCreate,
+    CustomTokenView
 )
 
 urlpatterns = [
