@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import getStudent from "../api/student"
+import { getStudent } from "../api/student"
 import axios from 'axios'; // Asegúrate de instalar axios: npm install axios
 
 const TableSelectCourse = () => {

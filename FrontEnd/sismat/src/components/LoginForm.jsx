@@ -12,6 +12,7 @@ import { login } from "../api/login";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from 'react-router-dom';
 
 const loginSchema = z.object({
     username: z
@@ -36,6 +37,7 @@ const LoginForm = () => {
     });
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
@@ -43,9 +45,12 @@ const LoginForm = () => {
             sessionStorage.setItem("access", res.data.access);
             sessionStorage.setItem("refresh", res.data.refresh);
             sessionStorage.setItem("student_id", res.data.student_id);
-            console.log(sessionStorage)
             setSuccessMessage("Inicio de sesión exitoso");
-            setTimeout(() => setSuccessMessage(""), 3000);
+            setTimeout(() => {
+                setSuccessMessage(""), 3000;
+                navigate("/pageCourse");
+            });
+            
         } catch (error) {
             console.log(error);
             setErrorMessage(error.response.data.detail);
@@ -80,7 +85,7 @@ const LoginForm = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute bottom-96 left-0 right-0 flex justify-center mt-2"
+                        className="absolute bottom left-0 right-0 flex justify-center mt-2"
                     >
                         <Alert
                             color="green"
