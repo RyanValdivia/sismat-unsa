@@ -2,40 +2,32 @@ import React, { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {getStudent} from "../api/student"
-import axios from 'axios'; // Asegúrate de instalar axios: npm install axios
+import { getCourses } from "../api/workload";
+
 
 const TableSelectCourse = () => {
-  const [student, setStudent] = useState({});
-  const [courses, setCourses] = useState([
-    { id: 1, code: "CS101", name: "Introducción a la Programación", status: "Disponible", credits: 3 },
-    { id: 2, code: "WD201", name: "Diseño Web Avanzado", status: "Disponible", credits: 4 },
-    { id: 3, code: "DB301", name: "Bases de Datos Relacionales", status: "Disponible", credits: 5 },
-    { id: 4, code: "MA401", name: "Desarrollo de Aplicaciones Móviles", status: "Disponible", credits: 4 },
-    { id: 5, code: "AI501", name: "Inteligencia Artificial y Machine Learning", status: "Disponible", credits: 5 },
-  ]);
+  
+ 
   const [selectedCourses, setSelectedCourses] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const accessToken = sessionStorage.getItem("access");
-    const studentId = sessionStorage.getItem("student_id");
-    console.log(accessToken);
-    
-      const fetchStudentData = async () => {
-        try {
-          const response = await getStudent(studentId,accessToken);
-          console.log('tamal', response);
-          setStudent(response.data);
-          
-        } catch (error) {
-          console.error('tamal', error);
-        }
-      };
+  const [courses, setCourses] = useState([]);
 
-      fetchStudentData();
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const token = sessionStorage.getItem('access'); 
+                const responseCourses = await getCourses(token);
+                console.log(fetchCourses);
+                setCourses(responseCourses.data); 
+            } catch (error) {
+                console.error('Error fetching courses:', error);
       
-  }, []);
+            }
+        };
+
+        fetchCourses();
+    }, []);
 
   const handleClick = () => {
     navigate('/pageGroup', { state: { courses: selectedCourses } });
@@ -65,7 +57,7 @@ const TableSelectCourse = () => {
   return (
     <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
         <div className="bg-white rounded-lg shadow-lg p-4 flex items-center justify-between">
-          <p>Créditos actuales: {student.credits}</p>
+          <p>Créditos actuales: </p>
           <p>Créditos seleccionados: {getTotalCredits()}</p>
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
