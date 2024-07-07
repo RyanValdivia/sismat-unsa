@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getStudent } from "../api/student"
+import {getStudent} from "../api/student"
 import axios from 'axios'; // Asegúrate de instalar axios: npm install axios
 
 const TableSelectCourse = () => {
@@ -24,17 +24,18 @@ const TableSelectCourse = () => {
     
       const fetchStudentData = async () => {
         try {
-          const student = await getStudent(studentId,accessToken);
-          setStudent(response.data.student);
-          console.log('tamal', student);
+          const response = await getStudent(studentId,accessToken);
+          console.log('tamal', response);
+          setStudent(response.data);
+          
         } catch (error) {
           console.error('tamal', error);
         }
       };
 
       fetchStudentData();
-    
-  }, [navigate]);
+      
+  }, []);
 
   const handleClick = () => {
     navigate('/pageGroup', { state: { courses: selectedCourses } });
