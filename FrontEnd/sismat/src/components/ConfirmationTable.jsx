@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import WorkloadTable from './WorkloadTable';
 import ScheduleModal from "./ScheduleModal";
@@ -15,6 +15,8 @@ const ConfirmationTable = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [matriculaConfirmada, setMatriculaConfirmada] = useState(false);
+    const navigate = useNavigate();
     const capacity = 10;
 
     useEffect(() => {
@@ -29,6 +31,7 @@ const ConfirmationTable = () => {
         if (capacity > 0) {
             setOpenDialog(true);
             setDialogType('confirmation');
+            setMatriculaConfirmada(true);
         } else {
             setOpenDialog(true);
             setDialogType('error');
@@ -47,6 +50,15 @@ const ConfirmationTable = () => {
         setIsModalOpen(false);
     };
 
+    const handleBackClick = () => {
+        if (matriculaConfirmada) {
+            alert("Ya te has matriculado. ¡No puedes matricularte de nuevo!");
+        } else {
+            navigate("/pageGroup");
+        }
+    };
+
+
     return (
         <main className="flex flex-col gap-6 mx-6">
             <Box display="flex" justifyContent="center">
@@ -59,9 +71,6 @@ const ConfirmationTable = () => {
                 <div className="mb-6 text-center">
                     <h1 className="text-3xl font-bold text-[#8B0000] p-2 mt-2">Confirmación de Matrícula</h1>
                     <div className="flex items-center justify-between mb-4">
-                    <p>Nombres: {student.names}</p>
-                    <p>Apellidos: {student.lastnames}</p>
-                    <p>CUI: {student.cui}</p>
                 </div>               
                 </div>
                 {/* tabla de Selección de cursos */}
@@ -74,9 +83,7 @@ const ConfirmationTable = () => {
                         </a>
                     </div>
                     <div className="flex items-center justify-between gap-4 mt-5 ml-5">
-                        <Link to="/pageGroup">
-                            <RedButton variant="outlined">Atrás</RedButton>
-                        </Link>
+                    <RedButton variant="outlined" onClick={handleBackClick}>Atrás</RedButton>
                         
                         <div className="flex items-center">
                             <p className="mr-7">Total de créditos: {totalCredits.toFixed(2)}</p>

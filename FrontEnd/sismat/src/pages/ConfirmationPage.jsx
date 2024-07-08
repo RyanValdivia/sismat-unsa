@@ -16,9 +16,9 @@ const ConfirmationPage = () => {
     return (
         <div className="flex flex-col min-h-screen w-full bg-[#DDDDDD] pb-5">
             <header className="flex items-center justify-between bg-[#8B0000] text-white py-4 px-6">
-                <div className="font-bold text-xl">{student.lastnames + ", " + student.names}</div>
-                <Link to="/" className="text-white hover:text-gray-300 md:text-lg">
-                    Sign Out
+                <div className="font-bold text-l">Nombre de Usuario: {student.names + " " + student.lastnames}</div>
+                <Link to="/" className="text-white hover:text-gray-300 md:text-l">
+                    Cerrar Sesión
                 </Link>
             </header>
             
