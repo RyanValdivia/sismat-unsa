@@ -13,4 +13,9 @@ python manage.py makemigrations
 # Apply any outstanding database migrations
 python manage.py migrate
 
-python manage.py createsuperuser --noinput --username admin --email admin@example.com
+export DJANGO_SUPERUSER_USERNAME=admin
+export DJANGO_SUPERUSER_EMAIL=admin@example.com
+export DJANGO_SUPERUSER_PASSWORD=1234
+
+# Ejecuta el comando para crear el superusuario
+python manage.py createsuperuser --noinput
