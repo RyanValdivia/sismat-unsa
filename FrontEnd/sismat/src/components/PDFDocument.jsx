@@ -218,8 +218,8 @@ const PDFDocument = ({ fileName, student, workloads, totalCredits, payment }) =>
                             <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1   2"}</Text>
                             <Text style={[styles.tableCell, styles.tableCellName]}>{workload.name}</Text>
                             <Text style={[styles.tableCell, styles.tableCellCiclo]}>{"B"}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellGroup]}>{workload.group}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellMat]}>{workload.enrollment}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellGroup]}>{workload.selectedGroup}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellMat]}>{1}</Text>
                             <Text style={[styles.tableCell, styles.tableCellCredits]}>{workload.credits.toFixed(2)}</Text>
                             <Text style={[styles.tableCell, styles.tableCellObservations]}></Text>
                         </View>

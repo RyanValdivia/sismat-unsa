@@ -31,7 +31,7 @@ const CourseTable = ({ workloads }) => (
                                 ? workload.credits.toFixed(2)
                                 : "N/A"}
                         </td>
-                        <td className="px-4 py-2">{workload.teacher}</td>
+                        <td className="px-4 py-2">{"Contrato Pendiente"}</td>
                     </tr>
                 ))}
             </tbody>
