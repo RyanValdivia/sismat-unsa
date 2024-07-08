@@ -3,7 +3,6 @@ import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { useNavigate } from "react-router-dom";
-import { fetchInscription } from "../api/inscription";
 
 import WorkloadTable from './WorkloadTable';
 import ScheduleModal from "./ScheduleModal";
