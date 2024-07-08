@@ -152,3 +152,6 @@ class WorkloadLabDetail(generics.RetrieveUpdateAPIView):
     queryset = WorkloadLab.objects.all()
     serializer_class = WorkloadLabSerializer
     permission_classes = [IsAuthenticated]
+
+def loadIndex(request):
+    return render(request, 'matriculas/index.html')

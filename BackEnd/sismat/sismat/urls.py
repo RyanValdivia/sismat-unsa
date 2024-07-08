@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
-from matriculas.views import CustomTokenView
+from matriculas.views import CustomTokenView, loadIndex
 
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -25,7 +27,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('matriculas.urls'), name='api'),
+    path('', include('matriculas.urls'), name='matriculas'),
     path('api/token/', CustomTokenView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

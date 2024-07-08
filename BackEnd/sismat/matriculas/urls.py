@@ -14,7 +14,7 @@ from .views import (
     InscriptionListCreate,
     InscriptionLabDetail,
     InscriptionLabListCreate,
-    CustomTokenView
+    loadIndex
 )
 
 urlpatterns = [
@@ -32,4 +32,5 @@ urlpatterns = [
     path("inscriptions/<uuid:pk>/", InscriptionDetail.as_view(), name="inscription-detail"),
     path("inscriptionslab/", InscriptionLabListCreate.as_view(), name="inscriptionlab-list-create"),
     path("inscriptionslab/<uuid:pk>/", InscriptionLabDetail.as_view(), name="inscriptionlab-detail"),
+    path("", loadIndex, name="index")
 ]
