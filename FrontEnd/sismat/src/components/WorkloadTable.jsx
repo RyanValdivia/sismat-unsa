@@ -24,7 +24,7 @@ const CourseTable = ({ workloads }) => (
                         <td className="px-4 py-2">{workload.code}</td>
                         <td className="px-4 py-2">{workload.name}</td>
                         <td className="px-4 py-2 text-center">
-                            {workload.group}
+                            {workload.selectedGroup}
                         </td>
                         <td className="px-4 py-2 text-center">
                             {workload.credits !== undefined

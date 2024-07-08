@@ -18,7 +18,12 @@ const ConfirmationTable = () => {
     const navigate = useNavigate();
     const capacity = 10;
 
+    console.log(sessionStorage.getItem("selectedGroups"));
+
+
     const workloadData = JSON.parse(sessionStorage.getItem("selectedGroups")) || [];
+
+    console.log(workloadData);
 
     useEffect(() => {
         const studentData = JSON.parse(sessionStorage.getItem("student"));
