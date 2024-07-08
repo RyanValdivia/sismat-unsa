@@ -152,6 +152,8 @@ const LoginForm = () => {
                         >
                             Iniciar Sesión
                         </Button>
+
+                        <Button onClick={navigate("/register")}>Registrate</Button>
                     </form>
                 </div>
             </Card>
