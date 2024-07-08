@@ -1,5 +1,6 @@
     import axios from "axios";
 
+
     const API_URL = "http://127.0.0.1:8000/api/";
 
     async function login(username, password) {
@@ -53,11 +54,11 @@
         }
     }
 
-    async function fetchCourse(courseId) {
+    async function fetchCourse(courseId, accessToken) {
         try {
             const response = await axios.get(`${API_URL}courses/${courseId}/`, {
                 headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("access")}`
+                    Authorization: `Bearer ${accessToken}`
                 }
             });
             return response.data;

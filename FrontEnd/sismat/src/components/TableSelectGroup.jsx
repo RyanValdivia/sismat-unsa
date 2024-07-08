@@ -1,52 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { fetchCourse } from '../api/workload';
 
 const TableGroup = () => {
-    const courses = [
-        {
-            id: 1,
-            code: "CS101",
-            name: "Introducción a la Programación",
-            status: "Disponible",
-            credits: 3,
-        },
-        {
-            id: 2,
-            code: "WD201",
-            name: "Diseño Web Avanzado",
-            status: "Disponible",
-            credits: 4,
-        },
-        {
-            id: 3,
-            code: "DB301",
-            name: "Bases de Datos Relacionales",
-            status: "Disponible",
-            credits: 5,
-        },
-        {
-            id: 4,
-            code: "MA401",
-            name: "Desarrollo de Aplicaciones Móviles",
-            status: "Disponible",
-            credits: 4,
-        },
-        {
-            id: 5,
-            code: "AI501",
-            name: "Inteligencia Artificial y Machine Learning",
-            status: "Disponible",
-            credits: 5,
-        },
-    ];
-    const maxCredits = courses.reduce(
-        (sum, course) => (sum += course.credits),
-        0
-    );
-    const location = useLocation();
+    const [coursesDetails, setCoursesDetails] = useState([]);
 
-    console.log(location.pathname);
+    useEffect(() => {
+        // Recuperar los cursos seleccionados del sessionStorage
+        const storedCourses = sessionStorage.getItem('selectedCourses');
+        const accessToken = sessionStorage.getItem("access");
+        console.log(storedCourses);
+
+        const fetchCourseDetails = async () => {
+            try {
+                const courseIds = JSON.parse(storedCourses);
+                const courseDetailsPromises = courseIds.map((courseId) => fetchCourse(courseId, accessToken ));
+                const courses = await Promise.all(courseDetailsPromises);
+                setCoursesDetails(courses);
+            } catch (error) {
+                console.error("Error fetching courses:", error);
+            }
+        };
+
+        fetchCourseDetails();
+    }, []);
+
     return (
         <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
             <div className="bg-white rounded-lg shadow-lg p-6">
@@ -61,36 +39,21 @@ const TableGroup = () => {
                     <table className="w-full table-auto">
                         <thead>
                             <tr className="bg-[#8B0000] text-white">
-                                <th className="px-4 py-2 rounded-tl-lg">Nro</th>
+                                <th className="px-4 py-2 rounded-tl-lg">ID</th>
                                 <th className="px-4 py-2">Código</th>
                                 <th className="px-4 py-2">Nombre</th>
                                 <th className="px-4 py-2">Créditos</th>
-                                <th className="px-4 py-2 rounded-tr-lg">
-                                    Grupos
-                                </th>
+                                <th className="px-4 py-2 rounded-tr-lg">Grupos</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {courses.map((course) => (
-                                <tr
-                                    key={course.id}
-                                    className="border-b border-[#800020]"
-                                >
-                                    <td
-                                        className={`px-4 py-2 ${
-                                            course.id === 5
-                                                ? "bg-[#8B0000] text-white "
-                                                : "bg-[#8B0000] text-white "
-                                        }`}
-                                    >
-                                        {course.id}
-                                    </td>
-                                    <td className="px-4 py-2">{course.code}</td>
-                                    <td className="px-4 py-2">{course.name}</td>
-                                    <td className="px-4 py-2 text-center">
-                                        {course.credits}
-                                    </td>
-                                    <td className="px-4 py-2 text-center">
+                            {coursesDetails.map((courseDetail, index) => (
+                                <tr key={courseDetail.id}>
+                                    <td>{index+1}</td>
+                                    <td>{courseDetail.code}</td>
+                                    <td>{courseDetail.name}</td>
+                                    <td>{courseDetail.credits}</td>
+                                    <td>
                                         <select name="grupos" id="grupos">
                                             <option value="grupoA">A</option>
                                             <option value="grupoB">B</option>
@@ -103,7 +66,7 @@ const TableGroup = () => {
                     </table>
                 </div>
                 <div className="flex justify-end mt-5">
-                    <p>Total de creditos: {maxCredits.toFixed(0)}</p>
+                    <p>Total de créditos: {coursesDetails.reduce((acc, curr) => acc + curr.credits, 0).toFixed(0)}</p>
                 </div>
             </div>
             <div className="flex items-center justify-between">
@@ -112,7 +75,6 @@ const TableGroup = () => {
                         Atras
                     </button>
                 </Link>
-
                 <Link to="/confirmation">
                     <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">
                         Continuar

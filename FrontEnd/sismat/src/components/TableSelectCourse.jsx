@@ -8,7 +8,7 @@ import axios from "axios"; // Asegúrate de instalar axios: npm install axios
 
 const TableSelectCourse = () => {
     const [student, setStudent] = useState({});
-    const creditosActuales = 5;
+    const creditosActuales = 12;
     const [courses, setCourses] = useState([]);
     const [selectedCourses, setSelectedCourses] = useState([]);
     const navigate = useNavigate();
@@ -60,6 +60,7 @@ const TableSelectCourse = () => {
     }, []);
 
     const handleClick = () => {
+        sessionStorage.setItem('selectedCourses', JSON.stringify(selectedCourses));
         navigate("/pageGroup", { state: { courses: selectedCourses } });
     };
 
@@ -80,8 +81,8 @@ const TableSelectCourse = () => {
     };
 
     const getTotalCredits = () => {
-        return selectedCourses.reduce((total, courseId) => {
-            const course = courses.find((course) => course.id === courseId);
+        return selectedCourses.reduce((total, courseCode) => {
+            const course = courses.find((course) => course.code === courseCode);
             return total + (course ? course.credits : 0);
         }, 0);
     };
