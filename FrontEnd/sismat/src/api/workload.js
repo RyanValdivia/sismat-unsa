@@ -39,7 +39,7 @@
             throw error;
         }
     }
-
+   
     async function fetchTeacher(teacherId) {
         try {
             const response = await axios.get(`${API_URL}teachers/${teacherId}/`, {

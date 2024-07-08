@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getStudent, refreshToken } from "../api/student";
 import { getCourses } from "../api/workload"; 
-import axios from "axios"; // Asegúrate de instalar axios: npm install axios
+import axios from "axios";
 
 const TableSelectCourse = () => {
     const [student, setStudent] = useState({});
@@ -37,6 +37,7 @@ const TableSelectCourse = () => {
                         setStudent(response.data);
                         sessionStorage.setItem("student", JSON.stringify(response.data));
                     } catch (error) {
+                        console.error(error);
                     }
                 }
             }
@@ -45,18 +46,16 @@ const TableSelectCourse = () => {
         fetchStudentData();
 
         const fetchCourses = async () => {
-          try {
-              const responseCourses = await getCourses(accessToken);
-              console.log('COURSES: ', responseCourses);
-              console.log(fetchCourses);
-              setCourses(responseCourses.data); 
-          } catch (error) {
-              console.error('Error fetching courses:', error);
-    
-          }
-      };
+            try {
+                const responseCourses = await getCourses(accessToken);
+                console.log('COURSES: ', responseCourses);
+                setCourses(responseCourses.data); 
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
 
-      fetchCourses();
+        fetchCourses();
     }, []);
 
     const handleClick = () => {
@@ -69,7 +68,7 @@ const TableSelectCourse = () => {
             const creditosMax = creditosActuales;
             if (prevSelected.includes(courseId)) {
                 return prevSelected.filter((id) => id !== courseId);
-            } else if (creditosMax - getTotalCredits() < courseCredits) {
+            } else if (getTotalCredits(prevSelected) + courseCredits > creditosMax) {
                 alert(
                     "No puede seleccionar más créditos. Ha superado el límite de créditos."
                 );
@@ -80,9 +79,9 @@ const TableSelectCourse = () => {
         });
     };
 
-    const getTotalCredits = () => {
-        return selectedCourses.reduce((total, courseCode) => {
-            const course = courses.find((course) => course.code === courseCode);
+    const getTotalCredits = (selected = selectedCourses) => {
+        return selected.reduce((total, courseId) => {
+            const course = courses.find((course) => course.id === courseId);
             return total + (course ? course.credits : 0);
         }, 0);
     };
@@ -145,7 +144,7 @@ const TableSelectCourse = () => {
                                     <td className="px-4 py-2">{course.code}</td>
                                     <td className="px-4 py-2">{course.name}</td>
                                     <td className="px-4 py-2">
-                                        {course.status = true? "Disponible" : "No disponible" }
+                                        {course.status ? "Disponible" : "No disponible"}
                                     </td>
                                     <td className="px-4 py-2 text-center">
                                         {course.credits}
@@ -179,14 +178,12 @@ const TableSelectCourse = () => {
                         Atras
                     </button>
                 </Link>
-                <Link to="/pageGroup">
-                    <button
-                        onClick={handleClick}
-                        className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2"
-                    >
-                        Continuar
-                    </button>
-                </Link>
+                <button
+                    onClick={handleClick}
+                    className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2"
+                >
+                    Continuar
+                </button>
             </div>
         </main>
     );

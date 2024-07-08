@@ -63,12 +63,14 @@ const TableGroup = () => {
                         </thead>
                         <tbody>
                             {coursesDetails.map((courseDetail, index) => (
-                                <tr key={courseDetail.id}>
-                                    <td>{index+1}</td>
-                                    <td>{courseDetail.code}</td>
-                                    <td>{courseDetail.name}</td>
-                                    <td>{courseDetail.credits}</td>
-                                    <td>
+                                <tr key={courseDetail.id} 
+                                  className="border-b border-[#800020]"
+                                >
+                                    <td className="px-4 py-2 text-center">{index+1}</td>
+                                    <td className="px-4 py-2 text-center">{courseDetail.code}</td>
+                                    <td className="px-4 py-2 ">{courseDetail.name}</td>
+                                    <td className="px-4 py-2 text-center">{courseDetail.credits}</td>
+                                    <td className="px-4 py-2 text-center">
                                         <select 
                                             name="grupos" 
                                             id={`grupos-${courseDetail.id}`}
