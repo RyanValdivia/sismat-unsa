@@ -11,7 +11,6 @@ import CustomDialog from './CustomDialog';
 
 const ConfirmationTable = () => {
     const [student, setStudent] = useState({});
-    const [workloadData, setWorkloadData] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,12 +18,15 @@ const ConfirmationTable = () => {
     const navigate = useNavigate();
     const capacity = 10;
 
+    const workloadData = JSON.parse(sessionStorage.getItem("selectedGroups")) || [];
+
     useEffect(() => {
         const studentData = JSON.parse(sessionStorage.getItem("student"));
         if (studentData) {
             setStudent(studentData);
         }
     }, []);
+
     const totalCredits = workloadData.reduce((sum, workload) => sum + workload.credits, 0); 
 
     const handleConfirmClick = () => {
