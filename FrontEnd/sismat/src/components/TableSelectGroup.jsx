@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchCourse } from '../api/workload';
 
 const TableGroup = () => {
     const [coursesDetails, setCoursesDetails] = useState([]);
+    const [selectedGroups, setSelectedGroups] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Recuperar los cursos seleccionados del sessionStorage
         const storedCourses = sessionStorage.getItem('selectedCourses');
         const accessToken = sessionStorage.getItem("access");
         console.log(storedCourses);
@@ -14,7 +15,7 @@ const TableGroup = () => {
         const fetchCourseDetails = async () => {
             try {
                 const courseIds = JSON.parse(storedCourses);
-                const courseDetailsPromises = courseIds.map((courseId) => fetchCourse(courseId, accessToken ));
+                const courseDetailsPromises = courseIds.map((courseId) => fetchCourse(courseId, accessToken));
                 const courses = await Promise.all(courseDetailsPromises);
                 setCoursesDetails(courses);
             } catch (error) {
@@ -25,6 +26,22 @@ const TableGroup = () => {
         fetchCourseDetails();
     }, []);
 
+    const handleGroupChange = (courseId, group) => {
+        setSelectedGroups((prevSelectedGroups) => ({
+            ...prevSelectedGroups,
+            [courseId]: group
+        }));
+    };
+
+    const handleClick = () => {
+        const coursesWithGroups = coursesDetails.map(course => ({
+            ...course,
+            selectedGroup: selectedGroups[course.id] || 'A' 
+        }));
+        sessionStorage.setItem('selectedGroups', JSON.stringify(coursesWithGroups));
+        navigate("/confirmation", { state: { group: coursesWithGroups } });
+    };
+
     return (
         <main className="flex-1 flex flex-col gap-6 mx-6 mt-6">
             <div className="bg-white rounded-lg shadow-lg p-6">
@@ -33,8 +50,6 @@ const TableGroup = () => {
                         Selección de Grupos
                     </h1>
                 </div>
-
-                {/* tabla de Selección de cursos */}
                 <div className="overflow-x-auto">
                     <table className="w-full table-auto">
                         <thead>
@@ -54,10 +69,15 @@ const TableGroup = () => {
                                     <td>{courseDetail.name}</td>
                                     <td>{courseDetail.credits}</td>
                                     <td>
-                                        <select name="grupos" id="grupos">
-                                            <option value="grupoA">A</option>
-                                            <option value="grupoB">B</option>
-                                            <option value="grupoC">C</option>
+                                        <select 
+                                            name="grupos" 
+                                            id={`grupos-${courseDetail.id}`}
+                                            value={selectedGroups[courseDetail.id] || 'A'}
+                                            onChange={(e) => handleGroupChange(courseDetail.id, e.target.value)}
+                                        >
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -75,11 +95,12 @@ const TableGroup = () => {
                         Atras
                     </button>
                 </Link>
-                <Link to="/confirmation">
-                    <button className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2">
-                        Continuar
-                    </button>
-                </Link>
+                <button 
+                    onClick={handleClick}
+                    className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2"
+                >
+                    Continuar
+                </button>
             </div>
         </main>
     );
