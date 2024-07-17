@@ -9,8 +9,8 @@ django.setup()
 
 # Configura las credenciales del superusuario
 SUPERUSER_USERNAME = os.getenv('DJANGO_SUPERUSER_USERNAME', 'admin')
-SUPERUSER_EMAIL = os.getenv('DJANGO_SUPERUSER_EMAIL', 'admin@example.com')
-SUPERUSER_PASSWORD = os.getenv('DJANGO_SUPERUSER_PASSWORD', 'admin')
+SUPERUSER_EMAIL = os.getenv('DJANGO_SUPERUSER_EMAIL', '')
+SUPERUSER_PASSWORD = os.getenv('DJANGO_SUPERUSER_PASSWORD', '1234')
 
 # Crea el superusuario solo si no existe
 if not User.objects.filter(username=SUPERUSER_USERNAME).exists():
