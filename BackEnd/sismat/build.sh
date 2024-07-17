@@ -13,4 +13,4 @@ python manage.py makemigrations
 # Apply any outstanding database migrations
 python manage.py migrate
 
-python manage.py createsuperuser --noinput --username admin --email admin@example.com
+python manage.py createsuperuser --noinput --username admin
