@@ -83,41 +83,40 @@
 1. **Clonar el repositorio:**
 
     ```bash
-    git clone https://github.com/usuario/proyecto-matricula.git
-    cd proyecto-matricula
+    git clone https://github.com/RyanValdivia/sismat-unsa.git
+    cd sismat-unsa
     ```
 
-2. **Instalar dependencias del backend (Django):**
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. **Configurar el entorno virtual de Python:**
+2. **Configurar el entorno virtual de Python:**
 
     ```bash
     python -m venv venv
     source venv/bin/activate
     ```
 
+3. **Instalar dependencias del backend (Django):**
+
+    ```bash
+    cd BackEnd/sismat
+    pip install -r requirements.txt
+    ```
+
 4. **Instalar dependencias del frontend (React y Vite):**
 
     ```bash
-    cd frontend
+    cd Frontend/sismat
     npm install
     ```
 
 5. **Iniciar el servidor de desarrollo de Django:**
 
     ```bash
-    cd ..
     python manage.py runserver
     ```
 
 6. **Iniciar el servidor de desarrollo de Vite:**
 
     ```bash
-    cd frontend
     npm run dev
     ```
 

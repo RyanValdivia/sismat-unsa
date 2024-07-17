@@ -2,9 +2,57 @@ POST
 
 http://127.0.0.1:8000/api/courses/
 
-// Para agregar prerrequisitos se necesita el id del curso (Caso del segundo objeto)
+// Para agregar prerrequisitos se necesita el id del curso (Caso del segundo semestre)
+
+///// PRIMER AÑO /////
+
+/// PRIMER SEMESTRE
 
 [
+    {
+        "code": "1701102",
+        "name": "Razonamiento Logico Matematico",
+        "hasLaboratory": false,
+        "theory_hours": "4.00",
+        "credits": 3,
+        "status": true,
+        "year": 1,
+        "semester": 1,
+        "prerequisites": []
+    },
+    {
+        "code": "1701103",
+        "name": "Matematica Basica",
+        "hasLaboratory": false,
+        "theory_hours": "6.00",
+        "credits": 4,
+        "status": true,
+        "year": 1,
+        "semester": 1,
+        "prerequisites": []
+    },
+    {
+        "code": "1701104",
+        "name": "Estructuras Discretas 1",
+        "hasLaboratory": false,
+        "theory_hours": "4.00",
+        "credits": 3,
+        "status": true,
+        "year": 1,
+        "semester": 1,
+        "prerequisites": []
+    },
+    {
+        "code": "1701105",
+        "name": "Introduccion a la Computacion",
+        "hasLaboratory": false,
+        "theory_hours": "3.00",
+        "credits": 2,
+        "status": true,
+        "year": 1,
+        "semester": 1,
+        "prerequisites": []
+    },
     {
         "code": "1701106",
         "name": "Fundamentos de la Programacion 1",
@@ -17,6 +65,55 @@ http://127.0.0.1:8000/api/courses/
         "prerequisites": []
     },
     {
+        "code": "1701114",
+        "name": "Metodologia del Trabajo Intelectual Universitario",
+        "hasLaboratory": false,
+        "theory_hours": "4.00",
+        "credits": 2,
+        "status": true,
+        "year": 1,
+        "semester": 1,
+        "prerequisites": []
+    },
+    {
+        "code": "1701145",
+        "name": "Relaciones Humanas en Empresas de Desarrollo de Software y Base Tecnologica",
+        "hasLaboratory": false,
+        "theory_hours": "3.00",
+        "credits": 2,
+        "status": true,
+        "year": 1,
+        "semester": 1,
+        "prerequisites": []
+    },
+]
+
+/// SEGUNDO SEMESTRE
+
+[
+    {
+        "code": "1701210",
+        "name": "Calculo en una variable",
+        "hasLaboratory": false,
+        "theory_hours": "7.00",
+        "credits": 4,
+        "status": true,
+        "year": 1,
+        "semester": 2,
+        "prerequisites": ["<id_course>"]
+    },
+    {
+        "code": "1701211",
+        "name": "Estructuras Discretas 2",
+        "hasLaboratory": false,
+        "theory_hours": "4.00",
+        "credits": 3,
+        "status": true,
+        "year": 1,
+        "semester": 2,
+        "prerequisites": ["<id_course>"]
+    },
+    {
         "code": "1701212",
         "name": "Programacion Web 1",
         "hasLaboratory": true,
@@ -27,4 +124,39 @@ http://127.0.0.1:8000/api/courses/
         "semester": 2,
         "prerequisites": ["<id_course>"]
     },
+    {
+        "code": "1701213",
+        "name": "Fundamentos de la Programacion 2",
+        "hasLaboratory": true,
+        "theory_hours": "4.00",
+        "credits": 5,
+        "status": true,
+        "year": 1,
+        "semester": 2,
+        "prerequisites": ["<id_course>"]
+    },
+    {
+        "code": "1701216",
+        "name": "Comunicacion Integral",
+        "hasLaboratory": false,
+        "theory_hours": "4.00",
+        "credits": 3,
+        "status": true,
+        "year": 1,
+        "semester": 2,
+        "prerequisites": []
+    },
+    {
+        "code": "1701217",
+        "name": "Realidad Nacional",
+        "hasLaboratory": false,
+        "theory_hours": "3.00",
+        "credits": 2,
+        "status": true,
+        "year": 1,
+        "semester": 2,
+        "prerequisites": []
+    },
 ]
+
+///// SEGUNDO AÑO /////

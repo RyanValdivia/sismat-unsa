@@ -8,9 +8,11 @@ import WorkloadTable from './WorkloadTable';
 import ScheduleModal from "./ScheduleModal";
 import RedButton from "./RedButton";
 import CustomDialog from './CustomDialog';
+import { getInscription, refreshToken, postInscription } from "../api/inscription";
 
 const ConfirmationTable = () => {
     const [student, setStudent] = useState({});
+    const [inscription, setInscription] = useState({});
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,12 +20,47 @@ const ConfirmationTable = () => {
     const navigate = useNavigate();
     const capacity = 10;
 
-    console.log(sessionStorage.getItem("selectedGroups"));
-
+    console.log("SELECTED GROUPS: " + sessionStorage.getItem("selectedGroups"));
 
     const workloadData = JSON.parse(sessionStorage.getItem("selectedGroups")) || [];
 
-    console.log(workloadData);
+    console.log("WORKLOAD DATA: " + workloadData);
+
+    useEffect(() => {
+        const accessToken = sessionStorage.getItem("access");
+        
+        console.log(accessToken);
+
+        const fetchInscriptionData = async () => {
+            try {
+                const response = await getInscription(accessToken);
+                setInscription(response.data);
+                console.log("INSCRIPCIONES" + response);
+                sessionStorage.setItem("inscription", JSON.stringify(response.data));
+                console.log("PROBANDO EL VER STATUS EN CONSOLA:  " + response.created_by);
+            } catch (error) {
+                let { code } = error.response.data;
+                console.log(error);
+                if (code === "token_not_valid") {
+                    console.log("Token no válido, intentando refrescarlo");
+                    try {
+                        const refresh = sessionStorage.getItem("refresh");
+                        const res = await refreshToken(refresh);
+                        sessionStorage.setItem("access", res.data.access);
+                        const response = await getInscription(res.data.access);
+                        setInscription(response.data);
+                        sessionStorage.setItem("inscription", JSON.stringify(response.data));
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            }
+        };
+
+        fetchInscriptionData();
+    }, []);
+
+    console.log(student.id);
 
     useEffect(() => {
         const studentData = JSON.parse(sessionStorage.getItem("student"));
@@ -34,11 +71,20 @@ const ConfirmationTable = () => {
 
     const totalCredits = workloadData.reduce((sum, workload) => sum + workload.credits, 0); 
 
-    const handleConfirmClick = () => {
+    const handleConfirmClick = async () => {
         if (capacity > 0) {
             setOpenDialog(true);
             setDialogType('confirmation');
             setMatriculaConfirmada(true);
+
+            try {
+                const accessToken = sessionStorage.getItem("access");
+                const response = await postInscription(accessToken, student.id, "1645b486-abe3-4fb9-a523-661c930f094e");
+                console.log("Inscripción realizada con éxito:", response);
+            } catch (error) {
+                console.error("Error al intentar inscribir al estudiante:", error);
+            }
+
         } else {
             setOpenDialog(true);
             setDialogType('error');
