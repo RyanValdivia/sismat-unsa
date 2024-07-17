@@ -13,4 +13,4 @@ python manage.py makemigrations
 # Apply any outstanding database migrations
 python manage.py migrate
 
-python create_superuser.py
+python manage.py createsuperuser --no-input --username admin --password 1234
