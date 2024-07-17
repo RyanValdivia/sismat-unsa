@@ -1,12 +1,11 @@
+# create_superuser.py
+
 import os
 import django
+from django.contrib.auth.models import User
 
-# Configura las variables de entorno para Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sismat.settings')
 django.setup()
-
-# Ahora puedes importar los modelos de Django
-from django.contrib.auth.models import User
 
 # Configura las credenciales del superusuario
 SUPERUSER_USERNAME = os.getenv('DJANGO_SUPERUSER_USERNAME', 'admin')
