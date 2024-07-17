@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'sismat.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://matriculas_user:EneRRuxflkfwF24f1vbOxaHCH45LOlm1@dpg-cq5lcolds78s73d3eftg-a/matriculas',
+        default='postgresql://postgres:postgres@localhost:5432/matriculas',
         conn_max_age=600
     )
 }
