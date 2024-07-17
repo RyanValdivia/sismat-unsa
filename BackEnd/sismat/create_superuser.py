@@ -4,7 +4,7 @@ import os
 import django
 from django.contrib.auth.models import User
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sismat.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tu_proyecto.settings')
 django.setup()
 
 # Configura las credenciales del superusuario
