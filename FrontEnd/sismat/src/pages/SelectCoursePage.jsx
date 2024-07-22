@@ -13,11 +13,11 @@ const SelectCoursePage = () => {
       const fetchStudentData = async () => {
         try {
           const response = await getStudent(studentId,accessToken);
-          console.log('tamal', response);
+          console.log('STUDENT', response);
           setStudent(response.data);
           
         } catch (error) {
-          console.error('tamal', error);
+          console.error('ERROR: ', error);
         }
       };
 

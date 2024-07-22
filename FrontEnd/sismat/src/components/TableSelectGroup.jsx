@@ -1,16 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getWorkload } from "../api/works";
 import { fetchCourse } from '../api/workload';
 
 const TableGroup = () => {
     const [coursesDetails, setCoursesDetails] = useState([]);
+    const [workloads, setWorkloads] = useState([]);
     const [selectedGroups, setSelectedGroups] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
+        
         const storedCourses = sessionStorage.getItem('selectedCourses');
         const accessToken = sessionStorage.getItem("access");
         console.log(storedCourses);
+
+        const fetchWorkload = async () => {
+            try {
+                const responseWorkload = await getWorkload(accessToken);
+                console.log('WORKLOADS: ', responseWorkload);
+                setWorkloads(responseWorkload); 
+                console.log(responseWorkload);
+            } catch (error) {
+                console.error('Error fetching workloads:', error);
+            }
+        };
+
+        fetchWorkload();
 
         const fetchCourseDetails = async () => {
             try {
@@ -24,6 +40,8 @@ const TableGroup = () => {
         };
 
         fetchCourseDetails();
+
+        
     }, []);
 
     const handleGroupChange = (courseId, group) => {
@@ -77,9 +95,12 @@ const TableGroup = () => {
                                             value={selectedGroups[courseDetail.id] || 'A'}
                                             onChange={(e) => handleGroupChange(courseDetail.id, e.target.value)}
                                         >
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
+                                            {workloads
+                                                .filter(wl => wl.course_id === courseDetail.id)
+                                                .map(wl => (
+                                                    <option key={wl.id} value={wl.group}>{wl.group}</option>
+                                                ))
+                                            }
                                         </select>
                                     </td>
                                 </tr>
