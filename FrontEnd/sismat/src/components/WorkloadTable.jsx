@@ -21,17 +21,19 @@ const CourseTable = ({ workloads }) => (
                         <td className="px-4 py-2 bg-[#8B0000] text-white text-center w-12">
                             {index + 1}
                         </td>
-                        <td className="px-4 py-2">{workload.code}</td>
-                        <td className="px-4 py-2">{workload.name}</td>
+                        <td className="px-4 py-2">{workload.course.code}</td>
+                        <td className="px-4 py-2">{workload.course.name}</td>
                         <td className="px-4 py-2 text-center">
-                            {workload.selectedGroup}
+                            {workload.group}
                         </td>
                         <td className="px-4 py-2 text-center">
-                            {workload.credits !== undefined
-                                ? workload.credits.toFixed(2)
+                            {workload.course.credits !== undefined
+                                ? workload.course.credits.toFixed(2)
                                 : "N/A"}
                         </td>
-                        <td className="px-4 py-2">{"Contrato Pendiente"}</td>
+                        <td className="px-4 py-2">
+                            {workload.teacher ? `${workload.teacher.lastnames} / ${workload.teacher.names}` : "CONTRATO PENDIENTE"}
+                        </td>
                     </tr>
                 ))}
             </tbody>

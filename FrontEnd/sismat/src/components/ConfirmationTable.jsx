@@ -12,6 +12,7 @@ import { getInscription, refreshToken, postInscription } from "../api/inscriptio
 
 const ConfirmationTable = () => {
     const [student, setStudent] = useState({});
+    const [workloads, setWorkloads] = useState({});
     const [inscription, setInscription] = useState({});
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
@@ -20,12 +21,22 @@ const ConfirmationTable = () => {
     const navigate = useNavigate();
     const capacity = 10;
 
-    console.log("SELECTED GROUPS: " + sessionStorage.getItem("selectedGroups"));
-
-    const workloadData = JSON.parse(sessionStorage.getItem("selectedGroups")) || [];
+    const workloadData = JSON.parse(sessionStorage.getItem("selectedWorkloads")) || [];
 
     console.log("WORKLOAD DATA: " + workloadData);
 
+    useEffect(() => {
+        const studentData = JSON.parse(sessionStorage.getItem("student"));
+        if (studentData) {
+            setStudent(studentData);
+        }
+        const storedWorkloads = JSON.parse(sessionStorage.getItem("selectedWorkloads"));
+        if (storedWorkloads) {
+            setWorkloads(storedWorkloads);
+        }
+    }, []);
+
+    {/*
     useEffect(() => {
         const accessToken = sessionStorage.getItem("access");
         
@@ -59,17 +70,9 @@ const ConfirmationTable = () => {
 
         fetchInscriptionData();
     }, []);
+    */}
 
-    console.log(student.id);
-
-    useEffect(() => {
-        const studentData = JSON.parse(sessionStorage.getItem("student"));
-        if (studentData) {
-            setStudent(studentData);
-        }
-    }, []);
-
-    const totalCredits = workloadData.reduce((sum, workload) => sum + workload.credits, 0); 
+    const totalCredits = 12; 
 
     const handleConfirmClick = async () => {
         if (capacity > 0) {
@@ -77,6 +80,7 @@ const ConfirmationTable = () => {
             setDialogType('confirmation');
             setMatriculaConfirmada(true);
 
+            {/*
             try {
                 const accessToken = sessionStorage.getItem("access");
                 const response = await postInscription(accessToken, student.id, "1645b486-abe3-4fb9-a523-661c930f094e");
@@ -84,6 +88,7 @@ const ConfirmationTable = () => {
             } catch (error) {
                 console.error("Error al intentar inscribir al estudiante:", error);
             }
+            */}
 
         } else {
             setOpenDialog(true);

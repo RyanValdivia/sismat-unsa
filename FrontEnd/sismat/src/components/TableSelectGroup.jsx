@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getWorkload } from "../api/works";
+import { getWorkload, getTeacherDetails, getCourseDetails } from "../api/works";
 import { fetchCourse } from '../api/workload';
 
 const TableGroup = () => {
@@ -10,17 +10,13 @@ const TableGroup = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
         const storedCourses = sessionStorage.getItem('selectedCourses');
         const accessToken = sessionStorage.getItem("access");
-        console.log(storedCourses);
 
         const fetchWorkload = async () => {
             try {
                 const responseWorkload = await getWorkload(accessToken);
-                console.log('WORKLOADS: ', responseWorkload);
                 setWorkloads(responseWorkload); 
-                console.log(responseWorkload);
             } catch (error) {
                 console.error('Error fetching workloads:', error);
             }
@@ -40,24 +36,36 @@ const TableGroup = () => {
         };
 
         fetchCourseDetails();
-
-        
     }, []);
 
-    const handleGroupChange = (courseId, group) => {
+    const handleGroupChange = (courseId, workloadId, group) => {
         setSelectedGroups((prevSelectedGroups) => ({
             ...prevSelectedGroups,
-            [courseId]: group
+            [courseId]: { workloadId, group }
         }));
     };
 
-    const handleClick = () => {
-        const coursesWithGroups = coursesDetails.map(course => ({
-            ...course,
-            selectedGroup: selectedGroups[course.id] || 'A' 
+    const handleClick = async () => {
+        const selectedWorkloads = workloads.filter(wl => {
+            const selectedGroup = selectedGroups[wl.course_id];
+            return selectedGroup && selectedGroup.group === wl.group;
+        });
+
+        // Esto es para enriquecer los workloads con detalles de profesores y cursos
+        const accessToken = sessionStorage.getItem("access");
+        const enrichedSelectedWorkloads = await Promise.all(selectedWorkloads.map(async (workload) => {
+            const teacher = await getTeacherDetails(accessToken, workload.teacher_id);
+            const course = await getCourseDetails(accessToken, workload.course_id);
+            return { ...workload, teacher, course };
         }));
-        sessionStorage.setItem('selectedGroups', JSON.stringify(coursesWithGroups));
-        navigate("/confirmation", { state: { group: coursesWithGroups } });
+
+        sessionStorage.setItem('selectedWorkloads', JSON.stringify(enrichedSelectedWorkloads));
+        navigate("/confirmation", { state: { workloads: enrichedSelectedWorkloads } });
+
+        console.log("Workloads elegidos (carajo):");
+        enrichedSelectedWorkloads.forEach(workload => {
+            console.log(JSON.stringify(workload, null, 2));
+        });
     };
 
     return (
@@ -81,19 +89,20 @@ const TableGroup = () => {
                         </thead>
                         <tbody>
                             {coursesDetails.map((courseDetail, index) => (
-                                <tr key={courseDetail.id} 
-                                  className="border-b border-[#800020]"
-                                >
-                                    <td className="px-4 py-2 text-center">{index+1}</td>
+                                <tr key={courseDetail.id} className="border-b border-[#800020]">
+                                    <td className="px-4 py-2 text-center">{index + 1}</td>
                                     <td className="px-4 py-2 text-center">{courseDetail.code}</td>
-                                    <td className="px-4 py-2 ">{courseDetail.name}</td>
+                                    <td className="px-4 py-2">{courseDetail.name}</td>
                                     <td className="px-4 py-2 text-center">{courseDetail.credits}</td>
                                     <td className="px-4 py-2 text-center">
-                                        <select 
-                                            name="grupos" 
+                                        <select
+                                            name="grupos"
                                             id={`grupos-${courseDetail.id}`}
-                                            value={selectedGroups[courseDetail.id] || 'A'}
-                                            onChange={(e) => handleGroupChange(courseDetail.id, e.target.value)}
+                                            value={selectedGroups[courseDetail.id]?.group || 'A'}
+                                            onChange={(e) => {
+                                                const selectedWorkload = workloads.find(wl => wl.course_id === courseDetail.id && wl.group === e.target.value);
+                                                handleGroupChange(courseDetail.id, selectedWorkload?.id, e.target.value);
+                                            }}
                                         >
                                             {workloads
                                                 .filter(wl => wl.course_id === courseDetail.id)
@@ -118,7 +127,7 @@ const TableGroup = () => {
                         Atras
                     </button>
                 </Link>
-                <button 
+                <button
                     onClick={handleClick}
                     className="bg-[#8B0000] text-white hover:bg-[#800020] px-4 py-2 rounded-md border-2"
                 >
