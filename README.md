@@ -151,6 +151,60 @@
     npm run dev
     ```
 
+## PROCESO SEGUIDO
+
+### Planificación
+
+1. **Definición de Requisitos:**
+    - Reuniones iniciales para definir los objetivos y alcances del proyecto.
+    - Identificación de las necesidades de los usuarios y especificaciones funcionales.
+
+2. **Análisis:**
+    - Estudio de factibilidad técnica.
+    - Evaluación de las tecnologías a utilizar (Django, React, Vite, Tailwind, etc.).
+
+### Diseño
+
+3. **Diseño del Sistema:**
+    - Creación de diagramas de arquitectura y diseño de base de datos.
+    - Prototipos de la interfaz de usuario con herramientas como Figma.
+
+4. **Planificación de Tareas:**
+    - División del trabajo en sprints y asignación de tareas específicas.
+    - Uso de herramientas de gestión de proyectos como Trello o Jira.
+
+### Implementación
+
+5. **Desarrollo del Backend:**
+    - Configuración de Django y creación de modelos, vistas, y controladores.
+    - Implementación de la API RESTful para la comunicación con el frontend.
+
+6. **Desarrollo del Frontend:**
+    - Configuración de React y Vite.
+    - Creación de componentes reutilizables y diseño responsivo con Tailwind y MUI.
+
+### Pruebas
+
+7. **Pruebas Unitarias:**
+    - Implementación de pruebas unitarias para asegurarse de que cada componente funciona correctamente.
+    - Uso de herramientas como Jest y Django Test.
+
+8. **Pruebas de Integración:**
+    - Pruebas de flujo completo del sistema para asegurarse de que todos los componentes trabajan en conjunto.
+    - Validación de la interfaz de usuario y la API RESTful.
+
+### Despliegue
+
+9. **Preparación para el Despliegue:**
+    - Configuración del entorno de producción.
+    - Uso de servicios de despliegue como Heroku, Vercel, o AWS.
+
+10. **Despliegue:**
+    - Lanzamiento de la aplicación en el entorno de producción.
+    - Monitoreo inicial y ajustes necesarios.
+
+---
+
 ## PDF Generado del README.md
 - **Adjuntar PDF del README.md**: [Descargar PDF](URL_AQUÍ)
 
