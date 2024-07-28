@@ -214,13 +214,13 @@ const PDFDocument = ({ fileName, student, workloads, totalCredits, payment }) =>
                     {workloads.map((workload, index) => (
                         <View key={index} style={styles.tableRow}>
                             <Text style={[styles.tableCell, styles.tableCellNro]}>{index + 1}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellCode]}>{workload.code}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellYearSem]}>{"1   2"}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellName]}>{workload.name}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCode]}>{workload.course.code}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellYearSem]}>{workload.year + "   " + workload.semester}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellName]}>{workload.course.name}</Text>
                             <Text style={[styles.tableCell, styles.tableCellCiclo]}>{"B"}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellGroup]}>{workload.selectedGroup}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellGroup]}>{workload.group}</Text>
                             <Text style={[styles.tableCell, styles.tableCellMat]}>{1}</Text>
-                            <Text style={[styles.tableCell, styles.tableCellCredits]}>{workload.credits.toFixed(2)}</Text>
+                            <Text style={[styles.tableCell, styles.tableCellCredits]}>{workload.course.credits.toFixed(2)}</Text>
                             <Text style={[styles.tableCell, styles.tableCellObservations]}></Text>
                         </View>
                     ))}
