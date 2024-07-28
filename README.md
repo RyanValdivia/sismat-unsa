@@ -1,3 +1,26 @@
+<div align="center">
+<table>
+    <theader>
+        <tr>
+            <td style="width:25%;"><img src="https://github.com/rescobedoq/pw2/blob/main/epis.png?raw=true" alt="EPIS" style="width:80%; height:auto"/></td>
+            <td>
+                <span style="font-weight:bold;">UNIVERSIDAD NACIONAL DE SAN AGUSTIN</span><br />
+                <span style="font-weight:bold;">FACULTAD DE INGENIERÍA DE PRODUCCIÓN Y SERVICIOS</span><br />
+                <span style="font-weight:bold;">DEPARTAMENTO ACADÉMICO DE INGENIERÍA DE SISTEMAS E INFORMÁTICA</span><br />
+                <span style="font-weight:bold;">ESCUELA PROFESIONAL DE INGENIERÍA DE SISTEMAS</span>
+            </td>            
+        </tr>
+    </theader>
+    <tbody>
+        <tr>
+            <td colspan="2"><span style="font-weight:bold;">Proyecto web</span>: Desarrollo de una aplicación web para realizar la inscripción de estudiantes</td>
+        </tr>
+        <tr>
+            <td colspan="2"><span style="font-weight:bold;">Fecha</span>:  2024/07/28</td>
+        </tr>
+    </tbody>
+</table>
+</div>
 <div align="center" style="margin-top: 10px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/LOGO_UNSA.png" alt="Logo de la UNSA" width="450px" height="150px">
     <h1 style="font-weight:bold; font-size: 2em;">Proyecto: Sistema de Matrículas</h1>
@@ -11,11 +34,18 @@
         <tbody>
             <tr><td>ASIGNATURA:</td><td colspan="5">Programación Web II</td></tr>
             <tr><td>NOMBRE DEL PROYECTO:</td><td colspan="5">SISMAT - UNSA</td></tr>
+            <tr><td colspan="6">INTEGRANTES:
+                <ul>
+                    <li>Caceres Ruiz, Johann Andre - jcaceresruiz@unsa.edu.pe</li>
+                    <li>Mamani Céspedes, Jhonatan Benjamin - jmamanices@unsa.edu.pe</li>
+                    <li>Valdivia Segovia, Ryan Fabian - rvaldiviase@unsa.edu.pe</li>
+                </ul>
+            </td></tr>
             <tr><td colspan="6">DOCENTES:
                 <ul>
-                    <li>Richart Smith Escobedo Quispe</li>
+                    <li>Richart Smith Escobedo Quispe - rescobedoq@unsa.edu.pe</li>
                 </ul>
-            </td></<tr>
+            </td></tr>
         </tbody>
     </table>
 </div>
@@ -119,6 +149,31 @@
     ```bash
     npm run dev
     ```
+
+## PDF Generado del README.md
+- **Adjuntar PDF del README.md**: [Descargar PDF](URL_AQUÍ)
+
+## Lista de Videos
+1. **BackEnd-Admin**
+    - [Video 1](URL_AQUÍ)
+
+2. **FrontEnd-Framework**
+    - [Video 2](URL_AQUÍ)
+
+3. **Proyecto en Producción**
+    - [Video 3](URL_AQUÍ)
+
+
+## Infografía Tipo Poster Digital PDF (Tamaño A1)
+- **Título de la webapp**: SISMAT - UNSA
+- **Curso**: Programación Web II
+- **Semestre**: III
+- **Alumnos**:
+    - Jhonatan Benjamin Mamani Céspedes
+    - Ryan Fabian Valdivia Segovia
+    - Johann Andre Caceres Ruiz
+- **Profesor**: Richart Smith Escobedo Quispe
+- **Imágenes y capturas de pantalla**: [Poster PDF](URL_AQUÍ)
 
 ## RECURSOS
 
