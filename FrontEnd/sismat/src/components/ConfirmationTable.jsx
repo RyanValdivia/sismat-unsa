@@ -36,42 +36,6 @@ const ConfirmationTable = () => {
         }
     }, []);
 
-    {/*
-    useEffect(() => {
-        const accessToken = sessionStorage.getItem("access");
-        
-        console.log(accessToken);
-
-        const fetchInscriptionData = async () => {
-            try {
-                const response = await getInscription(accessToken);
-                setInscription(response.data);
-                console.log("INSCRIPCIONES" + response);
-                sessionStorage.setItem("inscription", JSON.stringify(response.data));
-                console.log("PROBANDO EL VER STATUS EN CONSOLA:  " + response.created_by);
-            } catch (error) {
-                let { code } = error.response.data;
-                console.log(error);
-                if (code === "token_not_valid") {
-                    console.log("Token no válido, intentando refrescarlo");
-                    try {
-                        const refresh = sessionStorage.getItem("refresh");
-                        const res = await refreshToken(refresh);
-                        sessionStorage.setItem("access", res.data.access);
-                        const response = await getInscription(res.data.access);
-                        setInscription(response.data);
-                        sessionStorage.setItem("inscription", JSON.stringify(response.data));
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }
-            }
-        };
-
-        fetchInscriptionData();
-    }, []);
-    */}
-
     const calculateTotalCredits = (workloads) => {
         return workloads.reduce((total, workload) => total + workload.course.credits, 0);
     };
@@ -87,6 +51,10 @@ const ConfirmationTable = () => {
             }));
 
             if (allWorkloadsHaveCapacity.every(Boolean)) {
+                const studentId = student.id;
+                await Promise.all(workloadData.map(async (workload) => {
+                    await postInscription(accessToken, studentId, workload.id);
+                }));
                 setOpenDialog(true);
                 setDialogType('confirmation');
                 setMatriculaConfirmada(true);
@@ -97,7 +65,7 @@ const ConfirmationTable = () => {
                 console.log('NO TODOS TIENEN CAPACIDAD');
             }
         } catch (error) {
-            console.error("Error checking workload capacities:", error);
+            console.error("Error checking workload capacities or posting inscription:", error);
             setOpenDialog(true);
             setDialogType('error');
         }
