@@ -12,6 +12,7 @@ import { register as reg } from "../api/login";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -34,6 +35,8 @@ const LoginForm = () => {
     } = useForm({
         resolver: zodResolver(registerSchema),
     });
+
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
 
@@ -168,6 +171,17 @@ const LoginForm = () => {
                             Iniciar Sesión
                         </Button>
                     </form>
+                </div>
+                <div className="flex items-center justify-center p-2">
+                <Typography>
+                    ¿Ya tienes una cuenta?
+                    <Button
+                        onClick={() => navigate("/")}
+                        className="ml-2"
+                    >
+                        Inicia sesión
+                    </Button>
+                </Typography>
                 </div>
             </Card>
         </div>

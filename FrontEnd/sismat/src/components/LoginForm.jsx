@@ -154,7 +154,20 @@ const LoginForm = () => {
                         </Button>
                     </form>
                 </div>
+                <div className="flex items-center justify-center p-2">
+                <Typography>
+                    ¿No tienes una cuenta?
+                    <Button
+                        onClick={() => navigate("/register")}
+                        className="ml-2"
+                    >
+                        Regístrate
+                    </Button>
+                </Typography>
+                </div>
+                
             </Card>
+            
         </div>
     );
 };
