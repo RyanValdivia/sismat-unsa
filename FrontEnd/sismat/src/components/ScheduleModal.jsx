@@ -3,7 +3,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import RedButton from './RedButton';
 
-const ScheduleModal = ({ isOpen, onClose }) => {
+const ScheduleModal = ({ isOpen, workloads, student, onClose }) => {
 
     // Estilos para el horario
     const cellStyle = {
@@ -37,6 +37,11 @@ const ScheduleModal = ({ isOpen, onClose }) => {
         padding: 5,
     };
 
+    const now = new Date();
+    const timeZoneOffset = -5 * 60;
+    const peruTime = new Date(now.getTime() + timeZoneOffset * 60 * 1000);
+    const date = peruTime.toISOString().slice(0, 10);
+
     return (
         <Modal
             open={isOpen}
@@ -61,13 +66,13 @@ const ScheduleModal = ({ isOpen, onClose }) => {
                 <div style={section}>
                     <div style={rowStyle}>
                         <h2 style={{ fontWeight: 'bold', paddingLeft: 5, paddingRight: 10 }}>C.U.I.: </h2>
-                        <h2>20232188</h2>
+                        <h2>{student.cui}</h2>
                         <h2 style={{ fontWeight: 'bold', paddingLeft: 50, paddingRight: 10 }}>NOMBRE: </h2>
-                        <h2>MAMANI CESPEDES JHONATAN BENJAMIN</h2>
+                        <h2>{student.lastnames + ", " + student.names}</h2>
                     </div>
                     <div style={rowStyle}>
                         <h2 style={{ fontWeight: 'bold', paddingLeft: 5, paddingRight: 10 }}>FECHA: </h2>
-                        <h2>2024-07-01</h2>
+                        <h2>{date}</h2>
                         <h2 style={{ fontWeight: 'bold', paddingLeft: 25, paddingRight: 10 }}>ESCUELA: </h2>
                         <h2>INGENIERIA DE SISTEMAS</h2>
                     </div>

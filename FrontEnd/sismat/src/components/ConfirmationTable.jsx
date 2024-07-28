@@ -144,7 +144,7 @@ const ConfirmationTable = () => {
                 </div>
             </div>
             
-            <ScheduleModal isOpen={isModalOpen} onClose={handleCloseModal} />
+            <ScheduleModal isOpen={isModalOpen} workloads={workloadData} student={student} onClose={handleCloseModal} />
 
             <CustomDialog 
                 open={openDialog}
