@@ -8,6 +8,7 @@ import WorkloadTable from './WorkloadTable';
 import ScheduleModal from "./ScheduleModal";
 import RedButton from "./RedButton";
 import CustomDialog from './CustomDialog';
+import { getWorkloadCapacity } from "../api/works";
 import { getInscription, refreshToken, postInscription } from "../api/inscription";
 
 const ConfirmationTable = () => {
@@ -19,7 +20,6 @@ const ConfirmationTable = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [matriculaConfirmada, setMatriculaConfirmada] = useState(false);
     const navigate = useNavigate();
-    const capacity = 10;
 
     const workloadData = JSON.parse(sessionStorage.getItem("selectedWorkloads")) || [];
 
@@ -79,22 +79,25 @@ const ConfirmationTable = () => {
     const totalCredits = calculateTotalCredits(workloadData);
 
     const handleConfirmClick = async () => {
-        if (capacity > 0) {
-            setOpenDialog(true);
-            setDialogType('confirmation');
-            setMatriculaConfirmada(true);
+        try {
+            const accessToken = sessionStorage.getItem("access");
+            const allWorkloadsHaveCapacity = await Promise.all(workloadData.map(async (workload) => {
+                const capacity = await getWorkloadCapacity(accessToken, workload.id);
+                return capacity > 0;
+            }));
 
-            {/*
-            try {
-                const accessToken = sessionStorage.getItem("access");
-                const response = await postInscription(accessToken, student.id, "1645b486-abe3-4fb9-a523-661c930f094e");
-                console.log("Inscripción realizada con éxito:", response);
-            } catch (error) {
-                console.error("Error al intentar inscribir al estudiante:", error);
+            if (allWorkloadsHaveCapacity.every(Boolean)) {
+                setOpenDialog(true);
+                setDialogType('confirmation');
+                setMatriculaConfirmada(true);
+                console.log('TODOS LOS WORKLOADS TIENEN CAPACIDAD');
+            } else {
+                setOpenDialog(true);
+                setDialogType('error');
+                console.log('NO TODOS TIENEN CAPACIDAD');
             }
-            */}
-
-        } else {
+        } catch (error) {
+            console.error("Error checking workload capacities:", error);
             setOpenDialog(true);
             setDialogType('error');
         }
