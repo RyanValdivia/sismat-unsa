@@ -72,7 +72,11 @@ const ConfirmationTable = () => {
     }, []);
     */}
 
-    const totalCredits = 12; 
+    const calculateTotalCredits = (workloads) => {
+        return workloads.reduce((total, workload) => total + workload.course.credits, 0);
+    };
+
+    const totalCredits = calculateTotalCredits(workloadData);
 
     const handleConfirmClick = async () => {
         if (capacity > 0) {
