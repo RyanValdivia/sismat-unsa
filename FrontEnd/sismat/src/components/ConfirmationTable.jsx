@@ -34,6 +34,7 @@ const ConfirmationTable = () => {
         if (storedWorkloads) {
             setWorkloads(storedWorkloads);
         }
+        checkInscriptionStatus();
     }, []);
 
     const calculateTotalCredits = (workloads) => {
@@ -42,7 +43,21 @@ const ConfirmationTable = () => {
 
     const totalCredits = calculateTotalCredits(workloadData);
 
+    const checkInscriptionStatus = () => {
+        const alreadyInscribed = sessionStorage.getItem("matriculaConfirmada");
+        if (alreadyInscribed) {
+            setMatriculaConfirmada(true);
+            setOpenDialog(true);
+            setDialogType('confirmation');
+        }
+    };
+
     const handleConfirmClick = async () => {
+        if (matriculaConfirmada) {
+            setOpenDialog(true);
+            setDialogType('confirmation');
+            return;
+        }
         try {
             const accessToken = sessionStorage.getItem("access");
             const allWorkloadsHaveCapacity = await Promise.all(workloadData.map(async (workload) => {
@@ -58,11 +73,10 @@ const ConfirmationTable = () => {
                 setOpenDialog(true);
                 setDialogType('confirmation');
                 setMatriculaConfirmada(true);
-                console.log('TODOS LOS WORKLOADS TIENEN CAPACIDAD');
+                sessionStorage.setItem("matriculaConfirmada", "true");
             } else {
                 setOpenDialog(true);
                 setDialogType('error');
-                console.log('NO TODOS TIENEN CAPACIDAD');
             }
         } catch (error) {
             console.error("Error checking workload capacities or posting inscription:", error);
