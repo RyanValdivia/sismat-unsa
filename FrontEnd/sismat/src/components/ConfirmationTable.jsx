@@ -110,7 +110,7 @@ const ConfirmationTable = () => {
 
     const handleBackClick = () => {
         if (matriculaConfirmada) {
-            alert("Ya te has matriculado. ¡No puedes matricularte de nuevo!");
+            alert("Ya te has matriculado. ¡Descarga tu constancia y mira tus horarios!");
         } else {
             navigate("/pageGroup");
         }

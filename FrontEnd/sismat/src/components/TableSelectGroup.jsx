@@ -16,7 +16,22 @@ const TableGroup = () => {
         const fetchWorkload = async () => {
             try {
                 const responseWorkload = await getWorkload(accessToken);
-                setWorkloads(responseWorkload); 
+                setWorkloads(responseWorkload);
+
+                const courseIds = JSON.parse(storedCourses);
+                const initialSelectedGroups = {};
+                responseWorkload.forEach(workload => {
+                    if (courseIds.includes(workload.course_id)) {
+                        if (!initialSelectedGroups[workload.course_id]) {
+                            initialSelectedGroups[workload.course_id] = {
+                                workloadId: workload.id,
+                                group: workload.group
+                            };
+                        }
+                    }
+                });
+                setSelectedGroups(initialSelectedGroups);
+
             } catch (error) {
                 console.error('Error fetching workloads:', error);
             }
