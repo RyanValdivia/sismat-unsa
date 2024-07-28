@@ -2,14 +2,14 @@
 <table>
     <thead>
         <tr>
-            <td style="width:25%; text-align:center;"><img src="https://github.com/rescobedoq/pw2/blob/main/epis.png?raw=true" alt="EPIS" style="width:80%; height:auto"/></td>
+            <td style="width:25%; text-align:center;"><img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/epis.png?raw=true" alt="EPIS" style="width:80%; height:auto"/></td>
             <td style="text-align:center;">
                 <span style="font-weight:bold;">UNIVERSIDAD NACIONAL DE SAN AGUSTIN</span><br />
                 <span style="font-weight:bold;">FACULTAD DE INGENIERÍA DE PRODUCCIÓN Y SERVICIOS</span><br />
                 <span style="font-weight:bold;">DEPARTAMENTO ACADÉMICO DE INGENIERÍA DE SISTEMAS E INFORMÁTICA</span><br />
                 <span style="font-weight:bold;">ESCUELA PROFESIONAL DE INGENIERÍA DE SISTEMAS</span>
             </td>
-            <td style="width:25%; text-align:center;"><img src="https://github.com/rescobedoq/pw2/blob/main/abet.png?raw=true" alt="ABET" style="width:80%; height:auto"/></td>
+            <td style="width:25%; text-align:center;"><img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/abet.png?raw=true" alt="ABET" style="width:80%; height:auto"/></td>
         </tr>
     </thead>
     <tbody>
@@ -203,6 +203,10 @@
     - Lanzamiento de la aplicación en el entorno de producción.
     - Monitoreo inicial y ajustes necesarios.
 
+<div align="center" style="margin-top: 20px;">
+    <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/credentials.png?raw=true" alt="Despliegue" style="width:80%; height:auto;"/>
+</div>
+
 ---
 
 ## PDF Generado del README.md
@@ -210,7 +214,7 @@
 
 ## Lista de Videos
 1. **BackEnd-Admin**
-    - [Video 1](URL_AQUÍ)
+    - [Video Rest BackEnd](https://www.youtube.com/watch?v=KP6HK6RwmdE)
 
 2. **FrontEnd-Framework**
     - [Video 2](URL_AQUÍ)
