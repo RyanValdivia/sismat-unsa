@@ -76,11 +76,6 @@ const TableGroup = () => {
 
         sessionStorage.setItem('selectedWorkloads', JSON.stringify(enrichedSelectedWorkloads));
         navigate("/confirmation", { state: { workloads: enrichedSelectedWorkloads } });
-
-        console.log("Workloads elegidos (carajo):");
-        enrichedSelectedWorkloads.forEach(workload => {
-            console.log(JSON.stringify(workload, null, 2));
-        });
     };
 
     return (

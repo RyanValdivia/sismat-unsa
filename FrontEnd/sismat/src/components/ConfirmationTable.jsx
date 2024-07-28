@@ -9,12 +9,11 @@ import ScheduleModal from "./ScheduleModal";
 import RedButton from "./RedButton";
 import CustomDialog from './CustomDialog';
 import { getWorkloadCapacity } from "../api/works";
-import { getInscription, refreshToken, postInscription } from "../api/inscription";
+import { postInscription } from "../api/inscription";
 
 const ConfirmationTable = () => {
     const [student, setStudent] = useState({});
     const [workloads, setWorkloads] = useState({});
-    const [inscription, setInscription] = useState({});
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogType, setDialogType] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
