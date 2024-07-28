@@ -1,22 +1,23 @@
 <div align="center">
 <table>
-    <theader>
+    <thead>
         <tr>
-            <td style="width:25%;"><img src="https://github.com/rescobedoq/pw2/blob/main/epis.png?raw=true" alt="EPIS" style="width:80%; height:auto"/></td>
-            <td>
+            <td style="width:25%; text-align:center;"><img src="https://github.com/rescobedoq/pw2/blob/main/epis.png?raw=true" alt="EPIS" style="width:80%; height:auto"/></td>
+            <td style="text-align:center;">
                 <span style="font-weight:bold;">UNIVERSIDAD NACIONAL DE SAN AGUSTIN</span><br />
                 <span style="font-weight:bold;">FACULTAD DE INGENIERÍA DE PRODUCCIÓN Y SERVICIOS</span><br />
                 <span style="font-weight:bold;">DEPARTAMENTO ACADÉMICO DE INGENIERÍA DE SISTEMAS E INFORMÁTICA</span><br />
                 <span style="font-weight:bold;">ESCUELA PROFESIONAL DE INGENIERÍA DE SISTEMAS</span>
-            </td>            
+            </td>
+            <td style="width:25%; text-align:center;"><img src="https://github.com/rescobedoq/pw2/blob/main/abet.png?raw=true" alt="ABET" style="width:80%; height:auto"/></td>
         </tr>
-    </theader>
+    </thead>
     <tbody>
         <tr>
-            <td colspan="2"><span style="font-weight:bold;">Proyecto web</span>: Desarrollo de una aplicación web para realizar la inscripción de estudiantes</td>
+            <td colspan="3"><span style="font-weight:bold;">Proyecto web</span>: Desarrollo de una aplicación web para realizar la inscripción de estudiantes</td>
         </tr>
         <tr>
-            <td colspan="2"><span style="font-weight:bold;">Fecha</span>:  2024/07/28</td>
+            <td colspan="3"><span style="font-weight:bold;">Fecha</span>:  2024/07/28</td>
         </tr>
     </tbody>
 </table>
