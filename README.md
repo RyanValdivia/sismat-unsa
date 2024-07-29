@@ -156,8 +156,15 @@
 ### Planificación
 
 1. **Definición de Requisitos:**
-    - Reuniones iniciales para definir los objetivos y alcances del proyecto.
+    - Realizamos varias reuniones iniciales para definir los objetivos y alcances del proyecto, asegurándonos de cubrir todas las necesidades de los usuarios.
     - Identificación de las necesidades de los usuarios y especificaciones funcionales.
+    - Definición de las relaciones entre las entidades del sistema, utilizando diagramas ER para visualizar la estructura de la base de datos.
+    - En el proceso de planificación, colaboramos estrechamente para entender los requisitos y establecer prioridades claras para el desarrollo.
+    - Aquí está nuestro diagrama ER básico utilizado en este proceso:
+    
+    <div align="center" style="margin-top: 20px;">
+        <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/diagrama_ER.png" alt="Diagrama ER" style="width:80%; height:auto;"/>
+    </div>
 
 2. **Análisis:**
     - Estudio de factibilidad técnica.

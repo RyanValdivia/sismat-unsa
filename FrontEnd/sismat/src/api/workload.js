@@ -9,7 +9,7 @@
                 username: username,
                 password: password
             });
-            const { access, refresh } = response.data;
+            const { access, refresh } = response.data; 
             sessionStorage.setItem("access", access);
             sessionStorage.setItem("refresh", refresh);
         } catch (error) {
@@ -26,11 +26,11 @@
                 }
             });
             // Filtrar los datos del workload para excluir el campo 'id'
-            const { id, teacher_id, course_id, ...workloadData } = response.data;
+            const { teacher_id, course_id, workloadData } = response.data;
             const teacherData = await fetchTeacher(teacher_id);
             const courseData = await fetchCourse(course_id);
             return {
-                ...workloadData,
+                workloadData: workloadData,
                 teacher: teacherData,
                 course: courseData
             };
