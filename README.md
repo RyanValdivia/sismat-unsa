@@ -168,7 +168,12 @@
 
 2. **Análisis:**
     - Se hizo un estudio de factibilidad técnica para implementar en el código, validaciones y ciertos requerimientos.
-    - Por último, se hizo una evaluación de las tecnologías a utilizar (Django, React, Vite, Tailwind, etc.).
+    - Se evaluaron las tecnologías a utilizar en el proyecto (Django, React, Vite, Tailwind, etc.). 
+    - La elección de **Django** como backend se basó en su robustez, la rápida implementación de API RESTful y su capacidad para manejar la lógica del lado del servidor de manera eficiente.
+    - **React** fue seleccionado para el frontend debido a su flexibilidad, su capacidad para crear interfaces de usuario interactivas y su amplia comunidad de soporte.
+    - Se optó por **Vite** como el entorno de desarrollo debido a su velocidad y eficiencia en la compilación de proyectos React, mejorando significativamente los tiempos de desarrollo.
+    - **Tailwind CSS** se eligió para el diseño de la interfaz de usuario por su enfoque en clases utilitarias, lo que permite un diseño responsivo y personalizado sin sobrecargar el proyecto con CSS adicional.
+    - Estas tecnologías combinadas nos permitieron crear una aplicación escalable, mantenible y eficiente tanto en términos de rendimiento como de desarrollo.
 
 ### Diseño
 
