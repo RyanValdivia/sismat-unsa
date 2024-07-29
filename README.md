@@ -187,7 +187,10 @@
 ### Implementación
 
 5. **Desarrollo del Backend:**
-    - Configuración de Django y creación de modelos, vistas, y controladores.
+    - Configuración de Django y creación de modelos, vistas, y controladores a partir del modelo de la base de datos que generamos:
+        <div align="center">
+            <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/diagrama_BD.png?raw=true" alt="DB Diagram" style="width:80%; height:auto"/>
+        </div>
     - Implementación de la API RESTful para la comunicación con el frontend.
 
 6. **Desarrollo del Frontend:**
