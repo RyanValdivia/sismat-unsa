@@ -227,29 +227,17 @@
 ---
 
 ## PDF Generado del README.md
-- **Adjuntar PDF del README.md**: [Descargar PDF](URL_AQUÍ)
+- **Adjuntar PDF del README.md**: [Descargar PDF](https://github.com/RyanValdivia/sismat-unsa/raw/main/README.pdf)
 
 ## Lista de Videos
 1. **BackEnd-Admin**
-    - [Video Rest BackEnd](https://www.youtube.com/watch?v=KP6HK6RwmdE)
+    - [Video - API Rest BackEnd](https://www.youtube.com/KP6HK6RwmdE)
 
 2. **FrontEnd-Framework**
-    - [Video 2](URL_AQUÍ)
+    - [Video - Framework FrontEnd](https://www.youtube.com/r6S7xT2kxn8)
 
 3. **Proyecto en Producción**
-    - [Video 3](URL_AQUÍ)
-
-
-## Infografía Tipo Poster Digital PDF (Tamaño A1)
-- **Título de la webapp**: SISMAT - UNSA
-- **Curso**: Programación Web II
-- **Semestre**: III
-- **Alumnos**:
-    - Jhonatan Benjamin Mamani Céspedes
-    - Ryan Fabian Valdivia Segovia
-    - Johann Andre Caceres Ruiz
-- **Profesor**: Richart Smith Escobedo Quispe
-- **Imágenes y capturas de pantalla**: [Poster PDF](URL_AQUÍ)
+    - [Video - Proyecto en Producción](https://youtu.be/nIClu4IvCFY)
 
 ## RECURSOS
 
