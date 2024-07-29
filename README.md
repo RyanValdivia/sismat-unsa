@@ -162,27 +162,27 @@
     - En el proceso de planificación, colaboramos estrechamente para entender los requisitos y establecer prioridades claras para el desarrollo.
     - Aquí está nuestro diagrama ER básico utilizado en este proceso:
     
-    <div align="center" style="margin-top: 20px;">
-        <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/diagrama_ER.png" alt="Diagrama ER" style="width:80%; height:auto;"/>
-    </div>
+        <div align="center" style="margin-top: 20px;">
+            <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/diagrama_ER.png" alt="Diagrama ER" style="width:80%; height:auto;"/>
+        </div>
 
 2. **Análisis:**
-    - Estudio de factibilidad técnica.
-    - Evaluación de las tecnologías a utilizar (Django, React, Vite, Tailwind, etc.).
+    - Se hizo un estudio de factibilidad técnica para implementar en el código, validaciones y ciertos requerimientos.
+    - Por último, se hizo una evaluación de las tecnologías a utilizar (Django, React, Vite, Tailwind, etc.).
 
 ### Diseño
 
 3. **Diseño del Sistema:**
     - Creación de diagramas de arquitectura y diseño de base de datos.
-    - Realizamos los diseños iniciales y diagramas en Excalidraw para visualizar y planificar la estructura del sistema.
+    - Realizamos los diseños iniciales y diagramas en Excalidraw para visualizar y planificar la estructura visual del sistema.
     - **Diagrama de diseño:**
         <div align="center">
             <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/design.png?raw=true" alt="Design Diagram" style="width:80%; height:auto"/>
         </div>
 
 4. **Planificación de Tareas:**
-    - División del trabajo en sprints y asignación de tareas específicas.
-    - Uso de herramientas de gestión de proyectos como Trello o Jira.
+    - La división del trabajo se realizó en sprints y asignación de tareas específicas tras algunas sesiones Meet.
+    - Se hizo uso de herramientas de gestión de proyectos para determinar tiempos y tareas específicas.
 
 ### Implementación
 
@@ -191,32 +191,30 @@
     - Implementación de la API RESTful para la comunicación con el frontend.
 
 6. **Desarrollo del Frontend:**
-    - Configuración de React y Vite.
+    - La configuración se realizó con React y Vite.
     - Creación de componentes reutilizables y diseño responsivo con Tailwind y MUI.
 
 ### Pruebas
 
 7. **Pruebas Unitarias:**
-    - Implementación de pruebas unitarias para asegurarse de que cada componente funciona correctamente.
-    - Uso de herramientas como Jest y Django Test.
+    - Se siguió una implementación de pruebas unitarias para asegurarse de que cada componente funciona correctamente.
+    - Se hizo uso de herramientas como Jest y Django Test.
 
 8. **Pruebas de Integración:**
     - Pruebas de flujo completo del sistema para asegurarse de que todos los componentes trabajan en conjunto.
     - Validación de la interfaz de usuario y la API RESTful.
+    - Últimas observaciones para preparar el proyecto para hacer deploy.
 
 ### Despliegue
 
 9. **Preparación para el Despliegue:**
-    - Configuración del entorno de producción.
-    - Uso de servicios de despliegue como Heroku, Vercel, o AWS.
+    - Se realizó la configuración del entorno de producción.
+    - Se pensó sobre el uso de servicios de despliegue como Heroku, Vercel, o AWS.
 
 10. **Despliegue:**
     - Lanzamiento de la aplicación en el entorno de producción.
     - Monitoreo inicial y ajustes necesarios.
-
-<div align="center" style="margin-top: 20px;">
-    <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/credentials.png?raw=true" alt="Despliegue" style="width:80%; height:auto;"/>
-</div>
+    - Nuestro sitio ya está desplegado y accesible en el siguiente enlace: [SISMAT-UNSA](https://sismat-frontend.vercel.app/)
 
 ---
 
