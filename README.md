@@ -174,7 +174,11 @@
 
 3. **Diseño del Sistema:**
     - Creación de diagramas de arquitectura y diseño de base de datos.
-    - Prototipos de la interfaz de usuario con herramientas como Figma.
+    - Realizamos los diseños iniciales y diagramas en Excalidraw para visualizar y planificar la estructura del sistema.
+    - **Diagrama de diseño:**
+        <div align="center">
+            <img src="https://github.com/RyanValdivia/sismat-unsa/blob/main/img/design.png?raw=true" alt="Design Diagram" style="width:80%; height:auto"/>
+        </div>
 
 4. **Planificación de Tareas:**
     - División del trabajo en sprints y asignación de tareas específicas.
